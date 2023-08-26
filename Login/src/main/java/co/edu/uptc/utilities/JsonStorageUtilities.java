@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class JsonStorageUtilities {
@@ -18,6 +19,7 @@ public class JsonStorageUtilities {
     // Creo una lista global para almacenar los objetos leídos del archivo, esto para que
     //cuando agreguemos algo, no borre el resto
     private List<Object> existingContents = new ArrayList<>();
+    private List<Person> persons;
     private static final String FILEPATH = "Login/src/main/java/co/edu/uptc/persistence/";
     private static final String FILEPATHPEOPLE = "Login/src/main/java/co/edu/uptc/persistence/people.json";
 
@@ -27,6 +29,7 @@ public class JsonStorageUtilities {
         //Esto es para que reconozca siempre el contenido del archivo, ya que si no lo hacemos asi
         //cuando se agregue algo nuevo se va a sobreescribir
         readContentFromFile();
+        persons = objectConversion();
     }
 
     //Probablemente nunca se use / Este comentario es provisional, por eso el español
@@ -95,5 +98,64 @@ public class JsonStorageUtilities {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Person> objectConversion(){
+        if(existingContents != null){
+            return Collections.singletonList((Person) existingContents);
+        }else {
+            return null;
+        }
+    }
+
+    public Person findPosition(String id) {
+        for (int i = 0; i < persons.size(); i++) {
+            if (persons.get(i).getId().equals(id)) {
+                return persons.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean deletePerson(String id) {
+        Person personToRemove = findPosition(id);
+
+        if (personToRemove != null) {
+            persons.remove(personToRemove);
+            saveObject(persons);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void saveObject(List<Person> personList) {
+        try{
+            fileWriter = new FileWriter(FILEPATHPEOPLE);
+            fileWriter.write(gson.toJson(personList));
+            fileWriter.flush();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+
+    public List<Object> getExistingContents() {
+        return existingContents;
+    }
+
+    public void setExistingContents(List<Object> existingContents) {
+        this.existingContents = existingContents;
     }
 }
