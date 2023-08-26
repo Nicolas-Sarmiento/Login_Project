@@ -29,9 +29,9 @@ public class JsonStorageUtilities {
         readContentFromFile();
     }
 
-    //Probablemente nuncas se use / Este comentario es provisional, por eso el español
+    //Probablemente nunca se use / Este comentario es provisional, por eso el español
     public boolean createFile(String fileName){
-        String ext = ".txt";
+        String ext = ".json";
         String filePath = FILEPATH+fileName+ext;
 
         try {
@@ -43,7 +43,6 @@ public class JsonStorageUtilities {
         }
         return true;
     }
-
 
     /**
      * Reads the content from a JSON file located at the specified file path.
@@ -75,9 +74,18 @@ public class JsonStorageUtilities {
      * @return {@code true} if the data is successfully loaded and written to the JSON file, {@code false} otherwise.
      */
     public boolean loadDataToFile(Object[] newDataFile){
+        File file = new File(FILEPATHPEOPLE);
+        if(!file.exists()){
+            return false;
+        }
+        if(existingContents == null){
+            existingContents = new ArrayList<>();
+        }
         //Esto simplemente agrega el nuevo contenido al array, para luego pasarlo al archivo
         //Lo agrega uno por uno, como un for
-        existingContents.addAll(Arrays.asList(newDataFile));
+        for (Object object:newDataFile) {
+            existingContents.add(object);
+        }
 
         try (FileWriter fileWriter = new FileWriter(FILEPATHPEOPLE)){
             //Escribo lo que esta en la colleccion en el Json
