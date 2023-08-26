@@ -1,0 +1,86 @@
+[
+  {
+    "id": "202210568",
+    "name": "manuel",
+    "lastname": "Martinez",
+    "account": {
+      "id": "202210568",
+      "userName": "manuel.martinez",
+      "password": "Masfx83",
+      "role": "STUDENT",
+      "email": "manuel.martinez@uptc.edu.co"
+    }
+  },
+  {
+    "id": "2021456",
+    "name": "Maria",
+    "lastname": "Rodriguez",
+    "account": {
+      "id": "2021456",
+      "userName": "maria.rodriguez",
+      "password": "ho",
+      "role": "STUDENT",
+      "email": "maria.rodriguez@uptc.edu.co"
+    }
+  },
+  {
+    "id": "2020154",
+    "name": "Juan",
+    "lastname": "Velandia Fonseca",
+    "account": {
+      "id": "2020154",
+      "userName": "juan.velandia",
+      "password": "njksAPO293",
+      "role": "STUDENT",
+      "email": "juan.velandia@uptc.edu.co"
+    }
+  },
+  {
+    "id": "2022159",
+    "name": "Maria",
+    "lastname": "Rodriguez Vega",
+    "account": {
+      "id": "2022159",
+      "userName": "maria.rodriguez01",
+      "password": "HJAkjsf234",
+      "role": "STUDENT",
+      "email": "maria.rodriguez01@uptc.edu.co"
+    }
+  },
+  {
+    "id": "46389778",
+    "name": "Johana",
+    "lastname": "Torres Perez",
+    "account": {
+      "id": "46389778",
+      "userName": "johana.torres",
+      "password": "JKJfsdhf334",
+      "role": "PROFESSOR",
+      "email": "johana.torres@uptc.edu.co"
+    }
+  },
+  {
+    "id": "10953483",
+    "name": "Ivan",
+    "lastname": "Mendoza",
+    "account": {
+      "id": "10953483",
+      "userName": "ivan.mendoza",
+      "password": "HJ23jkil",
+      "role": "PROFESSOR",
+      "email": "ivan.mendoza@uptc.edu.co"
+    }
+  },
+  {
+    "id": "47865421",
+    "name": "Laura",
+    "lastname": "Castillo",
+    "account": {
+      "id": "47865421",
+      "userName": "laura.castillo",
+      "password": "ABcd12",
+      "role": "ADMINISTRATOR",
+      "email": "laura.castillo@uptc.edu.co"
+    }
+  }
+]

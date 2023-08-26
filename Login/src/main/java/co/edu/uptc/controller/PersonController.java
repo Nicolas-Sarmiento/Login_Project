@@ -3,6 +3,8 @@ package co.edu.uptc.controller;
 import co.edu.uptc.model.Account;
 import co.edu.uptc.model.Person;
 import co.edu.uptc.model.persontypes.*;
+import co.edu.uptc.utilities.JsonStorageUtilities;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  */
 public class PersonController {
     private HashSet<Person> personCollection;
+    private JsonStorageUtilities jsonStorageUtilities;
 
 
     /**
@@ -21,10 +24,13 @@ public class PersonController {
      */
     public PersonController(){
         this.personCollection = new HashSet<>();
+        jsonStorageUtilities = new JsonStorageUtilities();
     }
 
     public void loadPeople(Person[] people){
-        this.personCollection = new HashSet<>(List.of(people));
+        //this.personCollection = new HashSet<>(List.of(people));
+        //Lo que esta comentado son los datos iniciales (ABAJO)
+        //jsonStorageUtilities.loadDataToFile(people);
     }
 
     /**

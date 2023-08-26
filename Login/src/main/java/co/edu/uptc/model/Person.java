@@ -21,6 +21,12 @@ public class Person {
         this.lastname = lastname;
     }
 
+    public Person(String id, String name, String lastname, Account account) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.account = account;
+    }
 
     public Person() {
     }
