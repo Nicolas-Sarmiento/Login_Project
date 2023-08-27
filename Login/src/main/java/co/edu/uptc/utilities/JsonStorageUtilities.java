@@ -3,8 +3,10 @@ package co.edu.uptc.utilities;
 import co.edu.uptc.model.Person;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,7 +63,9 @@ public class JsonStorageUtilities {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             //Llena el array list con el contenido del Json, como el Json esta escrito como una lista
             //por eso esta especificado como lista, ya que al leer va a obtener una lista
-            existingContents = gson.fromJson(bufferedReader, List.class);
+            Type listType = new TypeToken<List<Person>>(){}.getType();
+            //El type es para que se conserve la informacion del tipo de objeto
+            existingContents = gson.fromJson(bufferedReader, listType);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
