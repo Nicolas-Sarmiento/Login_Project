@@ -20,8 +20,7 @@ public class JsonStorageUtilities {
     private Gson gson;
     // Creo una lista global para almacenar los objetos leídos del archivo, esto para que
     //cuando agreguemos algo, no borre el resto
-    private List<Object> existingContents = new ArrayList<>();
-    private List<Person> persons;
+    private List<Person> existingContents = new ArrayList<>();
     private static final String FILEPATH = "Login/src/main/java/co/edu/uptc/persistence/";
     private static final String FILEPATHPEOPLE = "Login/src/main/java/co/edu/uptc/persistence/people.json";
 
@@ -31,7 +30,6 @@ public class JsonStorageUtilities {
         //Esto es para que reconozca siempre el contenido del archivo, ya que si no lo hacemos asi
         //cuando se agregue algo nuevo se va a sobreescribir
         readContentFromFile();
-        persons = objectConversion();
     }
 
     //Probablemente nunca se use / Este comentario es provisional, por eso el español
@@ -63,9 +61,8 @@ public class JsonStorageUtilities {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             //Llena el array list con el contenido del Json, como el Json esta escrito como una lista
             //por eso esta especificado como lista, ya que al leer va a obtener una lista
-            Type listType = new TypeToken<List<Person>>(){}.getType();
             //El type es para que se conserve la informacion del tipo de objeto
-            existingContents = gson.fromJson(bufferedReader, listType);
+            existingContents = gson.fromJson(bufferedReader, new TypeToken<List<Person>>(){}.getType());
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -77,10 +74,10 @@ public class JsonStorageUtilities {
      * but in real execution, they are added one by one. This method is based on the array that contains the existing content in
      * the file. It adds the new data to the array of the previous content and writes the JSON.
      *
-     * @param newDataFile An array of people already linked to their respective accounts.
+     * @param listPerson An array of people already linked to their respective accounts.
      * @return {@code true} if the data is successfully loaded and written to the JSON file, {@code false} otherwise.
      */
-    public boolean loadDataToFile(Object[] newDataFile){
+    public boolean loadDataToFile(List<Person> listPerson){
         File file = new File(FILEPATHPEOPLE);
         if(!file.exists()){
             return false;
@@ -90,7 +87,7 @@ public class JsonStorageUtilities {
         }
         //Esto simplemente agrega el nuevo contenido al array, para luego pasarlo al archivo
         //Lo agrega uno por uno, como un for
-        for (Object object:newDataFile) {
+        for (Person object : listPerson) {
             existingContents.add(object);
         }
 
@@ -103,23 +100,11 @@ public class JsonStorageUtilities {
             return false;
         }
     }
-
-    /**
-     *
-     * @return
-     */
-    public List<Person> objectConversion(){
-        if(existingContents != null){
-            return Collections.singletonList((Person) existingContents);
-        }else {
-            return null;
-        }
-    }
-
+    
     public Person findPosition(String id) {
-        for (int i = 0; i < persons.size(); i++) {
-            if (persons.get(i).getId().equals(id)) {
-                return persons.get(i);
+        for (int i = 0; i < existingContents.size(); i++) {
+            if (existingContents.get(i).getId().equals(id)) {
+                return existingContents.get(i);
             }
         }
         return null;
@@ -129,8 +114,8 @@ public class JsonStorageUtilities {
         Person personToRemove = findPosition(id);
 
         if (personToRemove != null) {
-            persons.remove(personToRemove);
-            saveObject(persons);
+            existingContents.remove(personToRemove);
+            saveObject(existingContents);
             return true;
         }
 
@@ -147,19 +132,12 @@ public class JsonStorageUtilities {
         }
     }
 
-    public List<Person> getPersons() {
-        return persons;
-    }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    public List<Object> getExistingContents() {
+    public List<Person> getExistingContents() {
         return existingContents;
     }
 
-    public void setExistingContents(List<Object> existingContents) {
+    public void setExistingContents(List<Person> existingContents) {
         this.existingContents = existingContents;
     }
 }
