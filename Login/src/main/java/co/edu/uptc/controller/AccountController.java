@@ -1,12 +1,12 @@
 package co.edu.uptc.controller;
 
 import co.edu.uptc.model.Account;
+import co.edu.uptc.model.Person;
 import co.edu.uptc.utilities.AccountUtilities;
+import co.edu.uptc.utilities.JsonStorageUtilities;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * The Account Controller class allows to manage a collection of accounts
@@ -21,15 +21,26 @@ public class AccountController {
     private AccountUtilities utility;
     private String username = "";
     private String password = "";
+    private JsonStorageUtilities jsonStorageUtilities;
 
 
-    public AccountController(){
+    public AccountController(JsonStorageUtilities jsonStorageUtilities){
         this.utility = new AccountUtilities();
-        this.accounts = new HashSet<>();
+        this.jsonStorageUtilities = jsonStorageUtilities;
+        loadAccounts();
     }
-    public boolean loadAccounts(Account[] accounts){
-        this.accounts = new HashSet<>(List.of(accounts));
-        return true;
+
+    public void loadAccounts(){
+        accounts = new HashSet<>();
+
+        for (Person person : jsonStorageUtilities.getExistingContentsPersons()) {
+            accounts.add(person.getAccount());
+        }
+        jsonStorageUtilities.saveDataToFileAccount(accounts.stream().toList(), "accounts");
+    }
+
+    public void updateInformationFile(){
+        jsonStorageUtilities.saveDataToFileAccount(accounts.stream().toList(), "accounts");
     }
 
     /**
@@ -60,9 +71,11 @@ public class AccountController {
         Account newAccount = new Account(id, username, password, role, email);
 
         if (this.accounts.contains(newAccount)) return false;
-        this.accounts.add(newAccount);
-
-        return true;
+        if (this.accounts.add(newAccount)){
+            updateInformationFile();
+            return true;
+        }
+        return false;
     }
 
     /**

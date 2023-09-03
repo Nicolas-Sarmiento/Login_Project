@@ -4,6 +4,10 @@ import co.edu.uptc.model.Person;
 import co.edu.uptc.model.persontypes.Administrator;
 import co.edu.uptc.model.persontypes.Professor;
 import co.edu.uptc.model.persontypes.Student;
+import co.edu.uptc.utilities.JsonStorageUtilities;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -18,40 +22,39 @@ import co.edu.uptc.model.persontypes.Student;
  */
 public class LoginController {
 
+    private PersonController personControler;
+    private JsonStorageUtilities jsonStorageUtilities;
     Account loggedAcount;
     Person loggedPerson;
-
     AccountController acc;
 
-    private final Person[] defaultPeople = {
-            new Student("202210568","manuel","Martinez",new Account("202210568", "manuel.martinez", "Masfx83", Roles.STUDENT.name(), "manuel.martinez@uptc.edu.co") ),
-            new Student("2021456", "Maria", "Rodriguez",new Account("2021456","maria.rodriguez","ho",Roles.STUDENT.name(), "maria.rodriguez@uptc.edu.co")),
-            new Student("2020154","Juan", "Velandia Fonseca",new Account("2020154", "juan.velandia","njksAPO293",Roles.STUDENT.name(), "juan.velandia@uptc.edu.co")),
-            new Student("2022159", "Maria", "Rodriguez Vega",new Account("2022159", "maria.rodriguez01","HJAkjsf234",Roles.STUDENT.name(), "maria.rodriguez01@uptc.edu.co")),
-            new Professor("46389778", "Johana", "Torres Perez",new Account("46389778", "johana.torres","JKJfsdhf334",Roles.PROFESSOR.name(), "johana.torres@uptc.edu.co")),
-            new Professor("10953483", "Ivan", "Mendoza",new Account("10953483","ivan.mendoza","HJ23jkil",Roles.PROFESSOR.name(), "ivan.mendoza@uptc.edu.co")),
-            new Administrator("47865421", "Laura","Castillo",new Account("47865421","laura.castillo","ABcd12",Roles.ADMINISTRATOR.name(), "laura.castillo@uptc.edu.co"))
-    };
-
-    /*private final Account[] defaultAccounts = {
-            new Account("202210568", "manuel.martinez", "Masfx83", Roles.STUDENT.name(), "manuel.martinez@uptc.edu.co"),
-            new Account("2021456","maria.rodriguez","ho",Roles.STUDENT.name(), "maria.rodriguez@uptc.edu.co"),
-            new Account("2020154", "juan.velandia","njksAPO293",Roles.STUDENT.name(), "juan.velandia@uptc.edu.co"),
-            new Account("2022159", "maria.rodriguez01","HJAkjsf234",Roles.STUDENT.name(), "maria.rodriguez01@uptc.edu.co"),
-            new Account("46389778", "johana.torres","JKJfsdhf334",Roles.PROFESSOR.name(), "johana.torres@uptc.edu.co"),
-            new Account("10953483","ivan.mendoza","HJ23jkil",Roles.PROFESSOR.name(), "ivan.mendoza@uptc.edu.co"),
-            new Account("47865421","laura.castillo","ABcd12",Roles.ADMINISTRATOR.name(), "laura.castillo@uptc.edu.co")
-    };*/
-    private PersonController personControler;
     public LoginController(){
         this.loggedAcount = new Account();
         this.loggedPerson = new Person();
-        this.acc = new AccountController();
-        this.personControler = new PersonController();
-        //this.assignDefaultAccounts();
-        //this.acc.loadAccounts(this.defaultAccounts);
-        this.personControler.loadPeople(this.defaultPeople);
+        this.jsonStorageUtilities = new JsonStorageUtilities();
+        this.personControler = new PersonController(jsonStorageUtilities);
+        loadPersons();
+        this.acc = new AccountController(jsonStorageUtilities);
+        jsonStorageUtilities.getExistingContentsAccounts().clear();
+        jsonStorageUtilities.getExistingContentsAccounts().clear();
+
     }
+
+    /**
+     *
+     */
+    //CARGÁ A LA LISTA LAS PERSONAS CON SUS RESPECTIVAS CUENTAS
+    public void loadPersons(){
+        List<Person> defaultPersons = new ArrayList<>();
+        defaultPersons.add(new Student("202210568","manuel","Martinez",new Account("202210568", "manuel.martinez", "Masfx83", Roles.STUDENT.name(), "manuel.martinez@uptc.edu.co")));
+        defaultPersons.add(new Student("2020154","Juan", "Velandia Fonseca",new Account("2020154", "juan.velandia","njksAPO293",Roles.STUDENT.name(), "juan.velandia@uptc.edu.co")));
+        defaultPersons.add(new Student("2022159", "Maria", "Rodriguez Vega",new Account("2022159", "maria.rodriguez01","HJAkjsf234",Roles.STUDENT.name(), "maria.rodriguez01@uptc.edu.co")));
+        defaultPersons.add(new Professor("46389778", "Johana", "Torres Perez",new Account("46389778", "johana.torres","JKJfsdhf334",Roles.PROFESSOR.name(), "johana.torres@uptc.edu.co")));
+        defaultPersons.add(new Professor("10953483", "Ivan", "Mendoza",new Account("10953483","ivan.mendoza","HJ23jkil",Roles.PROFESSOR.name(), "ivan.mendoza@uptc.edu.co")));
+        defaultPersons.add(new Administrator("47865421", "Laura","Castillo",new Account("47865421","laura.castillo","1",Roles.ADMINISTRATOR.name(), "laura.castillo@uptc.edu.co")));
+        this.personControler.loadPeople(defaultPersons);
+    }
+
     /**
      * Main method, check the name and count if it matches
      * any user, it brings it and saves it in loggedAcount.
@@ -59,20 +62,18 @@ public class LoginController {
      * @param nameUser,password both entered by user
      * @return If the credentials entered are valid,
      * save the user and return true.
-    * 
- */
+     */
     public  boolean login(String nameUser, String password){
-        
 
         if(acc.findAccount(nameUser, password) != null){
             loggedAcount = acc.findAccount(nameUser, password);
             loggedPerson = personControler.findPersonById(loggedAcount.getId());
+            System.out.println(loggedPerson);
             return true;
-
         }
-
         return false;
     }
+
     /**
      * Allows the user who entered to change their password, only allows
      * it if they are already logged in. You must enter the first password
@@ -80,23 +81,24 @@ public class LoginController {
      * password wrong, the change is canceled
      * @param oldpassword,newpassword both entered by user
      * @return If the credentials entered are valid, change the password.
-    * 
- */
-
+    */
     public boolean changePassword(String oldpassword, String newPassword){
         try {
+
             if(oldpassword.equals(newPassword)){
+
                 return false;
+
             } else if(loggedAcount != null && loggedAcount.getPassword().equals(oldpassword)){
+
                 boolean methodAnswer = acc.setNewPassword(loggedAcount.getUserName(),oldpassword, newPassword );
                 loggedAcount = acc.findAccount(loggedAcount.getUserName(), newPassword);
                 Person person = personControler.findPersonById(loggedAcount.getId());
                 person.setAccount(loggedAcount);
                 return methodAnswer;
+
             }
         } catch (Exception e) {}
-       
-
         return false;
     }
 
@@ -111,7 +113,6 @@ public class LoginController {
             loggedAcount = null;
             return true;
         }
-
         return false;
     }
 
@@ -124,9 +125,8 @@ public class LoginController {
      * @return control boolean, if something fails the process is canceled.
     * 
  */
-
     public boolean signin(String name, String lastName, String id, String role){
-       
+
        if(personControler.addPerson(id, name, lastName, role)){
             Person person = personControler.findPersonById(id);
             if (acc.addAccount(person.getId(), person.getName(), person.getLastname(), role)) {
@@ -190,14 +190,5 @@ public class LoginController {
     }
 
     public Person getLoggedPerson(){return this.loggedPerson;}
-
-   /*private void assignDefaultAccounts(){
-        for (int i = 0; i < this.defaultAccounts.length; i++){
-            this.defaultPeople[i].setAccount(this.defaultAccounts[i]);
-        }
-   }*/
-
-
-
 
 }

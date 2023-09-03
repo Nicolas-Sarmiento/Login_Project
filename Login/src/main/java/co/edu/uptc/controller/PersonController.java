@@ -18,19 +18,27 @@ public class PersonController {
     private HashSet<Person> personCollection;
     private JsonStorageUtilities jsonStorageUtilities;
 
-
     /**
      * Empty constructor initialize the HashSet
      */
-    public PersonController(){
+    public PersonController(JsonStorageUtilities jsonStorageUtilities){
         this.personCollection = new HashSet<>();
-        jsonStorageUtilities = new JsonStorageUtilities();
+        this.jsonStorageUtilities = jsonStorageUtilities;
     }
 
-    public void loadPeople(Person[] people){
-        //this.personCollection = new HashSet<>(List.of(people));
-        //Lo que esta comentado son los datos iniciales (ABAJO)
-        //jsonStorageUtilities.loadDataToFile(people);
+    public void loadPeople(List<Person> people){
+        jsonStorageUtilities.saveDataToFilePerson(people, "people");
+
+        jsonStorageUtilities.readPersons("people");
+
+        for (Person person: jsonStorageUtilities.getExistingContentsPersons()) {
+            personCollection.add(person);
+        }
+
+    }
+
+    public void updateInformationFile(){
+        jsonStorageUtilities.saveDataToFilePerson(personCollection.stream().toList(), "people");
     }
 
     /**
@@ -42,11 +50,14 @@ public class PersonController {
      * @return true if the person was added to the collection. False if not.
      */
     public boolean addPerson(String id, String name, String lastName, String role){
-       Person newPerson = this.createPersonByRole(id, name, lastName, role);
-       if (newPerson == null) return false;
-       return this.personCollection.add(newPerson);
+        Person newPerson = this.createPersonByRole(id, name, lastName, role);
+        if (newPerson == null) return false;
+        if(this.personCollection.add(newPerson)){
+            updateInformationFile();
+            return true;
+        }
+        return false;
     }
-
 
     /**
      * This method allows to assing an account to a person by id.
@@ -56,7 +67,9 @@ public class PersonController {
      */
     public boolean assingAccount(String id, Account acc){
         Person personToAssing = this.findPersonById(id);
+
         if (personToAssing == null) return false;
+
         for (Person p : this.personCollection){
             if (p.equals(personToAssing)){
                 Person tempPerson = this.clonePerson(p);
@@ -88,6 +101,7 @@ public class PersonController {
      * @return a Person Object if the id was found.
      */
     public Person findPersonById(String id){
+        System.out.println(personCollection.size());
         for (Person person : this.personCollection){
             if (person.getId().equals(id)) return person;
         }

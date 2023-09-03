@@ -24,7 +24,6 @@ public class LoginView {
     public LoginView(){
         this.util = new InputLibrary();
         this.loginController = new LoginController();
-
         this.roles = new String[]{"Student", "Professor", "Secretary", "Administrator"};
         this.errorMessage = "Invalid input. Try again";
 
