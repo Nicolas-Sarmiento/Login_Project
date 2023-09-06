@@ -28,6 +28,13 @@
     "email": "juan.velandia@uptc.edu.co"
   },
   {
+    "id": "12345",
+    "userName": "nino.nakano",
+    "password": "77KYPur",
+    "role": "STUDENT",
+    "email": "nino.nakano@uptc.edu.co"
+  },
+  {
     "id": "10953483",
     "userName": "ivan.mendoza",
     "password": "HJ23jkil",

@@ -1,17 +1,5 @@
 [
   {
-    "id": "202210568",
-    "name": "manuel",
-    "lastname": "Martinez",
-    "account": {
-      "id": "202210568",
-      "userName": "manuel.martinez",
-      "password": "Masfx83",
-      "role": "STUDENT",
-      "email": "manuel.martinez@uptc.edu.co"
-    }
-  },
-  {
     "id": "2020154",
     "name": "Juan",
     "lastname": "Velandia Fonseca",
@@ -21,18 +9,6 @@
       "password": "njksAPO293",
       "role": "STUDENT",
       "email": "juan.velandia@uptc.edu.co"
-    }
-  },
-  {
-    "id": "2022159",
-    "name": "Maria",
-    "lastname": "Rodriguez Vega",
-    "account": {
-      "id": "2022159",
-      "userName": "maria.rodriguez01",
-      "password": "HJAkjsf234",
-      "role": "STUDENT",
-      "email": "maria.rodriguez01@uptc.edu.co"
     }
   },
   {
@@ -69,6 +45,42 @@
       "password": "1",
       "role": "ADMINISTRATOR",
       "email": "laura.castillo@uptc.edu.co"
+    }
+  },
+  {
+    "id": "202210568",
+    "name": "manuel",
+    "lastname": "Martinez",
+    "account": {
+      "id": "202210568",
+      "userName": "manuel.martinez",
+      "password": "Masfx83",
+      "role": "STUDENT",
+      "email": "manuel.martinez@uptc.edu.co"
+    }
+  },
+  {
+    "id": "12345",
+    "name": "Nino ",
+    "lastname": "Nakano",
+    "account": {
+      "id": "12345",
+      "userName": "nino.nakano",
+      "password": "M1nitaCH1na",
+      "role": "STUDENT",
+      "email": "nino.nakano@uptc.edu.co"
+    }
+  },
+  {
+    "id": "2022159",
+    "name": "Maria",
+    "lastname": "Rodriguez Vega",
+    "account": {
+      "id": "2022159",
+      "userName": "maria.rodriguez01",
+      "password": "HJAkjsf234",
+      "role": "STUDENT",
+      "email": "maria.rodriguez01@uptc.edu.co"
     }
   }
 ]

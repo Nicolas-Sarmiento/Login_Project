@@ -5,6 +5,8 @@ import co.edu.uptc.model.Person;
 import co.edu.uptc.model.persontypes.*;
 import co.edu.uptc.utilities.JsonStorageUtilities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -26,16 +28,13 @@ public class PersonController {
         this.jsonStorageUtilities = jsonStorageUtilities;
     }
 
-    public void loadPeople(List<Person> people){
-        jsonStorageUtilities.saveDataToFilePerson(people, "people");
-
-        jsonStorageUtilities.readPersons("people");
-
-        for (Person person: jsonStorageUtilities.getExistingContentsPersons()) {
-            personCollection.add(person);
-        }
-
+    public void loadPeople(){
+        this.jsonStorageUtilities.readPersons("people");
+        List<Person> people = this.jsonStorageUtilities.getExistingContentsPersons();
+        this.personCollection.addAll(people);
     }
+
+
 
     public void updateInformationFile(){
         jsonStorageUtilities.saveDataToFilePerson(personCollection.stream().toList(), "people");
@@ -116,8 +115,8 @@ public class PersonController {
      * @return a Person Object with te
      */
     public Person clonePerson(Person p) {
-        String role = p.getClass().getSimpleName();
-        return this.createPersonByRole(p.getId(), p.getName(), p.getLastname(), role);
+        //String role = p.getClass().getSimpleName();
+        return this.createPersonByRole(p.getId(), p.getName(), p.getLastname(), p.getAccount().getRole());
     }
 
     /**
@@ -149,5 +148,13 @@ public class PersonController {
         }
 
         return newPerson;
+    }
+
+    public ArrayList<Account> getAccounts(){
+        ArrayList<Account> accounts = new ArrayList<>();
+        for (Person p : this.personCollection){
+            accounts.add(p.getAccount());
+        }
+        return accounts;
     }
 }

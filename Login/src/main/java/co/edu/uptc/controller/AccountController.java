@@ -27,16 +27,17 @@ public class AccountController {
     public AccountController(JsonStorageUtilities jsonStorageUtilities){
         this.utility = new AccountUtilities();
         this.jsonStorageUtilities = jsonStorageUtilities;
-        loadAccounts();
+        this.accounts = new HashSet<>();
     }
 
-    public void loadAccounts(){
-        accounts = new HashSet<>();
-
-        for (Person person : jsonStorageUtilities.getExistingContentsPersons()) {
-            accounts.add(person.getAccount());
-        }
-        jsonStorageUtilities.saveDataToFileAccount(accounts.stream().toList(), "accounts");
+    public void loadAccounts(ArrayList<Account> accounts){
+//        accounts = new HashSet<>();
+//
+//        for (Person person : jsonStorageUtilities.getExistingContentsPersons()) {
+//            accounts.add(person.getAccount());
+//        }
+//        jsonStorageUtilities.saveDataToFileAccount(accounts.stream().toList(), "accounts");
+        this.accounts.addAll(accounts);
     }
 
     public void updateInformationFile(){
