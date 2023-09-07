@@ -67,11 +67,10 @@ public class PersonController {
     public boolean assingAccount(String id, Account acc){
         Person personToAssing = this.findPersonById(id);
 
-        if (personToAssing == null) return false;
-
         for (Person p : this.personCollection){
-            if (p.equals(personToAssing)){
-                Person tempPerson = this.clonePerson(p);
+            if (/*p.equals(personToAssing*/p.getId().equals(personToAssing.getId())){
+                //Person tempPerson = this.clonePerson(p);
+                Person tempPerson = p;
                 tempPerson.setAccount(acc);
                 this.personCollection.remove(p);
                 this.personCollection.add(tempPerson);
@@ -100,9 +99,10 @@ public class PersonController {
      * @return a Person Object if the id was found.
      */
     public Person findPersonById(String id){
-        System.out.println(personCollection.size());
         for (Person person : this.personCollection){
-            if (person.getId().equals(id)) return person;
+            if (person.getId().equals(id)) {
+                return person;
+            }
         }
         return null;
     }
@@ -153,6 +153,8 @@ public class PersonController {
     public ArrayList<Account> getAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
         for (Person p : this.personCollection){
+            //asghduaid
+            //System.out.println(p.getAccount().getUserName());
             accounts.add(p.getAccount());
         }
         return accounts;

@@ -48,6 +48,30 @@
     }
   },
   {
+    "id": "32589",
+    "name": "Jose",
+    "lastname": "Salamanca",
+    "account": {
+      "id": "32589",
+      "userName": "jose.salamanca",
+      "password": "HptaJulian99",
+      "role": "STUDENT",
+      "email": "jose.salamanca@uptc.edu.co"
+    }
+  },
+  {
+    "id": "4387582",
+    "name": "Maria",
+    "lastname": "Torres",
+    "account": {
+      "id": "4387582",
+      "userName": "maria.torres",
+      "password": "03GIQet",
+      "role": "SECRETARY",
+      "email": "maria.torres@uptc.edu.co"
+    }
+  },
+  {
     "id": "202210568",
     "name": "manuel",
     "lastname": "Martinez",
@@ -81,6 +105,18 @@
       "password": "HJAkjsf234",
       "role": "STUDENT",
       "email": "maria.rodriguez01@uptc.edu.co"
+    }
+  },
+  {
+    "id": "6378264",
+    "name": "Alvaro",
+    "lastname": "Perez",
+    "account": {
+      "id": "6378264",
+      "userName": "alvaro.perez",
+      "password": "34AWKug",
+      "role": "PROFESSOR",
+      "email": "alvaro.perez@uptc.edu.co"
     }
   }
 ]

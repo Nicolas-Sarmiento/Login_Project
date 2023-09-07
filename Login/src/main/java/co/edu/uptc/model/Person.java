@@ -77,9 +77,7 @@ public class Person {
     }
 
     public String toString(){
-
-        return "Name: " + this.getName() + " Last Name: " + this.getLastname() + " Id: " + this.getId() + " Data Acount: " + account.toString();
-
+        return "Name: " + this.getName() + " Last Name: " + this.getLastname() + " Id: " + this.getId() + " Data Acount: " + this.getAccount().toString();
     }
 
 

@@ -1,5 +1,19 @@
 [
   {
+    "id": "6378264",
+    "userName": "alvaro.perez",
+    "password": "34AWKug",
+    "role": "PROFESSOR",
+    "email": "alvaro.perez@uptc.edu.co"
+  },
+  {
+    "id": "4387582",
+    "userName": "maria.torres",
+    "password": "03GIQet",
+    "role": "SECRETARY",
+    "email": "maria.torres@uptc.edu.co"
+  },
+  {
     "id": "202210568",
     "userName": "manuel.martinez",
     "password": "Masfx83",
@@ -14,6 +28,20 @@
     "email": "johana.torres@uptc.edu.co"
   },
   {
+    "id": "32589",
+    "userName": "jose.salamanca",
+    "password": "HptaJulian99",
+    "role": "STUDENT",
+    "email": "jose.salamanca@uptc.edu.co"
+  },
+  {
+    "id": "12345",
+    "userName": "nino.nakano",
+    "password": "M1nitaCH1na",
+    "role": "STUDENT",
+    "email": "nino.nakano@uptc.edu.co"
+  },
+  {
     "id": "2022159",
     "userName": "maria.rodriguez01",
     "password": "HJAkjsf234",
@@ -26,13 +54,6 @@
     "password": "njksAPO293",
     "role": "STUDENT",
     "email": "juan.velandia@uptc.edu.co"
-  },
-  {
-    "id": "12345",
-    "userName": "nino.nakano",
-    "password": "77KYPur",
-    "role": "STUDENT",
-    "email": "nino.nakano@uptc.edu.co"
   },
   {
     "id": "10953483",

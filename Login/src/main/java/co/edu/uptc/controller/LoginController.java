@@ -130,11 +130,11 @@ public class LoginController {
     * 
  */
     public boolean signin(String name, String lastName, String id, String role){
-
        if(personController.addPerson(id, name, lastName, role)){
             Person person = personController.findPersonById(id);
             if (acc.addAccount(person.getId(), person.getName(), person.getLastname(), role)) {
-                personController.assingAccount(person.getId(), acc.findAccount(acc.getUsername(), acc.getPassword()));
+                Account account = acc.findAccount(acc.getUsername(), acc.getPassword());
+                personController.assingAccount(person.getId(), account);
                 this.personController.updateInformationFile();
                 return true;
             }
