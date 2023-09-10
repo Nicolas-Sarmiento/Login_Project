@@ -1,6 +1,7 @@
 
 package co.edu.uptc.test;
 
+import co.edu.uptc.controller.ForumController;
 import co.edu.uptc.controller.LoginController;
 import co.edu.uptc.utilities.InputLibrary;
 
@@ -19,11 +20,13 @@ public class LoginView {
     private  final LoginController loginController;
     private final String[] roles;
     private final String errorMessage;
+    private final ForumController forumController;
 
 
     public LoginView(){
         this.util = new InputLibrary();
         this.loginController = new LoginController();
+        this.forumController = new ForumController();
         this.roles = new String[]{"Student", "Professor", "Secretary", "Administrator"};
         this.errorMessage = "Invalid input. Try again";
 
@@ -111,7 +114,8 @@ public class LoginView {
                     System.out.println(this.changePassword() ? "password change was successful":"Error");
                 break;
                 case 4:
-
+                    forumMenu();
+                    break;
                 case 5:
                     System.out.println(this.logOut() ? "Logging out" : "Error. Try again");
                 break;
@@ -173,7 +177,9 @@ public class LoginView {
                 case 1:
                     System.out.println(this.changePassword() ? "password change was successful": "Error");
                 break;
-
+                case 2:
+                    forumMenu();
+                    break;
                 case 3:
                     System.out.println(this.logOut() ? "Logging out" : "Error. Try again");
                     break;
@@ -212,5 +218,115 @@ public class LoginView {
             }
 
         }while(decision!=2);
+    }
+    /**
+     * main menu for forum
+     */
+    public void forumMenu(){
+        int option = 0;
+        do {
+            System.out.println("+---------+ FORUMS+---------+");
+            if (this.loginController.showRol().equals("PROFESSOR") || this.loginController.showRol().equals("ADMINISTRATOR")){
+                this.manageForums();
+            }
+            System.out.println(this.forumController.seeTitles());
+            option = this.util.inputInt("Press -1 to Exit\nSelect Forum -----> ", this.errorMessage);
+            if (option == -1) break;
+
+            if (this.forumController.selectForum(option-1)){
+                this.forumActions();
+            }else {
+                System.out.println("Forum not found! Try again");
+            }
+
+
+        }while (true);
+    }
+
+    /**
+     * show Options basics for forum
+     */
+    public void forumActions(){
+        int option = 0;
+        String forumOptions = """
+                ========================
+                |\t1.add Answer\t\t|
+                |\t2.Delete Answer\t\t|
+                |\t3.Exit\t\t\t\t|
+                ========================
+                """;
+        String answer = "";
+        ArrayList<String> ownAns = new ArrayList<>();
+        do {
+            System.out.println(this.forumController.seeForum());
+            System.out.println(forumOptions);
+            option = this.util.inputInt("Selection ----> ", this.errorMessage, 1, 3);
+
+            switch (option){
+                case 1:
+                    answer = this.util.inputString("Enter your Answer: \n", "No empty answers");
+                    this.forumController.addComment(answer,loginController.getLoggedPerson());
+                    break;
+                case 2:
+                    ownAns = forumController.getOwnAnswers(this.loginController.getLoggedPerson());
+                    if (ownAns.size() > 0){
+                        for (int i = 0; i < ownAns.size(); i++){
+                            System.out.println("+-------------------------+\n\t\t\t" + (i+1) + "\t\t\t\n"+ "+-------------------------+\n" + ownAns.get(i));
+                        }
+                        int comment = this.util.inputInt("Press 0 to cancel\nComment to delete: ", this.errorMessage, 0, ownAns.size());
+                        if (comment == 0) break;
+                        forumController.deleteComment(ownAns.get(comment-1), loginController.getLoggedPerson());
+                    }else {
+                        System.out.println("You don't have any answers. Create one :)");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Closing Forum!");
+                    break;
+            }
+
+            if (option == 3) break;
+        }while (true);
+    }
+
+    /**
+     * Options special for professor or administrator regard of forum
+     */
+    public void manageForums(){
+        String forumOptions = """
+                ========================
+                |\t1.add Forum\t\t\t|
+                |\t2.Delete Forum\t\t|
+                |\t3.Continue\t\t\t|
+                ========================
+                """;
+        String forumTitle = "";
+        String description = "";
+        int index = 0;
+        int option = 0;
+        do {
+            System.out.println(forumOptions);
+            option = this.util.inputInt("Selection ---->", this.errorMessage, 1, 3);
+
+            switch (option){
+                case 1:
+                    System.out.println("+--------------+ NEW FORUM +--------------+");
+                    forumTitle = this.util.inputString("Forum Title: ", "Title must be not blank");
+                    description = this.util.inputString("Descritpion: ", "Description is necessary");
+                    System.out.println(this.forumController.createdForum(forumTitle, description)? "Forum added successfully" : "Error :(");
+                    break;
+                case 2:
+                    System.out.println(this.forumController.seeTitles());
+                    index = this.util.inputInt("Select forum: ", this.errorMessage);
+                    if (this.forumController.deleteForum(index-1)){
+                        System.out.println("Deleting forum");
+                    }else {
+                        System.out.println("Forum not found! Try again");
+                    }
+                    break;
+            }
+
+            if (option == 3) break;
+        }while (true);
     }
 }
