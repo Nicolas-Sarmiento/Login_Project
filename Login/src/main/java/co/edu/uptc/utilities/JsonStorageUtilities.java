@@ -25,9 +25,9 @@ public class JsonStorageUtilities {
     //cuando agreguemos algo, no borre el resto
     private List<Person> existingContentsPersons = new ArrayList<>();
     private List<Account> existingContentsAccounts = new ArrayList<>();
-    private static final String FILEPATH = "Login/src/main/java/co/edu/uptc/persistence/";
+    private static final String FILEPATH = "./src/main/java/co/edu/uptc/persistence/";
     private static final String EXTENSION = ".json";
-    private static final String FILEPATHPEOPLE = "Login/src/main/java/co/edu/uptc/persistence/people.json";
+    private static final String FILEPATHPEOPLE = "./src/main/java/co/edu/uptc/persistence/people.json";
 
     public JsonStorageUtilities(){
         //El gson esta inicializado asi para que se escriba en cascada y no en una misma linea
