@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class JsonStorageUtilities {
@@ -28,6 +29,7 @@ public class JsonStorageUtilities {
     private static final String FILEPATH = "./src/main/java/co/edu/uptc/persistence/";
     private static final String EXTENSION = ".json";
     private static final String FILEPATHPEOPLE = "./src/main/java/co/edu/uptc/persistence/people.json";
+    private static final String FILEPATHACCOUNT = "./src/main/java/co/edu/uptc/persistence/accounts.json";
 
     public JsonStorageUtilities(){
         //El gson esta inicializado asi para que se escriba en cascada y no en una misma linea
@@ -130,31 +132,39 @@ public class JsonStorageUtilities {
         existingContentsAccounts.addAll(readContentFromFile(fileName, new TypeToken<List<Account>>() {}.getType()));
     }
     //Julian hpta
-    public Person findPosition(String id) {
+    public Person findPositionPerson(String id) {
         for (int i = 0; i < existingContentsPersons.size(); i++) {
             if (existingContentsPersons.get(i).getId().equals(id)) {
                 return existingContentsPersons.get(i);
             }
         }
+
         return null;
     }
-
-    public boolean deletePerson(String id) {
-        Person personToRemove = findPosition(id);
-        if (personToRemove != null) {
-            existingContentsPersons.remove(personToRemove);
-            saveObject(existingContentsPersons);
-            return true;
+    public Account findPositionAccount(String id) {
+        for (int i = 0; i<existingContentsAccounts.size();i++){
+            if(existingContentsAccounts.get(i).getId().equals(id)){
+                return existingContentsAccounts.get(i);
+            }
         }
-        return false;
+        return null;
+    }
+    public void saveAccounts(HashSet<Account> accountList) {
+        try {
+            fileWriter = new FileWriter(FILEPATHACCOUNT, false);
+            fileWriter.write(gson.toJson(accountList));
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void saveObject(List<Person> personList) {
-        try{
-            fileWriter = new FileWriter(FILEPATHPEOPLE);
+    public void saveObject(HashSet<Person> personList) {
+        try {
+            fileWriter = new FileWriter(FILEPATHPEOPLE, false);
             fileWriter.write(gson.toJson(personList));
             fileWriter.flush();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

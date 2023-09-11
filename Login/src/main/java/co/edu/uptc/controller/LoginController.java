@@ -196,4 +196,34 @@ public class LoginController {
 
     public Person getLoggedPerson(){return this.loggedPerson;}
 
+    public boolean deletePerson(String id) {
+        Person personToRemove = findPositionPerson(id);
+        Account accountToRemove = findPositionAccount(id);
+        if (personToRemove != null&& accountToRemove != null) {
+            personController.getPersonCollection().remove(personToRemove);
+            acc.getAccounts().remove(accountToRemove);
+            jsonStorageUtilities.saveObject(personController.getPersonCollection());
+            jsonStorageUtilities.saveAccounts(acc.getAccounts());
+            return true;
+        }
+        return false;
+    }
+    public Person findPositionPerson(String id) {
+        for (Person person : personController.getPersonCollection()) {
+            if (person.getId().equals(id)) {
+                return person;
+            }
+        }
+        return null;
+    }
+    public Account findPositionAccount(String id) {
+        for (Account account : acc.getAccounts()) {
+            if (account.getId().equals(id)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+
 }

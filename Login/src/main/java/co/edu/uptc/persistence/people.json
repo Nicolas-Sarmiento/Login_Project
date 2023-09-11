@@ -48,18 +48,6 @@
     }
   },
   {
-    "id": "32589",
-    "name": "Jose",
-    "lastname": "Salamanca",
-    "account": {
-      "id": "32589",
-      "userName": "jose.salamanca",
-      "password": "HptaJulian99",
-      "role": "STUDENT",
-      "email": "jose.salamanca@uptc.edu.co"
-    }
-  },
-  {
     "id": "4387582",
     "name": "Maria",
     "lastname": "Torres",

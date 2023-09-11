@@ -188,5 +188,7 @@ public class AccountController {
         return passwords;
     }
 
-
+    public HashSet<Account> getAccounts() {
+        return accounts;
+    }
 }

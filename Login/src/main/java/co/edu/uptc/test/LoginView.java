@@ -93,10 +93,11 @@ public class LoginView {
         String loginMessage = """
                 ========================
                 |\t1.Sing in accounts\t|
-                |\t2.see accounts\t\t|
-                |\t3.change password\t|
-                |\t4.Forums\t\t\t|
-                |\t5.logout\t\t\t|
+                |\t2.Delete account\t|
+                |\t3.See accounts\t|
+                |\t4.Change password\t\t\t|
+                |\t5.Forum\t\t\t|
+                |\t6.logout\t\t\t|
                 ========================""";
         int decision,role;
         do{
@@ -108,22 +109,26 @@ public class LoginView {
                             "your user name is: "+loginController.getUserName()+"\n your password is: "+loginController.getPassword(): "Error with your data");
                 break;
                 case 2:
+                    System.out.println("Type the id of the account to delete");
+                    System.out.println(loginController.deletePerson(util.inputString("Selection -----> ", "Invalid ID"))?"The account has been deleted ":"There is an error with the account id");
+                    break;
+                case 3:
                     System.out.println(loginController.showAccounts());
                 break;
-                case 3:
+                case 4:
                     System.out.println(this.changePassword() ? "password change was successful":"Error");
                 break;
-                case 4:
+                case 5:
                     forumMenu();
                     break;
-                case 5:
+                case 6:
                     System.out.println(this.logOut() ? "Logging out" : "Error. Try again");
                 break;
                 default:
                     System.out.println("Invalid option, try again.");
                 break;
             }
-        }while(decision!=5);
+        }while(decision!=6);
     }
 
     public boolean singInAccounts(){

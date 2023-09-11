@@ -159,4 +159,9 @@ public class PersonController {
         }
         return accounts;
     }
+
+    public HashSet<Person> getPersonCollection() {
+        return personCollection;
+    }
+
 }
