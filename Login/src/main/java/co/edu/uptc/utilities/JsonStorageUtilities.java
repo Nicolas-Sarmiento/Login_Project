@@ -131,7 +131,7 @@ public class JsonStorageUtilities {
     public void readAccounts(String fileName) {
         existingContentsAccounts.addAll(readContentFromFile(fileName, new TypeToken<List<Account>>() {}.getType()));
     }
-    //Julian hpta
+    //Error 404
     public Person findPositionPerson(String id) {
         for (int i = 0; i < existingContentsPersons.size(); i++) {
             if (existingContentsPersons.get(i).getId().equals(id)) {

@@ -31,12 +31,10 @@ public class Forum {
     }
     //esta son las respuestas del foro
     public void setAnswerForum(ArrayList<Answer> answerForum) {
-
         this.answerForum = answerForum;
     }
 
     public void addAnswer(String answer, Person person){
-
         Answer answerForum = new Answer(answer , person);
         this.answerForum.add(answerForum);
     }
