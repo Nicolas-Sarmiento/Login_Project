@@ -3,8 +3,12 @@ package co.edu.uptc.controller;
 import co.edu.uptc.model.Answer;
 import co.edu.uptc.model.Forum;
 import co.edu.uptc.model.Person;
+import co.edu.uptc.utilities.JsonStorageUtilities;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  *this class is for forum management.
  * saved forums in ArrayList
@@ -13,12 +17,16 @@ import java.util.ArrayList;
 public class ForumController {
     private ArrayList<Forum> forums;
     private Forum loggedForum;
+    private JsonStorageUtilities jsonStorageUtilities;
+    private LoginController loginController = new LoginController();
 
     /**
      * The void constructor initializes the ArrayList
      */
     public ForumController(){
-        forums=new ArrayList<>();
+        //forums=new ArrayList<>();
+        jsonStorageUtilities = loginController.getJsonStorageUtilities();
+        forums = (ArrayList<Forum>) jsonStorageUtilities.getExistingContentsForums();
     }
 
     /**
@@ -44,7 +52,7 @@ public class ForumController {
     public boolean createdForum(String titleForum,String description){
         Forum f=new Forum(titleForum,description);
         forums.add(f);
-        return true;
+        return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {}.getType());
     }
 
     /**
@@ -63,11 +71,11 @@ public class ForumController {
     public boolean deleteForum(int c){
         try{
             forums.remove(forums.get(c));
-            return true;
+            //Volver a escribir el archivo
+            return jsonStorageUtilities.saveDataToFileForum(forums,"forums",new TypeToken<List<Forum>>() {}.getType());
         }catch (IndexOutOfBoundsException e){
-
+            return false;
         }
-        return false;
     }
 
     /**
@@ -89,7 +97,7 @@ public class ForumController {
      */
     public boolean addComment(String comment, Person person){
         loggedForum.addAnswer(comment, person);
-        return true;
+        return jsonStorageUtilities.saveDataToFileForum(forums,"forums",new TypeToken<List<Forum>>() {}.getType());
     }
 
     /**
@@ -102,11 +110,10 @@ public class ForumController {
         Answer auxAnswer = new Answer(comment, person);
         for (int i=0;i<aux.size();i++) {
             if (aux.get(i).equals(auxAnswer)){
-
                 aux.remove(auxAnswer);
-
                 loggedForum.setAnswerForum(aux);
-                return true;
+                //Asignar el objeto loggedForum a el arreglo sobre escribiendolo
+                return jsonStorageUtilities.saveDataToFileForum(forums,"forums",new TypeToken<List<Forum>>() {}.getType());
             }
         }
         return false;

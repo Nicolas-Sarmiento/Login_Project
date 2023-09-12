@@ -224,6 +224,7 @@ public class LoginController {
         }
         return null;
     }
-
-
+    public JsonStorageUtilities getJsonStorageUtilities() {
+        return jsonStorageUtilities;
+    }
 }

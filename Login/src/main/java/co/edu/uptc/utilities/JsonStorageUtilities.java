@@ -1,6 +1,7 @@
 package co.edu.uptc.utilities;
 
 import co.edu.uptc.model.Account;
+import co.edu.uptc.model.Forum;
 import co.edu.uptc.model.Person;
 import co.edu.uptc.model.persontypes.Administrator;
 import co.edu.uptc.model.persontypes.Professor;
@@ -26,7 +27,9 @@ public class JsonStorageUtilities {
     //cuando agreguemos algo, no borre el resto
     private List<Person> existingContentsPersons = new ArrayList<>();
     private List<Account> existingContentsAccounts = new ArrayList<>();
+    private List<Forum> existingContentsForums = new ArrayList<>();
     private static final String FILEPATH = "./src/main/java/co/edu/uptc/persistence/";
+    private static final String FILEPATHFORUM = "./src/main/java/co/edu/uptc/persistence/Forum/";
     private static final String EXTENSION = ".json";
     private static final String FILEPATHPEOPLE = "./src/main/java/co/edu/uptc/persistence/people.json";
     private static final String FILEPATHACCOUNT = "./src/main/java/co/edu/uptc/persistence/accounts.json";
@@ -39,6 +42,7 @@ public class JsonStorageUtilities {
         //readContentFromFile();
         readPersons("people");
         readAccounts("accounts");
+        readForums("Forum/forums");
     }
 
     //Probablemente nunca se use / Este comentario es provisional, por eso el español
@@ -70,6 +74,19 @@ public class JsonStorageUtilities {
             return false;
         }
     }
+    public <T> boolean saveDataToFileForum(List<T> dataList, String fileName, Type type) {
+        File file = new File(FILEPATHFORUM + fileName + EXTENSION);
+        if (dataList == null) {
+            dataList = new ArrayList<>();
+        }
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            gson.toJson(dataList, type, fileWriter);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public boolean saveDataToFilePerson(List<Person> listPerson, String fileName) {
         Type personListType = new TypeToken<List<Person>>() {}.getType();
         return saveDataToFile(listPerson, fileName, personListType);
@@ -85,7 +102,6 @@ public class JsonStorageUtilities {
 
         File file = new File( FILEPATH + fileName + EXTENSION);
         if (!file.exists()) {
-            System.out.println("hola");
             return null;
         }
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -97,6 +113,8 @@ public class JsonStorageUtilities {
         }
         return dataList;
     }
+
+
     /**
      * Reads a JSON file containing information about people and stores them in the list
      * 'existingContentsPersons', initializing each person with their respective role.
@@ -131,24 +149,10 @@ public class JsonStorageUtilities {
     public void readAccounts(String fileName) {
         existingContentsAccounts.addAll(readContentFromFile(fileName, new TypeToken<List<Account>>() {}.getType()));
     }
+    public void readForums(String filename){
+        existingContentsForums.addAll(readContentFromFile(filename, new TypeToken<List<Forum>>() {}.getType()));
+    }
     //Error 404
-    public Person findPositionPerson(String id) {
-        for (int i = 0; i < existingContentsPersons.size(); i++) {
-            if (existingContentsPersons.get(i).getId().equals(id)) {
-                return existingContentsPersons.get(i);
-            }
-        }
-
-        return null;
-    }
-    public Account findPositionAccount(String id) {
-        for (int i = 0; i<existingContentsAccounts.size();i++){
-            if(existingContentsAccounts.get(i).getId().equals(id)){
-                return existingContentsAccounts.get(i);
-            }
-        }
-        return null;
-    }
     public void saveAccounts(HashSet<Account> accountList) {
         try {
             fileWriter = new FileWriter(FILEPATHACCOUNT, false);
@@ -183,5 +187,13 @@ public class JsonStorageUtilities {
 
     public void setExistingContentsPersons(List<Person> existingContents) {
         this.existingContentsPersons = existingContents;
+    }
+
+    public List<Forum> getExistingContentsForums() {
+        return existingContentsForums;
+    }
+
+    public void setExistingContentsForums(List<Forum> existingContentsForums) {
+        this.existingContentsForums = existingContentsForums;
     }
 }
