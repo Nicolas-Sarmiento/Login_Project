@@ -28,47 +28,78 @@ public class LoginPanel {
     Label msg;
     VBox msgContainer;
     Button btn;
+    VBox btnContainer;
     TextField username;
     PasswordField password;
 
-    public LoginPanel(LoginController lg, LoginView parent){
+    Label userNameTag;
+    Label passwordTag;
+    VBox loginContainer;
+    VBox containerLeft;
+    VBox imageContainer;
+
+    public LoginPanel(LoginView parent){
         this.parent = parent;
     }
     public Scene login(){
 
-        Label userNameTag = new Label("Usuario");
+        this.settingLeftContainer();
+        this.settingImageContainer();
+
+        HBox root = new HBox(containerLeft, imageContainer);
+        HBox.setHgrow(containerLeft, Priority.SOMETIMES);
+        HBox.setHgrow(imageContainer, Priority.ALWAYS);
+        Scene scene = new Scene(root, 1000, 600);
+
+        scene.getStylesheets().add(new File("./styles/login.css").toURI().toString());
+        return scene;
+    }
+
+
+    private void settingUsernameField(){
+        this.userNameTag = new Label("Usuario");
         userNameTag.setFont(new Font(15));
         VBox.setMargin(userNameTag, new Insets(10,0,0,10));
         this.username = new TextField();
         VBox.setMargin(username, new Insets(10));
-        username.setPrefWidth(400);
-        username.setFont(new Font(15));
-        username.setPromptText("usuario");
+        this.username.setPrefWidth(400);
+        this.username.setFont(new Font(15));
+        this.username.setPromptText("usuario");
+    }
 
-        Label passwordTag = new Label("Contraseña");
+    private void settingPasswordField(){
+        this.passwordTag = new Label("Contraseña");
         passwordTag.setFont(new Font(15));
         VBox.setMargin(passwordTag, new Insets(10,0,0,10));
         this.password = new PasswordField();
         VBox.setMargin(password, new Insets(10));
-        password.setPrefWidth(400);
-        password.setFont(new Font(15));
-        password.setPromptText("Contraseña");
+        this.password.setPrefWidth(400);
+        this.password.setFont(new Font(15));
+        this.password.setPromptText("Contraseña");
+    }
 
+    private void settingLoginButton(){
         this.btn = new Button("Ingresar");
         btn.setPrefWidth(250);
         btn.setFont(new Font(18));
         VBox.setMargin(btn, new Insets(15));
-        VBox btnContainer = new VBox(btn);
-        btnContainer.setAlignment(Pos.CENTER);
-        btnContainer.setCursor(Cursor.HAND);
-        btn.setOnAction(this.parent);
+        this.btnContainer = new VBox(btn);
+        this.btnContainer.setAlignment(Pos.CENTER);
+        this.btnContainer.setCursor(Cursor.HAND);
+        this.btn.setOnAction(this.parent);
+    }
 
-
-        VBox loginContainer = new VBox(userNameTag, username, passwordTag, password, btnContainer);
+    private void settingLoginContainer(){
+        this.settingUsernameField();
+        this.settingPasswordField();
+        this.settingLoginButton();
+        this.loginContainer = new VBox(this.userNameTag, this.username, this.passwordTag, this.password, this.btnContainer);
         VBox.setMargin(loginContainer, new Insets(20,20,20,20));
-        loginContainer.setPrefWidth(500);
-        loginContainer.setId("loginContainer");
+        this.loginContainer.setPrefWidth(500);
+        this.loginContainer.setId("loginContainer");
+    }
 
+    private void settingErrorContainer(){
         this.msg = new Label("Error");
         this.msg.setId("error");
         this.msg.setAlignment(Pos.CENTER);
@@ -81,36 +112,35 @@ public class LoginPanel {
         this.msgContainer.setVisible(false);
         VBox.setMargin(this.msgContainer, new Insets(15));
         this.msgContainer.setAlignment(Pos.CENTER);
+    }
 
-        VBox containerLeft = new VBox(loginContainer, msgContainer);
-        containerLeft.setPrefWidth(500);
-        containerLeft.setMinWidth(300);
-        containerLeft.setAlignment(Pos.CENTER);
-        containerLeft.setPrefWidth(500);
-        containerLeft.setId("left");
+    private void settingLeftContainer(){
+        this.settingLoginContainer();
 
-        VBox imageContainer = new VBox();
+        this.settingErrorContainer();
+
+        this.containerLeft = new VBox(loginContainer, msgContainer);
+        this.containerLeft.setPrefWidth(500);
+        this.containerLeft.setMinWidth(300);
+        this.containerLeft.setAlignment(Pos.CENTER);
+        this.containerLeft.setPrefWidth(500);
+        this.containerLeft.setId("left");
+    }
+
+    private void settingImageContainer(){
+        this.imageContainer = new VBox();
         try {
 
             Image image = new Image(new FileInputStream("./imgs/logoUptc.png"));
             ImageView logo = new ImageView(image);
             logo.setFitWidth(400);
             logo.setFitHeight(200);
-            imageContainer.setPrefWidth(500);
-            imageContainer.getChildren().add(logo);
-            imageContainer.setAlignment(Pos.CENTER);
-        }catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        HBox root = new HBox(containerLeft, imageContainer);
-        HBox.setHgrow(containerLeft, Priority.SOMETIMES);
-        HBox.setHgrow(imageContainer, Priority.ALWAYS);
-        Scene scene = new Scene(root, 1000, 600);
-        scene.getStylesheets().add(new File("./styles/login.css").toURI().toString());
-        return scene;
+            this.imageContainer.setPrefWidth(500);
+            this.imageContainer.getChildren().add(logo);
+            this.imageContainer.setAlignment(Pos.CENTER);
+        }catch (FileNotFoundException e) {}
     }
+
     public Scene emptyScene(){
 
         return new Scene(new StackPane(new Text("Loggeado")));

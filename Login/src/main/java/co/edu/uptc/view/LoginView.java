@@ -13,7 +13,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     LoginController controller;
     public LoginView (){
         this.controller = new LoginController();
-        this.login =new LoginPanel(this.controller, this);
+        this.login =new LoginPanel(this);
     }
 
 
