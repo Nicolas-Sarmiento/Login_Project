@@ -10,12 +10,14 @@ import javafx.stage.Stage;
 public class LoginView  extends Application implements EventHandler<ActionEvent> {
     LoginPanel loginPanel;
     LoginDashBoard loginDashBoard;
+    SingInView singInView;
     Stage stage;
     LoginController controller;
 
     public LoginView (){
         this.controller = new LoginController();
         this.loginPanel = new LoginPanel(this);
+        this.singInView = new SingInView();
     }
 
     @Override
@@ -42,6 +44,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
             boolean response = this.controller.login(this.loginPanel.getUsername().getText(), this.loginPanel.getPassword().getText());
             if (response){
                 this.loginDashBoard = new LoginDashBoard(this);
+                this.stage.setTitle("Dashboard UPTC");
                 this.setScene(loginDashBoard.dashBoard());
             }else {
                 this.loginPanel.getUsername().setText("");
