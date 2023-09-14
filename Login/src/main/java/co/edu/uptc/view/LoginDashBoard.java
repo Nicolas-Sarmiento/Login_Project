@@ -33,8 +33,6 @@ public class LoginDashBoard {
     Button btnOption3;
     Button btnOption4;
 
-
-
     public LoginDashBoard(LoginView loginView) {
         this.parent = loginView;
     }

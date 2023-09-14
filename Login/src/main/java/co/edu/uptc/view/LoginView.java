@@ -14,6 +14,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     Stage stage;
     LoginController controller;
     LoginTemplate loginTemplate;
+    LoginListUsers loginListUsers;
 
     public LoginView (){
         this.controller = new LoginController();
@@ -47,7 +48,6 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
                 this.loginDashBoard = new LoginDashBoard(this);
                 this.stage.setTitle("Dashboard UPTC");
                 this.setScene(loginDashBoard.dashBoard());
-
             }else {
                 this.loginPanel.getUsername().setText("");
                 this.loginPanel.getPassword().setText("");
@@ -61,7 +61,9 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption2){
-            // Incluir la pantalla de ver todas las cuentas
+            loginListUsers = new LoginListUsers(this);
+            this.stage.setTitle("List Accounts");
+            this.stage.setScene(loginListUsers.loginListUsers());
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption3){
