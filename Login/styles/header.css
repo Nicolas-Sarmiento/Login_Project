@@ -1,0 +1,18 @@
+#header {
+    -fx-background-color: #F4D03F;
+    -fx-pref-height: 50;
+    -fx-font-family: sans-serif;
+}
+
+#home{
+    -fx-background-color: none;
+}
+
+#info{
+    -fx-font-size: 15;
+}
+
+#name{
+    -fx-padding: 15;
+    -fx-font-size: 15;
+}
