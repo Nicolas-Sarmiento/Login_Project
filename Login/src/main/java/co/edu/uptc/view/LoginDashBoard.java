@@ -42,8 +42,9 @@ public class LoginDashBoard {
     public Scene dashBoard(){
         this.settingContainer();
         HBox root = new HBox(container);
-        Scene scene = new Scene(root, 500, 600);
-
+        root.setId("root");
+        root.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(root, 1000, 600);
         scene.getStylesheets().add(new File("./styles/dashboard.css").toURI().toString());
         return scene;
     }
@@ -52,6 +53,9 @@ public class LoginDashBoard {
         settingContainerInformation();
         settingContainerButtoms();
         container = new VBox(containerInformationUser, containerButtoms);
+        container.setAlignment(Pos.CENTER);
+        VBox.setMargin(container, new Insets(10));
+        container.setId("container");
     }
 
     private void settingContainerButtoms() {
@@ -63,9 +67,7 @@ public class LoginDashBoard {
             containerButtoms = new VBox(btnOption3, btnOption4);
         }
 
-        this.containerButtoms.setCursor(Cursor.HAND);
         this.containerButtoms.setAlignment(Pos.CENTER);
-
     }
 
     private void settingButtomsGenerals(){
@@ -91,7 +93,6 @@ public class LoginDashBoard {
         this.btnOption2.setFont(new Font(18));
         this.btnOption1.setOnAction(this.parent);
         this.btnOption2.setOnAction(this.parent);
-
     }
 
     private void settingContainerInformation() {

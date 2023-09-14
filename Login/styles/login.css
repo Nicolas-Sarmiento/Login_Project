@@ -23,3 +23,7 @@
 .button:hover {
      -fx-background-color: #ffcc00;
 }
+
+.button:focused{
+    -fx-background-color: #ffcc00;
+}
