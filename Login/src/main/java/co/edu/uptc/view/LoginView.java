@@ -11,16 +11,18 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     LoginPanel login;
     Stage stage;
     LoginController controller;
+    LoginTemplate template;
     public LoginView (){
         this.controller = new LoginController();
         this.login =new LoginPanel(this);
+        this.template = new LoginTemplate();
     }
 
 
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        this.stage.setScene(this.login.login());
+        this.stage.setScene(this.template.template());
         this.stage.setTitle("Login UPTC");
         this.stage.show();
     }
