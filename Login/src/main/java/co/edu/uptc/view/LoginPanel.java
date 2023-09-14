@@ -130,7 +130,6 @@ public class LoginPanel {
     private void settingImageContainer(){
         this.imageContainer = new VBox();
         try {
-
             Image image = new Image(new FileInputStream("./imgs/logoUptc.png"));
             ImageView logo = new ImageView(image);
             logo.setFitWidth(400);
@@ -139,11 +138,6 @@ public class LoginPanel {
             this.imageContainer.getChildren().add(logo);
             this.imageContainer.setAlignment(Pos.CENTER);
         }catch (FileNotFoundException e) {}
-    }
-
-    public Scene emptyScene(){
-
-        return new Scene(new StackPane(new Text("Loggeado")));
     }
 
     public Button getBtn(){
