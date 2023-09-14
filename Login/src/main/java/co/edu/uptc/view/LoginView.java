@@ -13,6 +13,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     SingInView singInView;
     Stage stage;
     LoginController controller;
+    LoginTemplate loginTemplate;
 
     public LoginView (){
         this.controller = new LoginController();
@@ -46,6 +47,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
                 this.loginDashBoard = new LoginDashBoard(this);
                 this.stage.setTitle("Dashboard UPTC");
                 this.setScene(loginDashBoard.dashBoard());
+
             }else {
                 this.loginPanel.getUsername().setText("");
                 this.loginPanel.getPassword().setText("");
@@ -53,5 +55,27 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
                 this.loginPanel.setVisibleErrorMessage(true);
             }
         }
+
+        if (e.getSource() == this.loginDashBoard.btnOption1){
+           // Incluir la pantalla de crear nuevas cuentas
+        }
+
+        if(e.getSource() == this.loginDashBoard.btnOption2){
+            // Incluir la pantalla de ver todas las cuentas
+        }
+
+        if(e.getSource() == this.loginDashBoard.btnOption3){
+            loginTemplate = new LoginTemplate();
+
+            this.stage.setTitle("Cambiar contraseña");
+            this.stage.setScene(loginTemplate.template());
+        }
+
+        if(e.getSource() == this.loginDashBoard.btnOption4){
+            this.stage.setTitle("Login UPTC");
+            this.stage.setScene(loginPanel.login());
+        }
+
+
     }
 }
