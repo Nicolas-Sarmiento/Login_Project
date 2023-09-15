@@ -1,8 +1,8 @@
 package co.edu.uptc.view;
 
 import co.edu.uptc.model.Account;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,9 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
 
-public class LoginListUsers {
+public class LoginListUsers extends Header{
     LoginView parent;
     //LoginTemplate loginTemplate;
     VBox container;
@@ -24,7 +23,8 @@ public class LoginListUsers {
     TableColumn roleColumn;
     TableColumn emailColumn;
 
-    public LoginListUsers(LoginView loginView) {
+    public LoginListUsers(LoginView loginView, Button home) {
+        super(home);
         this.parent = loginView;
         //loginTemplate = new LoginTemplate();
         borderPane = new BorderPane();
@@ -35,9 +35,12 @@ public class LoginListUsers {
 
     public Scene loginListUsers(){
         borderPane.setCenter(table);
-//        HBox root = new HBox(borderPane);
-        //root.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(borderPane, 1000, 600);
+        HBox header = this.getHeader();
+        this.setOption("Ver cuentas");
+        this.setName(parent.controller.getName());
+        VBox root = new VBox(header, borderPane);
+
+        Scene scene = new Scene(root, 1000, 600);
         return scene;
     }
 

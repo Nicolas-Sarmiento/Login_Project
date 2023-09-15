@@ -20,13 +20,15 @@ public class Header {
     Label optionInfo;
     VBox Container;
 
+    public Header(Button button) {
+        this.home = button;
+    }
 
     public HBox getHeader(){
 
         this.settingHomeContainer();
         this.settingNameContainer();
         this.settingInfoContainer();
-
 
         this.header = new HBox();
         this.header.getChildren().addAll(this.homeButtonContainer, this.optionInfoContainer, this.nameContainer);
@@ -37,10 +39,11 @@ public class Header {
         return this.header;
     }
 
+
     private void settingHomeContainer(){
         this.homeButtonContainer = new VBox();
         ImageView homeIcon = new ImageView(new File("./imgs/home.png").toURI().toString());
-        this.home = new Button("",homeIcon);
+        this.home.setGraphic(homeIcon);
         this.home.setId("home");
         this.home.setAlignment(Pos.CENTER_LEFT);
         this.homeButtonContainer.getChildren().add(this.home);
