@@ -5,7 +5,9 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 
 public class LoginView  extends Application implements EventHandler<ActionEvent> {
     LoginPanel loginPanel;
@@ -14,11 +16,16 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     Stage stage;
     LoginController controller;
     LoginTemplate loginTemplate;
+    LoginListUsers loginListUsers;
+    Button home;
 
     public LoginView (){
         this.controller = new LoginController();
         this.loginPanel = new LoginPanel(this);
         this.singInView = new SingInView();
+        this.home = new Button();
+        this.home.setOnAction(this);
+        this.loginListUsers = new LoginListUsers(this, home);
     }
 
     @Override
@@ -47,7 +54,6 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
                 this.loginDashBoard = new LoginDashBoard(this);
                 this.stage.setTitle("Dashboard UPTC");
                 this.setScene(loginDashBoard.dashBoard());
-
             }else {
                 this.loginPanel.getUsername().setText("");
                 this.loginPanel.getPassword().setText("");
@@ -61,7 +67,9 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption2){
-            // Incluir la pantalla de ver todas las cuentas
+
+            this.stage.setTitle("Cuentas");
+            this.stage.setScene(loginListUsers.loginListUsers());
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption3){
@@ -76,6 +84,9 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
             this.stage.setScene(loginPanel.login());
         }
 
+        if(e.getSource() == this.home){
+            this.stage.setScene(loginDashBoard.dashBoard());
+        }
 
     }
 }
