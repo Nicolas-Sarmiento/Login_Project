@@ -196,4 +196,7 @@ public class LoginController {
 
     public Person getLoggedPerson(){return this.loggedPerson;}
 
+    public PersonController getPersonController() {
+        return personController;
+    }
 }

@@ -5,7 +5,9 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 
 public class LoginView  extends Application implements EventHandler<ActionEvent> {
     LoginPanel loginPanel;
@@ -13,11 +15,17 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     SingInView singInView;
     Stage stage;
     LoginController controller;
+    LoginTemplate loginTemplate;
+    LoginListUsers loginListUsers;
+    Button home;
 
     public LoginView (){
         this.controller = new LoginController();
         this.loginPanel = new LoginPanel(this);
         this.singInView = new SingInView();
+        this.home = new Button();
+        this.home.setOnAction(this);
+        this.loginListUsers = new LoginListUsers(this, home);
     }
 
     @Override
@@ -53,5 +61,32 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
                 this.loginPanel.setVisibleErrorMessage(true);
             }
         }
+
+        if (e.getSource() == this.loginDashBoard.btnOption1){
+           // Incluir la pantalla de crear nuevas cuentas
+        }
+
+        if(e.getSource() == this.loginDashBoard.btnOption2){
+
+            this.stage.setTitle("Cuentas");
+            this.stage.setScene(loginListUsers.loginListUsers());
+        }
+
+        if(e.getSource() == this.loginDashBoard.btnOption3){
+            loginTemplate = new LoginTemplate();
+
+            this.stage.setTitle("Cambiar contraseña");
+            this.stage.setScene(loginTemplate.template());
+        }
+
+        if(e.getSource() == this.loginDashBoard.btnOption4){
+            this.stage.setTitle("Login UPTC");
+            this.stage.setScene(loginPanel.login());
+        }
+
+        if(e.getSource() == this.home){
+            this.stage.setScene(loginDashBoard.dashBoard());
+        }
+
     }
 }
