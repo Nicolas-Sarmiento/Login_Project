@@ -26,6 +26,11 @@
 }
 
 #name{
-    -fx-padding: 15;
+    -fx-padding: 0 0 0 15;
+    -fx-font-size: 14;
+    -fx-pref-width: 100;
+}
+
+#info{
     -fx-font-size: 15;
 }

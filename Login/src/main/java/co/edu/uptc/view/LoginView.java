@@ -24,9 +24,9 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     public LoginView (){
         this.controller = new LoginController();
         this.loginPanel = new LoginPanel(this);
-        this.singInView = new SingInView();
         this.home = new Button();
         this.home.setOnAction(this);
+        this.singInView = new SingInView(this,this.home);
         this.loginListUsers = new LoginListUsers(this, home);
         this.changePassword = new ChangePasswordOptionConfig(this,home);
     }
@@ -82,6 +82,9 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
 
         if (e.getSource() == this.loginDashBoard.btnOption1){
            // Incluir la pantalla de crear nuevas cuentas
+            this.stage.setTitle("Crear Cuentas");
+            this.setScene(this.singInView.singIn());
+
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption2){

@@ -77,6 +77,7 @@ public class Header {
     }
 
     public void setOption(String option){
+
         this.optionInfo.setText(option);
     }
 
