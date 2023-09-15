@@ -96,6 +96,7 @@ public class LoginController {
                 if (methodAnswer){
                     this.personController.assingAccount(loggedPerson.getId(), this.loggedAcount);
                     this.personController.updateInformationFile();
+                    this.acc.updateInformationFile();
                 }
                 return methodAnswer;
 

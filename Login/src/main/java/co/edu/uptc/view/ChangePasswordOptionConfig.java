@@ -13,21 +13,27 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 
-public class ChangePasswordOptionConfig extends Header{
+public class ChangePasswordOptionConfig extends Header {
 
-    Button changePasswordButton;
     Button confirmButton;
     Label oldPassword;
     Label newPasswordSecond;
     Label newPassword;
+    Label changePasswordMessage;
     Label newPasswordErrorLabel;
     VBox optionInfoContainer;
     TextField newPasswordField;
     TextField newPasswordFieldSecond;
     TextField oldPasswordField;
     VBox root;
-    public ChangePasswordOptionConfig(){
-
+    LoginView loginView;
+    public ChangePasswordOptionConfig(LoginView loginView, Button button){
+        super(button);
+        this.loginView = loginView;
+        this.changePasswordMessage = new Label("La contraseña se ha cambiado satisfactoriamente.");
+        this.newPasswordErrorLabel = new Label("Las contraselas no coinciden");
+        this.changePasswordMessage.setVisible(false);
+        this.newPasswordErrorLabel.setVisible(false);
     }
     public Scene settingInfoContainer(){
 
@@ -35,7 +41,7 @@ public class ChangePasswordOptionConfig extends Header{
 
         this.optionInfoContainer = new VBox();
         this.optionInfoContainer.setAlignment(Pos.CENTER);
-        optionInfoContainer.getChildren().addAll(this.oldPassword, this.oldPasswordField, this.newPassword, this.newPasswordField, this.newPasswordSecond,this.newPasswordFieldSecond, this.confirmButton);
+        optionInfoContainer.getChildren().addAll(this.oldPassword, this.newPasswordErrorLabel, this.oldPasswordField, this.newPassword, this.newPasswordField, this.newPasswordSecond,this.newPasswordFieldSecond, this.confirmButton, this.changePasswordMessage);//aqui esta el error
         oldPasswordField.setVisible(true);
         newPasswordField.setVisible(true);
         confirmButton.setVisible(true);
@@ -46,6 +52,7 @@ public class ChangePasswordOptionConfig extends Header{
 
         root = new VBox();
         root.getChildren().addAll(getHeader(), this.optionInfoContainer);
+        this.setName(this.loginView.controller.getName());
         Scene scene = new Scene(root,1000,600);
         scene.getStylesheets().add(new File("./styles/header.css").toURI().toString());
         return scene;
@@ -81,29 +88,9 @@ public class ChangePasswordOptionConfig extends Header{
             validatePasswords();
         });
 
-        confirmButton.setOnAction(event -> {
-            //Esta logica la hago cuando ya se haya implementado, se me facilitara mas
-            System.out.println("Por que espicho el boton?");
-            oldPasswordField.getText();
-            if (newPasswordField.getText().equals(newPasswordFieldSecond.getText()));
-
-
-
-            //loginController.changePassword()
-            /*
-             * */
-        });
-
-        newPasswordField.setVisible(false);
-        oldPasswordField.setVisible(false);
-        confirmButton.setVisible(false);
-        oldPassword.setVisible(false);
-        newPassword.setVisible(false);
-        newPasswordSecond.setVisible(false);
-        newPasswordFieldSecond.setVisible(false);
+        confirmButton.setOnAction(this.loginView);
     }
     public void validatePasswords(){
-        newPasswordErrorLabel = new Label("Las contraselas no coinciden");
         //De alguna manera conectar con la cuenta logeada
         String password1 = newPasswordField.getText();
         String password2 = newPasswordFieldSecond.getText();
@@ -117,5 +104,37 @@ public class ChangePasswordOptionConfig extends Header{
             newPasswordField.setStyle("-fx-border-color: red;");
             newPasswordFieldSecond.setStyle("-fx-border-color: red;");
         }
+    }
+
+    public void passwordChangeSuccesfully(){
+        changePasswordMessage.setVisible(true);
+    }
+
+    public Button getConfirmButton() {
+        return confirmButton;
+    }
+
+    public TextField getNewPasswordField() {
+        return newPasswordField;
+    }
+
+    public void setNewPasswordField(String newPasswordField) {
+        this.newPasswordField.setText(newPasswordField);
+    }
+
+    public TextField getNewPasswordFieldSecond() {
+        return newPasswordFieldSecond;
+    }
+
+    public void setNewPasswordFieldSecond(String newPasswordFieldSecond) {
+        this.newPasswordFieldSecond.setText(newPasswordFieldSecond);
+    }
+
+    public TextField getOldPasswordField() {
+        return oldPasswordField;
+    }
+
+    public void setOldPasswordField(String oldPasswordField) {
+        this.oldPasswordField.setText(oldPasswordField);
     }
 }

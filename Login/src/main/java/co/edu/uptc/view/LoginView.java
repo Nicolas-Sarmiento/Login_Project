@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 
@@ -17,6 +18,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     LoginController controller;
     LoginTemplate loginTemplate;
     LoginListUsers loginListUsers;
+    ChangePasswordOptionConfig changePassword;
     Button home;
 
     public LoginView (){
@@ -26,6 +28,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         this.home = new Button();
         this.home.setOnAction(this);
         this.loginListUsers = new LoginListUsers(this, home);
+        this.changePassword = new ChangePasswordOptionConfig(this,home);
     }
 
     @Override
@@ -61,6 +64,21 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
                 this.loginPanel.setVisibleErrorMessage(true);
             }
         }
+        if (e.getSource() == this.changePassword.getConfirmButton()){
+            String old = changePassword.oldPasswordField.getText();
+            String newPassword = "";
+            if(old.equals(controller.getLoggedPerson().getAccount().getPassword())){ // Usar equals() para comparar cadenas
+                newPassword = changePassword.newPasswordField.getText();
+                if(newPassword.equals(changePassword.newPasswordFieldSecond.getText())){ // Usar equals() para comparar cadenas
+                    if(controller.changePassword(old, newPassword)){
+                        changePassword.setNewPasswordField("");
+                        changePassword.setNewPasswordFieldSecond("");
+                        changePassword.setOldPasswordField("");
+                        changePassword.passwordChangeSuccesfully();
+                    }
+                }
+            }
+        }
 
         if (e.getSource() == this.loginDashBoard.btnOption1){
            // Incluir la pantalla de crear nuevas cuentas
@@ -73,10 +91,8 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption3){
-            loginTemplate = new LoginTemplate();
-
             this.stage.setTitle("Cambiar contraseña");
-            this.stage.setScene(loginTemplate.template());
+            this.stage.setScene(changePassword.settingInfoContainer());
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption4){
