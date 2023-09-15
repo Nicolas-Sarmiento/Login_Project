@@ -50,6 +50,9 @@ public class PersonController {
      */
     public boolean addPerson(String id, String name, String lastName, String role){
         Person newPerson = this.createPersonByRole(id, name, lastName, role);
+        for (Person per : this.personCollection){
+            if (per.getId().equals(newPerson.getId())) return false;
+        }
         if (newPerson == null) return false;
         if(this.personCollection.add(newPerson)){
             updateInformationFile();
