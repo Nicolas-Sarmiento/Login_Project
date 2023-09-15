@@ -1,6 +1,7 @@
 package co.edu.uptc.view;
 
 import co.edu.uptc.utilities.InputLibrary;
+import com.sun.javafx.css.StyleClassSet;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -39,6 +40,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     private Button summit;
 
     private static final String[] ROLES ={"Student", "Professor", "Secretary", "Administrator"};
+    private Label idLabel;
 
     public SingInView(LoginView parent, Button btn){
         super(btn);
@@ -84,7 +86,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.name.setPromptText("Jhon");
         this.name.getStyleClass().add("input");
         this.name.textProperty().addListener(((observable, oldValue, newValue) -> {
-            validateNumbers(this.name, this.nameError, newValue);
+            validateNumbers(this.name, this.nameError, this.name.getText());
         }));
 
 
@@ -112,10 +114,10 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.lastName.setPromptText("Doe");
         this.lastName.getStyleClass().add("input");
         this.lastName.textProperty().addListener(((observable, oldValue, newValue) -> {
-            validateNumbers(this.lastName, this.lastNameError, newValue);
+            validateNumbers(this.lastName, this.lastNameError, this.lastName.getText());
         }));;
 
-        this.lastNameError = new Label("Los apellidos no puede contener caracteres especiales o números");
+        this.lastNameError = new Label("");
         this.lastNameError.getStyleClass().add("errorLabel");
         this.lastNameError.setVisible(false);
 
@@ -131,17 +133,18 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.idField = new HBox();
         this.idField.setAlignment(Pos.CENTER);
 
-        Label idLabel = new Label("Identificación");
-        idLabel.getStyleClass().add("tag");
-
+        this.idLabel = new Label();
+        this.idLabel.setText("código");
+        this.idLabel.getStyleClass().add("tag");
         this.id = new TextField();
+        this.id.setPromptText("202216034");
         this.id.getStyleClass().add("input");
         this.id.setPromptText("Ej: 202210583");
         this.id.textProperty().addListener(((observable, oldValue, newValue) -> {
-            validateIdStyle(this.id, this.idError, newValue);
+            validateIdStyle(this.id, this.idError, this.id.getText());
         }));;
 
-        this.idError = new Label("sdf");
+        this.idError = new Label("");
         this.idError.getStyleClass().add("errorLabel");
         this.idError.setVisible(false);
         VBox labelContainer = new VBox(idLabel);
@@ -191,7 +194,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     }
 
     private void validateIdStyle(TextField ob, Label error, String value){
-        if (value.isBlank() ||  this.util.containSpecialCharactersNums(value)){
+        if (value.isBlank() ||  this.util.containSpecialCharactersId(value)){
             ob.getStyleClass().add("errorInput");
             error.setVisible(true);
         }
@@ -202,13 +205,13 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             }
         }
 
-        if ( this.util.containSpecialCharactersNums(value)){
+        if ( this.util.containSpecialCharactersId(value)){
             if (!error.getText().contains(" Sin caracteres especiales")){
                 error.setText(error.getText() + " Sin caracteres especiales");
             }
         }
 
-        if (!this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
+        if (!this.util.containSpecialCharactersId(ob.getText()) && !ob.getText().isBlank()){
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
@@ -217,7 +220,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     }
 
     private void validateNumbers(TextField ob, Label error, String value){
-        if (this.util.containsNums(value) || this.util.containSpecialCharactersNums(value) || value.isBlank()){
+        if (this.util.containsNums(this.id.getText()) || this.util.containSpecialCharactersNums(value) || value.isBlank() || value.startsWith(" ")){
             if (!ob.getStyleClass().contains("errorInput")){
                 ob.getStyleClass().add("errorInput");
             }
@@ -229,19 +232,25 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                 }
             }
             if (this.util.containsNums(value)){
-                if (!error.getText().contains(" Sin Números")){
-                    error.setText(error.getText() + " Sin Números");
+                if (!error.getText().contains(" Sin Números.")){
+                    error.setText(error.getText() + " Sin Números.");
+                }
+            }
+
+            if (value.startsWith(" ")){
+                if (!error.getText().contains("No espacios iniciales.")){
+                    error.setText(error.getText() + "No espacios iniciales.");
                 }
             }
 
             if ( this.util.containSpecialCharactersNums(value)){
                 if (!error.getText().contains(" Sin caracteres especiales")){
-                    error.setText(error.getText() + " Sin caracteres especiales");
+                    error.setText(error.getText() + " Sin caracteres especiales.");
                 }
             }
         }
 
-        if (!this.util.containsNums(ob.getText()) && !this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
+        if (!this.util.containsNums(ob.getText()) && !this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank() && !ob.getText().startsWith(" ")){
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
@@ -249,15 +258,12 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
 
     }
 
-
-
-
-    public boolean validateNames(String str){
+    private boolean validateNames(String str){
         return  !str.isBlank() && !this.util.containsNums(str)  && !this.util.containSpecialCharactersNums(str) && !str.startsWith(" ");
     }
 
     public boolean validateId(String str){
-        return  !str.isBlank() && !this.util.containSpecialCharactersNums(str) && !str.contains(" ");
+        return  !str.isBlank() && !this.util.containSpecialCharactersId(str) && !str.contains(" ");
     }
     @Override
     public void handle(ActionEvent e) {
@@ -269,8 +275,11 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                     this.parent.loginListUsers.addAccount(this.parent.controller.getPersonController().findPersonById(this.id.getText()).getAccount());
                     this.message.setText("Añadido con éxito!");
                 }else{
-                    this.message.setText("Ha ocurrido un error!");
+                    this.message.setText("ese usuario ya existe");
                 }
+                this.messageContainer.setVisible(true);
+            }else {
+                this.message.setText("Los nombres no deben contener espacios al iniciar\n números o caracteres especiales.");
                 this.messageContainer.setVisible(true);
             }
 
@@ -289,6 +298,16 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             }
 
 
+        }
+
+        if (e.getSource() == this.roles){
+            if (!this.roles.getValue().equals(ROLES[0])){
+                this.idLabel.setText("Identificación");
+                this.id.setPromptText("1053893289");
+            }else {
+                this.idLabel.setText("código");
+                this.id.setPromptText("202216034");
+            }
         }
     }
 }
