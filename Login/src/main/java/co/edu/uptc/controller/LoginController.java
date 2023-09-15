@@ -157,7 +157,7 @@ public class LoginController {
     }
 
     public String getName(){
-        return this.loggedPerson.getName() + " " + this.loggedPerson.getLastname();
+        return this.loggedPerson.getName();
     }
     /**
      * Method to view the information of the account that is logged in
