@@ -48,6 +48,9 @@
     -fx-border-width: 2px;
     -fx-font-size: 15px;
 }
+.errorInput{
+     -fx-border-color: transparent transparent red transparent;
+}
 
 .input:focused{
      -fx-border-color: transparent transparent #2e2e2e transparent;
@@ -68,11 +71,8 @@
     -fx-text-fill: #000000;
 }
 #summit:focused{
-    -fx-border-width: 2px;
-    -fx-border-style: solid;
-    -fx-border-radius: 5px;
-    -fx-border-color: #F4D03F;
-
+   -fx-background-color: #F4D03F;
+   -fx-text-fill: #000000;
 }
 
 .errorLabel{

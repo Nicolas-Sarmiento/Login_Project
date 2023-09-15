@@ -29,6 +29,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         this.singInView = new SingInView(this,this.home);
         this.loginListUsers = new LoginListUsers(this, home);
         this.changePassword = new ChangePasswordOptionConfig(this,home);
+        this.loginDashBoard = new LoginDashBoard(this);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
 
             boolean response = this.controller.login(this.loginPanel.getUsername().getText(), this.loginPanel.getPassword().getText());
             if (response){
-                this.loginDashBoard = new LoginDashBoard(this);
+
                 this.stage.setTitle("Dashboard UPTC");
                 this.setScene(loginDashBoard.dashBoard());
             }else {

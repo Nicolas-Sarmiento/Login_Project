@@ -139,8 +139,7 @@ public class InputLibrary {
 
 
     public boolean containSpecialCharactersNums(String input){
-        String str = input.replaceAll("[^a-zA-Z0-9]+", "");
-        return input.length() > str.length();
+       return !input.matches("[a-zA-Z0-9 ]+");
     }
     public boolean containsNums(String str){
         String noNums = str.replaceAll("[0-9]", "");

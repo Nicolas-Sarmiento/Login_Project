@@ -81,11 +81,14 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         nameLabel.getStyleClass().add("tag");
 
         this.name = new TextField();
-        this.name.setPromptText("Ej: Jhon");
+        this.name.setPromptText("Jhon");
         this.name.getStyleClass().add("input");
-        this.name.setOnAction(this);
+        this.name.textProperty().addListener(((observable, oldValue, newValue) -> {
+            validateNumbers(this.name, this.nameError, newValue);
+        }));
 
-        this.nameError = new Label("El nombre no puede contener caracteres especiales ");
+
+        this.nameError = new Label("");
         this.nameError.getStyleClass().add("errorLabel");
         this.nameError.setVisible(false);
         this.nameError.setAlignment(Pos.BASELINE_RIGHT);
@@ -108,7 +111,9 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.lastName = new TextField();
         this.lastName.setPromptText("Doe");
         this.lastName.getStyleClass().add("input");
-        this.lastName.setOnAction(this);
+        this.lastName.textProperty().addListener(((observable, oldValue, newValue) -> {
+            validateNumbers(this.lastName, this.lastNameError, newValue);
+        }));;
 
         this.lastNameError = new Label("Los apellidos no puede contener caracteres especiales o números");
         this.lastNameError.getStyleClass().add("errorLabel");
@@ -132,7 +137,9 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.id = new TextField();
         this.id.getStyleClass().add("input");
         this.id.setPromptText("Ej: 202210583");
-        this.id.setOnAction(this);
+        this.id.textProperty().addListener(((observable, oldValue, newValue) -> {
+            validateIdStyle(this.id, this.idError, newValue);
+        }));;
 
         this.idError = new Label("sdf");
         this.idError.getStyleClass().add("errorLabel");
@@ -183,6 +190,68 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.messageContainer.setVisible(false);
     }
 
+    private void validateIdStyle(TextField ob, Label error, String value){
+        if (value.isBlank() ||  this.util.containSpecialCharactersNums(value)){
+            ob.getStyleClass().add("errorInput");
+            error.setVisible(true);
+        }
+
+        if (value.isBlank()){
+            if (!error.getText().contains(" Obligatorio*")){
+                error.setText(error.getText() + " Obligatorio*");
+            }
+        }
+
+        if ( this.util.containSpecialCharactersNums(value)){
+            if (!error.getText().contains(" Sin caracteres especiales")){
+                error.setText(error.getText() + " Sin caracteres especiales");
+            }
+        }
+
+        if (!this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
+            error.setText("");
+            ob.getStyleClass().remove("errorInput");
+        }
+
+
+    }
+
+    private void validateNumbers(TextField ob, Label error, String value){
+        if (this.util.containsNums(value) || this.util.containSpecialCharactersNums(value) || value.isBlank()){
+            if (!ob.getStyleClass().contains("errorInput")){
+                ob.getStyleClass().add("errorInput");
+            }
+            error.setVisible(true);
+
+            if (value.isBlank()){
+                if (!error.getText().contains(" Obligatorio*")){
+                    error.setText(error.getText() + " Obligatorio*");
+                }
+            }
+            if (this.util.containsNums(value)){
+                if (!error.getText().contains(" Sin Números")){
+                    error.setText(error.getText() + " Sin Números");
+                }
+            }
+
+            if ( this.util.containSpecialCharactersNums(value)){
+                if (!error.getText().contains(" Sin caracteres especiales")){
+                    error.setText(error.getText() + " Sin caracteres especiales");
+                }
+            }
+        }
+
+        if (!this.util.containsNums(ob.getText()) && !this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
+            error.setText("");
+            ob.getStyleClass().remove("errorInput");
+        }
+
+
+    }
+
+
+
+
     public boolean validateNames(String str){
         return  !str.isBlank() && !this.util.containsNums(str)  && !this.util.containSpecialCharactersNums(str) && !str.startsWith(" ");
     }
@@ -193,8 +262,9 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent e) {
         if (e.getSource() == this.summit){
+            this.roles.requestFocus();
             if (this.validateNames(this.name.getText()) && this.validateNames(this.lastName.getText()) && this.validateId(this.id.getText())){
-                boolean respone = this.parent.controller.signin(this.name.getText(),this.lastName.getText(), this.id.getId(), this.roles.getValue());
+                boolean respone = this.parent.controller.signin(this.name.getText(),this.lastName.getText(), this.id.getText(), this.roles.getValue());
                 if (respone){
                     this.message.setText("Añadido con éxito!");
                 }else{
