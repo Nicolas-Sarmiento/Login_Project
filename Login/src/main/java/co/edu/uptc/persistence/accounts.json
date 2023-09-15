@@ -28,6 +28,13 @@
     "email": "johana.torres@uptc.edu.co"
   },
   {
+    "id": "32589",
+    "userName": "jose.salamanca",
+    "password": "Maisit00",
+    "role": "STUDENT",
+    "email": "jose.salamanca@uptc.edu.co"
+  },
+  {
     "id": "12345",
     "userName": "nino.nakano",
     "password": "M1nitaCH1na",
@@ -40,13 +47,6 @@
     "password": "HJAkjsf234",
     "role": "STUDENT",
     "email": "maria.rodriguez01@uptc.edu.co"
-  },
-  {
-    "id": "32589",
-    "userName": "jose.salamanca",
-    "password": "Maisit000",
-    "role": "STUDENT",
-    "email": "jose.salamanca@uptc.edu.co"
   },
   {
     "id": "2020154",
