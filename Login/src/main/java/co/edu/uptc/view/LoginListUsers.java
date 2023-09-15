@@ -13,8 +13,6 @@ import javafx.scene.layout.VBox;
 
 public class LoginListUsers extends Header{
     LoginView parent;
-    //LoginTemplate loginTemplate;
-    VBox container;
     BorderPane borderPane;
     TableView table;
     TableColumn idColumn;
@@ -26,22 +24,31 @@ public class LoginListUsers extends Header{
     public LoginListUsers(LoginView loginView, Button home) {
         super(home);
         this.parent = loginView;
-        //loginTemplate = new LoginTemplate();
         borderPane = new BorderPane();
         table = new TableView<Account>();
-        creationColumns();
         addingRegisters();
+        creationColumns();
     }
 
     public Scene loginListUsers(){
+
         borderPane.setCenter(table);
         HBox header = this.getHeader();
         this.setOption("Ver cuentas");
         this.setName(parent.controller.getName());
         VBox root = new VBox(header, borderPane);
-
         Scene scene = new Scene(root, 1000, 600);
         return scene;
+    }
+
+    public void addAccount(Account account){
+        table.getItems().add(account);
+    }
+
+    private void addingRegisters(){
+        for (Account account: parent.controller.getPersonController().getAccounts()) {
+            table.getItems().add(new Account(account.getId(), account.getUserName(), account.getPassword(), account.getRole(), account.getEmail()));
+        }
     }
 
     private void creationColumns() {
@@ -69,10 +76,6 @@ public class LoginListUsers extends Header{
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
     }
 
-    private void addingRegisters(){
-        for (Account account: parent.controller.getPersonController().getAccounts()) {
-            table.getItems().add(new Account(account.getId(), account.getUserName(), account.getPassword(), account.getRole(), account.getEmail()));
-        }
-    }
+
 
 }

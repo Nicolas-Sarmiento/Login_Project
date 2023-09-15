@@ -1,5 +1,12 @@
 [
   {
+    "id": "1035",
+    "userName": "maria.perez",
+    "password": "35SCKqs",
+    "role": "STUDENT",
+    "email": "maria.perez@uptc.edu.co"
+  },
+  {
     "id": "6378264",
     "userName": "alvaro.perez",
     "password": "34AWKug",
@@ -19,6 +26,13 @@
     "password": "Masfx83",
     "role": "STUDENT",
     "email": "manuel.martinez@uptc.edu.co"
+  },
+  {
+    "id": "123455",
+    "userName": "fredy.alarcon",
+    "password": "48IAGqy",
+    "role": "STUDENT",
+    "email": "fredy.alarcon@uptc.edu.co"
   },
   {
     "id": "46389778",

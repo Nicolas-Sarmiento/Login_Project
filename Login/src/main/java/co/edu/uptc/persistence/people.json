@@ -108,6 +108,30 @@
     }
   },
   {
+    "id": "123455",
+    "name": "Fredy",
+    "lastname": "Alarcon",
+    "account": {
+      "id": "123455",
+      "userName": "fredy.alarcon",
+      "password": "48IAGqy",
+      "role": "STUDENT",
+      "email": "fredy.alarcon@uptc.edu.co"
+    }
+  },
+  {
+    "id": "1035",
+    "name": "Maria",
+    "lastname": "Perez",
+    "account": {
+      "id": "1035",
+      "userName": "maria.perez",
+      "password": "35SCKqs",
+      "role": "STUDENT",
+      "email": "maria.perez@uptc.edu.co"
+    }
+  },
+  {
     "id": "6378264",
     "name": "Alvaro",
     "lastname": "Perez",

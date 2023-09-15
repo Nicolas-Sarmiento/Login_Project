@@ -266,6 +266,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             if (this.validateNames(this.name.getText()) && this.validateNames(this.lastName.getText()) && this.validateId(this.id.getText())){
                 boolean respone = this.parent.controller.signin(this.name.getText(),this.lastName.getText(), this.id.getText(), this.roles.getValue());
                 if (respone){
+                    this.parent.loginListUsers.addAccount(this.parent.controller.getPersonController().findPersonById(this.id.getText()).getAccount());
                     this.message.setText("Añadido con éxito!");
                 }else{
                     this.message.setText("Ha ocurrido un error!");

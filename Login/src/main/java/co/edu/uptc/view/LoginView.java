@@ -83,14 +83,11 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         }
 
         if (e.getSource() == this.loginDashBoard.btnOption1){
-           // Incluir la pantalla de crear nuevas cuentas
             this.stage.setTitle("Crear Cuentas");
             this.setScene(this.singInView.singIn());
-
         }
 
         if(e.getSource() == this.loginDashBoard.btnOption2){
-
             this.stage.setTitle("Cuentas");
             this.stage.setScene(loginListUsers.loginListUsers());
         }
