@@ -32,6 +32,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         this.stage.setScene(this.loginPanel.login());
+        //this.stage.setScene(this.singInView.singIn());
         this.stage.setTitle("Login UPTC");
         this.stage.show();
     }

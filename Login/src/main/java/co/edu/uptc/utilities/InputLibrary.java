@@ -124,7 +124,9 @@ public class InputLibrary {
 
     }
 
-    private boolean containsSpecialCharacters(String str){
+
+    private boolean containsSpecialCharacters(String input){
+        String str = input.replaceAll("[0-9]", "d");
         for (int i = 0; i < str.length(); i++){
             if (str.charAt(i) == 32) continue;
             if (str.charAt(i) < 65) return false;
@@ -133,5 +135,15 @@ public class InputLibrary {
         }
 
         return true;
+    }
+
+
+    public boolean containSpecialCharactersNums(String input){
+        String str = input.replaceAll("[^a-zA-Z0-9]+", "");
+        return input.length() > str.length();
+    }
+    public boolean containsNums(String str){
+        String noNums = str.replaceAll("[0-9]", "");
+        return str.length() > noNums.length();
     }
 }

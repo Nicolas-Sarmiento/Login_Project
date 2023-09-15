@@ -69,8 +69,6 @@ public class Header {
         this.optionInfoContainer = new VBox();
         this.optionInfo = new Label("cambiar contraseña");
         this.optionInfo.setId("info");
-        this.optionInfo.setAlignment(Pos.CENTER);
-        this.optionInfo.setMaxWidth(Double.MAX_VALUE);
         this.optionInfoContainer.getChildren().add(this.optionInfo);
         this.optionInfoContainer.setAlignment(Pos.CENTER);
         HBox.setHgrow(this.optionInfoContainer, Priority.ALWAYS);
