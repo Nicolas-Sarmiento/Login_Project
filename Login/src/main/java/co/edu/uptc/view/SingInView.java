@@ -1,7 +1,6 @@
 package co.edu.uptc.view;
 
 import co.edu.uptc.utilities.InputLibrary;
-import com.sun.javafx.css.StyleClassSet;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -18,7 +17,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
-
+/**
+ * The SingInView class represents the view for user registration.
+ * It extends the Header class and implements the EventHandler interface for handling events.
+ */
 public class SingInView extends Header implements EventHandler<ActionEvent> {
     private InputLibrary util;
     private LoginView parent;
@@ -40,14 +42,22 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     private Button summit;
 
     private static final String[] ROLES ={"Student", "Professor", "Secretary", "Administrator"};
-    private Label idLabel;
-
+    /**
+     * Constructs a SingInView instance.
+     *
+     * @param parent The parent LoginView instance.
+     * @param btn    The Button instance to be set as home button in the header.
+     */
     public SingInView(LoginView parent, Button btn){
         super(btn);
         this.parent = parent;
         this.util = new InputLibrary();
     }
-
+    /**
+     * Creates the scene for user registration.
+     *
+     * @return The Scene for user registration.
+     */
     public Scene singIn(){
         HBox header = this.getHeader();
         this.setName(this.parent.controller.getName());
@@ -74,7 +84,11 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         scene.getStylesheets().add(new File("./styles/signin.css").toURI().toString());
         return scene;
     }
-
+    /**
+     * Sets up the UI elements for entering the user's first name.
+     * Configures a label for the field, a text input for the first name,
+     * and an error label to display validation messages.
+     */
     private void settingNameField(){
         this.nameField = new HBox();
         this.nameField.setAlignment(Pos.CENTER);
@@ -86,7 +100,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.name.setPromptText("Jhon");
         this.name.getStyleClass().add("input");
         this.name.textProperty().addListener(((observable, oldValue, newValue) -> {
-            validateNumbers(this.name, this.nameError, this.name.getText());
+            validateNumbers(this.name, this.nameError, newValue);
         }));
 
 
@@ -102,7 +116,11 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.nameField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-
+    /**
+     * Sets up the UI elements for entering the user's last name.
+     * Configures a label for the field, a text input for the last name,
+     * and an error label to display validation messages.
+     */
     private void settingLastNameField(){
         this.lastNameField = new HBox();
         this.lastNameField.setAlignment(Pos.CENTER);
@@ -114,10 +132,10 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.lastName.setPromptText("Doe");
         this.lastName.getStyleClass().add("input");
         this.lastName.textProperty().addListener(((observable, oldValue, newValue) -> {
-            validateNumbers(this.lastName, this.lastNameError, this.lastName.getText());
+            validateNumbers(this.lastName, this.lastNameError, newValue);
         }));;
 
-        this.lastNameError = new Label("");
+        this.lastNameError = new Label("Los apellidos no puede contener caracteres especiales o números");
         this.lastNameError.getStyleClass().add("errorLabel");
         this.lastNameError.setVisible(false);
 
@@ -128,23 +146,26 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.lastNameField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-
+    /**
+     * Sets up the UI elements for entering the user's identification.
+     * Configures a label for the field, a text input for the identification,
+     * and an error label to display validation messages.
+     */
     private void settingIdField(){
         this.idField = new HBox();
         this.idField.setAlignment(Pos.CENTER);
 
-        this.idLabel = new Label();
-        this.idLabel.setText("código");
-        this.idLabel.getStyleClass().add("tag");
+        Label idLabel = new Label("Identificación");
+        idLabel.getStyleClass().add("tag");
+
         this.id = new TextField();
-        this.id.setPromptText("202216034");
         this.id.getStyleClass().add("input");
         this.id.setPromptText("Ej: 202210583");
         this.id.textProperty().addListener(((observable, oldValue, newValue) -> {
-            validateIdStyle(this.id, this.idError, this.id.getText());
+            validateIdStyle(this.id, this.idError, newValue);
         }));;
 
-        this.idError = new Label("");
+        this.idError = new Label("sdf");
         this.idError.getStyleClass().add("errorLabel");
         this.idError.setVisible(false);
         VBox labelContainer = new VBox(idLabel);
@@ -154,7 +175,11 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.idField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-
+    /**
+     * Sets up the UI elements for selecting a role.
+     * Configures a label for the role selection, a choice box to select a role,
+     * and sets up event handling for role selection changes.
+     */
     private void settingRoleField( ){
         this.roleField = new HBox();
         this.roleField.setAlignment(Pos.CENTER);
@@ -174,7 +199,10 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.roleField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-
+    /**
+     * Configures the "Registrar" button for user registration.
+     * Sets the button label, CSS ID, cursor style, and event handling for button clicks.
+     */
     private void settingSummitButton(){
         this.summit = new Button("Registrar");
         this.summit.setId("summit");
@@ -182,7 +210,10 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.summit.setOnAction(this);
         VBox.setMargin(this.summit, new Insets(20, 0, 0 ,0));
     }
-
+    /**
+     * Configures the message display container and label for displaying status messages.
+     * Sets the initial message, container ID for styling, alignment, and visibility.
+     */
     private void settingMessage(){
         this.messageContainer = new VBox();
         this.messageContainer.setId("messageContainer");
@@ -192,9 +223,15 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.messageContainer.getChildren().add(this.message);
         this.messageContainer.setVisible(false);
     }
-
+    /**
+     * Validates the input style and displays appropriate error messages for the ID field.
+     *
+     * @param ob    The TextField for the ID
+     * @param error The Label to display error messages
+     * @param value The input value to be validated
+     */
     private void validateIdStyle(TextField ob, Label error, String value){
-        if (value.isBlank() ||  this.util.containSpecialCharactersId(value)){
+        if (value.isBlank() ||  this.util.containSpecialCharactersNums(value)){
             ob.getStyleClass().add("errorInput");
             error.setVisible(true);
         }
@@ -205,20 +242,26 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             }
         }
 
-        if ( this.util.containSpecialCharactersId(value)){
+        if ( this.util.containSpecialCharactersNums(value)){
             if (!error.getText().contains(" Sin caracteres especiales")){
                 error.setText(error.getText() + " Sin caracteres especiales");
             }
         }
 
-        if (!this.util.containSpecialCharactersId(ob.getText()) && !ob.getText().isBlank()){
+        if (!this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
 
 
     }
-
+    /**
+     * Validates the input style and displays appropriate error messages for fields that should not contain numbers.
+     *
+     * @param ob    The TextField for which the validation is performed
+     * @param error The Label to display error messages
+     * @param value The input value to be validated
+     */
     private void validateNumbers(TextField ob, Label error, String value){
         if (this.util.containsNums(ob.getText()) || this.util.containSpecialCharactersNums(value) || value.isBlank() || value.startsWith(" ")){
             if (!ob.getStyleClass().contains("errorInput")){
@@ -232,39 +275,48 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                 }
             }
             if (this.util.containsNums(value)){
-                if (!error.getText().contains(" Sin Números.")){
-                    error.setText(error.getText() + " Sin Números.");
-                }
-            }
-
-            if (value.startsWith(" ")){
-                if (!error.getText().contains("No espacios iniciales.")){
-                    error.setText(error.getText() + "No espacios iniciales.");
+                if (!error.getText().contains(" Sin Números")){
+                    error.setText(error.getText() + " Sin Números");
                 }
             }
 
             if ( this.util.containSpecialCharactersNums(value)){
                 if (!error.getText().contains(" Sin caracteres especiales")){
-                    error.setText(error.getText() + " Sin caracteres especiales.");
+                    error.setText(error.getText() + " Sin caracteres especiales");
                 }
             }
         }
 
-        if (!this.util.containsNums(ob.getText()) && !this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank() && !ob.getText().startsWith(" ")){
+        if (!this.util.containsNums(ob.getText()) && !this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
 
 
     }
-
-    private boolean validateNames(String str){
+    /**
+     * Validates a string to ensure it does not contain numbers, special characters, is not blank, and does not start with a space.
+     *
+     * @param str The string to be validated
+     * @return True if the string is valid (meets the specified criteria), false otherwise
+     */
+    public boolean validateNames(String str){
         return  !str.isBlank() && !this.util.containsNums(str)  && !this.util.containSpecialCharactersNums(str) && !str.startsWith(" ");
     }
-
+    /**
+     * Validates an identification string to ensure it is not blank, does not contain special characters, and does not contain spaces.
+     *
+     * @param str The identification string to be validated
+     * @return True if the string is valid (meets the specified criteria), false otherwise
+     */
     public boolean validateId(String str){
-        return  !str.isBlank() && !this.util.containSpecialCharactersId(str) && !str.contains(" ");
+        return  !str.isBlank() && !this.util.containSpecialCharactersNums(str) && !str.contains(" ");
     }
+    /**
+     * Event handler for handling actions triggered by the user.
+     *
+     * @param e The ActionEvent that occurred.
+     */
     @Override
     public void handle(ActionEvent e) {
         if (e.getSource() == this.summit){
@@ -275,11 +327,8 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                     this.parent.loginListUsers.addAccount(this.parent.controller.getPersonController().findPersonById(this.id.getText()).getAccount());
                     this.message.setText("Añadido con éxito!");
                 }else{
-                    this.message.setText("ese usuario ya existe");
+                    this.message.setText("Ha ocurrido un error!");
                 }
-                this.messageContainer.setVisible(true);
-            }else {
-                this.message.setText("Los nombres no deben contener espacios al iniciar\n números o caracteres especiales.");
                 this.messageContainer.setVisible(true);
             }
 
@@ -298,16 +347,6 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             }
 
 
-        }
-
-        if (e.getSource() == this.roles){
-            if (!this.roles.getValue().equals(ROLES[0])){
-                this.idLabel.setText("Identificación");
-                this.id.setPromptText("1053893289");
-            }else {
-                this.idLabel.setText("código");
-                this.id.setPromptText("202216034");
-            }
         }
     }
 }

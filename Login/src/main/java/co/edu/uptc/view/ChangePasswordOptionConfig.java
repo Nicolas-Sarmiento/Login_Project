@@ -10,9 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import java.io.File;
-
+/**
+ * This class represents the change password configuration view.
+ * It allows users to change their passwords.
+ */
 public class ChangePasswordOptionConfig extends Header {
 
     Button confirmButton;
@@ -27,6 +31,12 @@ public class ChangePasswordOptionConfig extends Header {
     TextField oldPasswordField;
     VBox root;
     LoginView loginView;
+    /**
+     * Constructs a new ChangePasswordOptionConfig instance.
+     *
+     * @param loginView The LoginView instance associated with this view.
+     * @param button    The button used to navigate back to the dashboard.
+     */
     public ChangePasswordOptionConfig(LoginView loginView, Button button){
         super(button);
         this.loginView = loginView;
@@ -35,13 +45,18 @@ public class ChangePasswordOptionConfig extends Header {
         this.changePasswordMessage.setVisible(false);
         this.newPasswordErrorLabel.setVisible(false);
     }
+    /**
+     * Creates and configures the UI elements for the change password view.
+     *
+     * @return A Scene object representing the change password view.
+     */
     public Scene settingInfoContainer(){
 
         this.passwordChangeOptions();
 
         this.optionInfoContainer = new VBox();
         this.optionInfoContainer.setAlignment(Pos.CENTER);
-        optionInfoContainer.getChildren().addAll(this.oldPassword, this.newPasswordErrorLabel, this.oldPasswordField, this.newPassword, this.newPasswordField, this.newPasswordSecond,this.newPasswordFieldSecond, this.confirmButton, this.changePasswordMessage);//aqui esta el error
+        optionInfoContainer.getChildren().addAll(this.oldPassword, this.newPasswordErrorLabel, this.oldPasswordField, this.newPassword, this.newPasswordField, this.newPasswordSecond,this.newPasswordFieldSecond, this.confirmButton, this.changePasswordMessage);
         oldPasswordField.setVisible(true);
         newPasswordField.setVisible(true);
         confirmButton.setVisible(true);
@@ -57,6 +72,7 @@ public class ChangePasswordOptionConfig extends Header {
         scene.getStylesheets().add(new File("./styles/header.css").toURI().toString());
         return scene;
     }
+    // Private method to configure password change options
     private void passwordChangeOptions(){
         newPasswordField = new TextField();
         newPassword = new Label("Digita tu nueva contraseña:");
@@ -77,6 +93,7 @@ public class ChangePasswordOptionConfig extends Header {
         newPasswordFieldSecond.setAlignment(Pos.CENTER);
 
         confirmButton = new Button("Confirmar");
+        confirmButton.setFont( new Font(18));
         confirmButton.setId("confirmButton");
         confirmButton.setAlignment(Pos.CENTER);
 
@@ -90,8 +107,10 @@ public class ChangePasswordOptionConfig extends Header {
 
         confirmButton.setOnAction(this.loginView);
     }
+    /**
+     * Validates the entered passwords and updates UI accordingly.
+     */
     public void validatePasswords(){
-        //De alguna manera conectar con la cuenta logeada
         String password1 = newPasswordField.getText();
         String password2 = newPasswordFieldSecond.getText();
 
