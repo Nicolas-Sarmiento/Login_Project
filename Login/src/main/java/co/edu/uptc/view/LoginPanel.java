@@ -1,9 +1,5 @@
 package co.edu.uptc.view;
 
-import co.edu.uptc.controller.LoginController;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -15,9 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,6 +47,7 @@ public class LoginPanel {
     public LoginPanel(LoginView parent){
         this.parent = parent;
     }
+
     /**
      * Generates the login scene with the configured interface components.
      *
@@ -71,6 +66,7 @@ public class LoginPanel {
         scene.getStylesheets().add(new File("./styles/login.css").toURI().toString());
         return scene;
     }
+
     /**
      * Configures the username field in the login interface.
      * It creates and configures a Label for the username field with the text "Usuario",
@@ -89,6 +85,7 @@ public class LoginPanel {
         this.username.setFont(new Font(15));
         this.username.setPromptText("usuario");
     }
+
     /**
      * Configures the password field in the login interface.
      * It creates and configures a Label for the password field with the text "Contraseña",
@@ -107,6 +104,7 @@ public class LoginPanel {
         this.password.setFont(new Font(15));
         this.password.setPromptText("Contraseña");
     }
+
     /**
      * Configures the login button in the login interface.
      * It creates and configures a Button with the label "Ingresar," sets its preferred width,
@@ -126,6 +124,7 @@ public class LoginPanel {
         this.btnContainer.setCursor(Cursor.HAND);
         this.btn.setOnAction(this.parent);
     }
+
     /**
      * Configures the login container in the login interface.
      * It calls helper methods to set up the username field, password field, and login button.
@@ -144,6 +143,7 @@ public class LoginPanel {
         this.loginContainer.setPrefWidth(500);
         this.loginContainer.setId("loginContainer");
     }
+
     /**
      * Configures the error message container in the login interface.
      * It sets up a label to display error messages, adjusts its appearance,
@@ -166,6 +166,7 @@ public class LoginPanel {
         VBox.setMargin(this.msgContainer, new Insets(15));
         this.msgContainer.setAlignment(Pos.CENTER);
     }
+
     /**
      * Configures the left container in the login interface which contains the login form and error message components.
      * It sets up the login container and the error message container as VBox children,
@@ -185,6 +186,7 @@ public class LoginPanel {
         this.containerLeft.setPrefWidth(500);
         this.containerLeft.setId("left");
     }
+
     /**
      * Configures the image container in the login interface to display the UPTC logo.
      * It sets up a VBox to hold the logo image, adjusts its dimensions, and centers it within the container.

@@ -118,7 +118,6 @@ public class PersonController {
      * @return a Person Object with te
      */
     public Person clonePerson(Person p) {
-        //String role = p.getClass().getSimpleName();
         return this.createPersonByRole(p.getId(), p.getName(), p.getLastname(), p.getAccount().getRole());
     }
 
@@ -156,8 +155,6 @@ public class PersonController {
     public ArrayList<Account> getAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
         for (Person p : this.personCollection){
-            //asghduaid
-            //System.out.println(p.getAccount().getUserName());
             accounts.add(p.getAccount());
         }
         return accounts;

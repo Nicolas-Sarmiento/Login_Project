@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 /**
@@ -98,6 +97,8 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
                         changePassword.setNewPasswordFieldSecond("");
                         changePassword.setOldPasswordField("");
                         changePassword.passwordChangeSuccesfully();
+                    }else{
+                        //changePassword.changeMsgError.setVisible(true);
                     }
                 }
             }
