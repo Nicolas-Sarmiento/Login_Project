@@ -42,6 +42,8 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     private Button summit;
 
     private static final String[] ROLES ={"Student", "Professor", "Secretary", "Administrator"};
+    private Label idLabel;
+
     /**
      * Constructs a SingInView instance.
      *
@@ -135,7 +137,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             validateNumbers(this.lastName, this.lastNameError, newValue);
         }));;
 
-        this.lastNameError = new Label("Los apellidos no puede contener caracteres especiales o números");
+        this.lastNameError = new Label("");
         this.lastNameError.getStyleClass().add("errorLabel");
         this.lastNameError.setVisible(false);
 
@@ -155,8 +157,9 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.idField = new HBox();
         this.idField.setAlignment(Pos.CENTER);
 
-        Label idLabel = new Label("Identificación");
-        idLabel.getStyleClass().add("tag");
+        this.idLabel = new Label();
+        this.idLabel.setText("código");
+        this.idLabel.getStyleClass().add("tag");
 
         this.id = new TextField();
         this.id.getStyleClass().add("input");
@@ -231,7 +234,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
      * @param value The input value to be validated
      */
     private void validateIdStyle(TextField ob, Label error, String value){
-        if (value.isBlank() ||  this.util.containSpecialCharactersNums(value)){
+        if (value.isBlank() ||  this.util.containSpecialCharactersId(value)){
             ob.getStyleClass().add("errorInput");
             error.setVisible(true);
         }
@@ -242,13 +245,13 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             }
         }
 
-        if ( this.util.containSpecialCharactersNums(value)){
+        if ( this.util.containSpecialCharactersId(value)){
             if (!error.getText().contains(" Sin caracteres especiales")){
                 error.setText(error.getText() + " Sin caracteres especiales");
             }
         }
 
-        if (!this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
+        if (!this.util.containSpecialCharactersId(ob.getText()) && !ob.getText().isBlank()){
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
@@ -274,6 +277,11 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                     error.setText(error.getText() + " Obligatorio*");
                 }
             }
+            if (value.startsWith(" ")){
+                if (!error.getText().contains("No espacios iniciales.")){
+                    error.setText(error.getText() + "No espacios iniciales.");
+                }
+            }
             if (this.util.containsNums(value)){
                 if (!error.getText().contains(" Sin Números")){
                     error.setText(error.getText() + " Sin Números");
@@ -287,7 +295,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             }
         }
 
-        if (!this.util.containsNums(ob.getText()) && !this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank()){
+        if (!this.util.containsNums(ob.getText()) && !this.util.containSpecialCharactersNums(ob.getText()) && !ob.getText().isBlank() && !value.startsWith(" ")){
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
@@ -310,7 +318,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
      * @return True if the string is valid (meets the specified criteria), false otherwise
      */
     public boolean validateId(String str){
-        return  !str.isBlank() && !this.util.containSpecialCharactersNums(str) && !str.contains(" ");
+        return  !str.isBlank() && !this.util.containSpecialCharactersId(str) && !str.contains(" ");
     }
     /**
      * Event handler for handling actions triggered by the user.
@@ -330,6 +338,9 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                     this.message.setText("Ha ocurrido un error!");
                 }
                 this.messageContainer.setVisible(true);
+            }else {
+                this.message.setText("Los nombres no deben contener espacios al iniciar\n números o caracteres especiales.");
+                this.messageContainer.setVisible(true);
             }
 
 
@@ -345,8 +356,15 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                 this.idError.setText("Obligatorio*");
                 this.idError.setVisible(true);
             }
-
-
+        }
+        if (e.getSource() == this.roles){
+            if (!this.roles.getValue().equals(ROLES[0])){
+                this.idLabel.setText("Identificación");
+                this.id.setPromptText("1053893289");
+            }else {
+                this.idLabel.setText("código");
+                this.id.setPromptText("202216034");
+            }
         }
     }
 }
