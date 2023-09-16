@@ -172,7 +172,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             validateIdStyle(this.id, this.idError, newValue);
         }));;
 
-        this.idError = new Label("sdf");
+        this.idError = new Label();
         this.idError.getStyleClass().add("errorLabel");
         this.idError.setVisible(false);
         VBox labelContainer = new VBox(idLabel);
