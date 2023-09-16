@@ -271,7 +271,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
      * @param value The input value to be validated
      */
     private void validateNumbers(TextField ob, Label error, String value){
-        if (this.util.containsNums(value) || this.util.containSpecialCharactersNums(value) || value.isBlank()){
+        if (this.util.containsNums(ob.getText()) || this.util.containSpecialCharactersNums(value) || value.isBlank() || value.startsWith(" ")){
             if (!ob.getStyleClass().contains("errorInput")){
                 ob.getStyleClass().add("errorInput");
             }
