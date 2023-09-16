@@ -26,17 +26,25 @@ public class LoginDashBoard {
     VBox imageContainer;
     Label msgUsername;
     Label msgRolUser;
-
     VBox containerButtoms;
     Button btnOption1;
     Button btnOption2;
     Button btnOption3;
     Button btnOption4;
 
+    /**
+     * Constructs a LoginDashboard instance.
+     *
+     * @param loginView The parent LoginView instance.
+     */
     public LoginDashBoard(LoginView loginView) {
         this.parent = loginView;
     }
 
+    /**
+     * Creates the scene of dashboard.
+     * @return The Scene of dashboard
+     */
     public Scene dashBoard(){
         this.settingContainer();
         HBox root = new HBox(container);
@@ -47,6 +55,11 @@ public class LoginDashBoard {
         return scene;
     }
 
+    /**
+     * Information containers and buttons are configured.
+     * Buttons and information are inserted into the main container.
+     * Margins and alignment are set.
+     */
     private void settingContainer() {
         settingContainerInformation();
         settingContainerButtoms();
@@ -56,6 +69,10 @@ public class LoginDashBoard {
         container.setId("container");
     }
 
+    /**
+     * Validates if the role is different from administrator to show certain buttons on the dashboard.
+     * Buttons are included on the container depending on the role and alignment are set.
+     */
     private void settingContainerButtoms() {
         if(parent.controller.showRol().equals("ADMINISTRATOR")){
             settingButtomsAdministrator();
@@ -68,6 +85,10 @@ public class LoginDashBoard {
         this.containerButtoms.setAlignment(Pos.CENTER);
     }
 
+    /**
+     *The general options buttons are configured to appear regardless
+     * of the user's role. Margins are set.
+     */
     private void settingButtomsGenerals(){
         this.btnOption3 = new Button("Change password");
         this.btnOption4 = new Button("Logout");
@@ -80,6 +101,10 @@ public class LoginDashBoard {
         this.btnOption4.setOnAction(this.parent);
     }
 
+    /**
+     *  The buttons of the options that will only appear when the
+     *  user is the administrator are configured.
+     */
     private void settingButtomsAdministrator() {
         settingButtomsGenerals();
         this.btnOption1 = new Button("Sing in accounts");
@@ -93,6 +118,11 @@ public class LoginDashBoard {
         this.btnOption2.setOnAction(this.parent);
     }
 
+    /**
+     * Method for setting up a user information container
+     * containing welcome labels, an image, user name and user role,
+     * and aligning the content in the centre.
+     */
     private void settingContainerInformation() {
         settingmsgWelcomField();
         settingImageContainer();
@@ -103,6 +133,11 @@ public class LoginDashBoard {
         this.containerInformationUser.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Method to configure the user image via a container.
+     * The role image is configured, establishing measurements
+     * and alignment. Possible exceptions are foreseen.
+     */
     private void settingImageContainer() {
         this.imageContainer = new VBox();
         try {
@@ -116,17 +151,32 @@ public class LoginDashBoard {
         }catch (FileNotFoundException e) {}
     }
 
+    /**
+     * Method for setting the welcome label field.
+     * A label with the text "Welcome!" is created
+     * and a font size of 20 is set.
+     */
     private void settingmsgWelcomField() {
         this.msgWelcom = new Label("¡Bienvenido!");
         this.msgWelcom.setFont(new Font(20));
         VBox.setMargin(msgWelcom, new Insets(25,20,0,20));
     }
 
+    /**
+     * Method for setting the user role label field.
+     * The user role is obtained from the controller
+     * and displayed in a label with a font size of 15.
+     */
     private void settingRolUserField() {
         this.msgRolUser = new Label("Rol: " + parent.controller.showRol());
         this.msgRolUser.setFont(new Font(15));
     }
 
+    /**
+     * Method for setting the user name label field.
+     * The user name is retrieved from the controller
+     * and displayed in a label with a font size of 15.
+     */
     private void settingUsernameField(){
         this.msgUsername = new Label("Usuario: " + parent.controller.getName());
         msgUsername.setFont(new Font(15));

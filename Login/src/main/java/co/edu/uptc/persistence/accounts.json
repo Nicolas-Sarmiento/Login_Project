@@ -16,7 +16,7 @@
   {
     "id": "4387582",
     "userName": "maria.torres",
-    "password": "03GIQet",
+    "password": "48IAGqy",
     "role": "SECRETARY",
     "email": "maria.torres@uptc.edu.co"
   },
@@ -26,6 +26,13 @@
     "password": "Masfx83",
     "role": "STUDENT",
     "email": "manuel.martinez@uptc.edu.co"
+  },
+  {
+    "id": "47865421",
+    "userName": "laura.castillo",
+    "password": "Masfx83",
+    "role": "ADMINISTRATOR",
+    "email": "laura.castillo@uptc.edu.co"
   },
   {
     "id": "123455",
@@ -75,12 +82,5 @@
     "password": "HJ23jkil",
     "role": "PROFESSOR",
     "email": "ivan.mendoza@uptc.edu.co"
-  },
-  {
-    "id": "47865421",
-    "userName": "laura.castillo",
-    "password": "1",
-    "role": "ADMINISTRATOR",
-    "email": "laura.castillo@uptc.edu.co"
   }
 ]

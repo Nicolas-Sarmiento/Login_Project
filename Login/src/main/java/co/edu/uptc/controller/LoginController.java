@@ -91,9 +91,9 @@ public class LoginController {
             } else if(loggedAcount != null && loggedAcount.getPassword().equals(oldpassword)){
 
                 boolean methodAnswer = acc.setNewPassword(loggedAcount.getUserName(),oldpassword, newPassword );
-                loggedAcount = acc.findAccount(loggedAcount.getUserName(), newPassword);
 
                 if (methodAnswer){
+                    loggedAcount = acc.findAccount(loggedAcount.getUserName(), newPassword);
                     this.personController.assingAccount(loggedPerson.getId(), this.loggedAcount);
                     this.personController.updateInformationFile();
                     this.acc.updateInformationFile();

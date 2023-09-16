@@ -42,6 +42,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     private Button summit;
 
     private static final String[] ROLES ={"Student", "Professor", "Secretary", "Administrator"};
+
     /**
      * Constructs a SingInView instance.
      *
@@ -53,6 +54,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.parent = parent;
         this.util = new InputLibrary();
     }
+
     /**
      * Creates the scene for user registration.
      *
@@ -84,6 +86,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         scene.getStylesheets().add(new File("./styles/signin.css").toURI().toString());
         return scene;
     }
+
     /**
      * Sets up the UI elements for entering the user's first name.
      * Configures a label for the field, a text input for the first name,
@@ -116,6 +119,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.nameField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
+
     /**
      * Sets up the UI elements for entering the user's last name.
      * Configures a label for the field, a text input for the last name,
@@ -146,6 +150,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.lastNameField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
+
     /**
      * Sets up the UI elements for entering the user's identification.
      * Configures a label for the field, a text input for the identification,
@@ -175,6 +180,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.idField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
+
     /**
      * Sets up the UI elements for selecting a role.
      * Configures a label for the role selection, a choice box to select a role,
@@ -199,6 +205,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.roleField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
+
     /**
      * Configures the "Registrar" button for user registration.
      * Sets the button label, CSS ID, cursor style, and event handling for button clicks.
@@ -210,6 +217,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.summit.setOnAction(this);
         VBox.setMargin(this.summit, new Insets(20, 0, 0 ,0));
     }
+
     /**
      * Configures the message display container and label for displaying status messages.
      * Sets the initial message, container ID for styling, alignment, and visibility.
@@ -223,6 +231,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.messageContainer.getChildren().add(this.message);
         this.messageContainer.setVisible(false);
     }
+
     /**
      * Validates the input style and displays appropriate error messages for the ID field.
      *
@@ -252,9 +261,8 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
-
-
     }
+
     /**
      * Validates the input style and displays appropriate error messages for fields that should not contain numbers.
      *
@@ -291,9 +299,8 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
             error.setText("");
             ob.getStyleClass().remove("errorInput");
         }
-
-
     }
+
     /**
      * Validates a string to ensure it does not contain numbers, special characters, is not blank, and does not start with a space.
      *
@@ -303,6 +310,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     public boolean validateNames(String str){
         return  !str.isBlank() && !this.util.containsNums(str)  && !this.util.containSpecialCharactersNums(str) && !str.startsWith(" ");
     }
+
     /**
      * Validates an identification string to ensure it is not blank, does not contain special characters, and does not contain spaces.
      *
@@ -312,6 +320,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     public boolean validateId(String str){
         return  !str.isBlank() && !this.util.containSpecialCharactersNums(str) && !str.contains(" ");
     }
+
     /**
      * Event handler for handling actions triggered by the user.
      *
