@@ -17,10 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
-/**
- * The SingInView class represents the view for user registration.
- * It extends the Header class and implements the EventHandler interface for handling events.
- */
+
 public class SingInView extends Header implements EventHandler<ActionEvent> {
     private InputLibrary util;
     private LoginView parent;
@@ -42,22 +39,13 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
     private Button summit;
 
     private static final String[] ROLES ={"Student", "Professor", "Secretary", "Administrator"};
-    /**
-     * Constructs a SingInView instance.
-     *
-     * @param parent The parent LoginView instance.
-     * @param btn    The Button instance to be set as home button in the header.
-     */
+
     public SingInView(LoginView parent, Button btn){
         super(btn);
         this.parent = parent;
         this.util = new InputLibrary();
     }
-    /**
-     * Creates the scene for user registration.
-     *
-     * @return The Scene for user registration.
-     */
+
     public Scene singIn(){
         HBox header = this.getHeader();
         this.setName(this.parent.controller.getName());
@@ -84,11 +72,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         scene.getStylesheets().add(new File("./styles/signin.css").toURI().toString());
         return scene;
     }
-    /**
-     * Sets up the UI elements for entering the user's first name.
-     * Configures a label for the field, a text input for the first name,
-     * and an error label to display validation messages.
-     */
+
     private void settingNameField(){
         this.nameField = new HBox();
         this.nameField.setAlignment(Pos.CENTER);
@@ -116,11 +100,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.nameField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-    /**
-     * Sets up the UI elements for entering the user's last name.
-     * Configures a label for the field, a text input for the last name,
-     * and an error label to display validation messages.
-     */
+
     private void settingLastNameField(){
         this.lastNameField = new HBox();
         this.lastNameField.setAlignment(Pos.CENTER);
@@ -146,11 +126,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.lastNameField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-    /**
-     * Sets up the UI elements for entering the user's identification.
-     * Configures a label for the field, a text input for the identification,
-     * and an error label to display validation messages.
-     */
+
     private void settingIdField(){
         this.idField = new HBox();
         this.idField.setAlignment(Pos.CENTER);
@@ -175,11 +151,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.idField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-    /**
-     * Sets up the UI elements for selecting a role.
-     * Configures a label for the role selection, a choice box to select a role,
-     * and sets up event handling for role selection changes.
-     */
+
     private void settingRoleField( ){
         this.roleField = new HBox();
         this.roleField.setAlignment(Pos.CENTER);
@@ -199,10 +171,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.roleField.getChildren().addAll(labelContainer, inputContainer);
         HBox.setHgrow(inputContainer, Priority.ALWAYS);
     }
-    /**
-     * Configures the "Registrar" button for user registration.
-     * Sets the button label, CSS ID, cursor style, and event handling for button clicks.
-     */
+
     private void settingSummitButton(){
         this.summit = new Button("Registrar");
         this.summit.setId("summit");
@@ -210,10 +179,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.summit.setOnAction(this);
         VBox.setMargin(this.summit, new Insets(20, 0, 0 ,0));
     }
-    /**
-     * Configures the message display container and label for displaying status messages.
-     * Sets the initial message, container ID for styling, alignment, and visibility.
-     */
+
     private void settingMessage(){
         this.messageContainer = new VBox();
         this.messageContainer.setId("messageContainer");
@@ -223,13 +189,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.messageContainer.getChildren().add(this.message);
         this.messageContainer.setVisible(false);
     }
-    /**
-     * Validates the input style and displays appropriate error messages for the ID field.
-     *
-     * @param ob    The TextField for the ID
-     * @param error The Label to display error messages
-     * @param value The input value to be validated
-     */
+
     private void validateIdStyle(TextField ob, Label error, String value){
         if (value.isBlank() ||  this.util.containSpecialCharactersNums(value)){
             ob.getStyleClass().add("errorInput");
@@ -255,13 +215,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
 
 
     }
-    /**
-     * Validates the input style and displays appropriate error messages for fields that should not contain numbers.
-     *
-     * @param ob    The TextField for which the validation is performed
-     * @param error The Label to display error messages
-     * @param value The input value to be validated
-     */
+
     private void validateNumbers(TextField ob, Label error, String value){
         if (this.util.containsNums(value) || this.util.containSpecialCharactersNums(value) || value.isBlank()){
             if (!ob.getStyleClass().contains("errorInput")){
@@ -294,29 +248,17 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
 
 
     }
-    /**
-     * Validates a string to ensure it does not contain numbers, special characters, is not blank, and does not start with a space.
-     *
-     * @param str The string to be validated
-     * @return True if the string is valid (meets the specified criteria), false otherwise
-     */
+
+
+
+
     public boolean validateNames(String str){
         return  !str.isBlank() && !this.util.containsNums(str)  && !this.util.containSpecialCharactersNums(str) && !str.startsWith(" ");
     }
-    /**
-     * Validates an identification string to ensure it is not blank, does not contain special characters, and does not contain spaces.
-     *
-     * @param str The identification string to be validated
-     * @return True if the string is valid (meets the specified criteria), false otherwise
-     */
+
     public boolean validateId(String str){
         return  !str.isBlank() && !this.util.containSpecialCharactersNums(str) && !str.contains(" ");
     }
-    /**
-     * Event handler for handling actions triggered by the user.
-     *
-     * @param e The ActionEvent that occurred.
-     */
     @Override
     public void handle(ActionEvent e) {
         if (e.getSource() == this.summit){
