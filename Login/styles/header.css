@@ -25,6 +25,12 @@
     -fx-pref-height: 30px;
 }
 
+#confirmButton {
+    -fx-background-color: #c4d01f;
+    -fx-background-radius: 10;
+    -fx-max-width: 200;
+}
+
 #name{
     -fx-padding: 0px 0px 0px 15px;
     -fx-font-size: 14px;

@@ -9,18 +9,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
-
+/**
+ * This class represents the main application view for the login functionality.
+ * It manages the login panel, dashboard, sign-in view, and other related views.
+ */
 public class LoginView  extends Application implements EventHandler<ActionEvent> {
     LoginPanel loginPanel;
     LoginDashBoard loginDashBoard;
     SingInView singInView;
     Stage stage;
     LoginController controller;
-    LoginTemplate loginTemplate;
     LoginListUsers loginListUsers;
     ChangePasswordOptionConfig changePassword;
     Button home;
-
+    /**
+     * Constructs a new LoginView instance and initializes its components.
+     */
     public LoginView (){
         this.controller = new LoginController();
         this.loginPanel = new LoginPanel(this);
@@ -31,7 +35,12 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         this.changePassword = new ChangePasswordOptionConfig(this,home);
         this.loginDashBoard = new LoginDashBoard(this);
     }
-
+    /**
+     * The entry point for the JavaFX application.
+     *
+     * @param stage The primary stage for this application.
+     * @throws Exception If an exception occurs during application start.
+     */
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
@@ -40,15 +49,27 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         this.stage.setTitle("Login UPTC");
         this.stage.show();
     }
-
+    /**
+     * The main method to launch the JavaFX application.
+     *
+     * @param args The command-line arguments.
+     */
     public static void main(String[] args) {
         launch(args);
     }
-
+    /**
+     * Sets the scene for the primary stage.
+     *
+     * @param sc The Scene object to set as the scene for the stage.
+     * */
     public void setScene(Scene sc){
         this.stage.setScene(sc);
    }
-
+    /**
+     * Handles various events triggered within the application.
+     *
+     * @param e The ActionEvent representing the event.
+     */
     @Override
     public void handle(ActionEvent e) {
 
