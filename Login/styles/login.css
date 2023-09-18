@@ -1,0 +1,29 @@
+#loginContainer {
+    -fx-background-color: #000000b3;
+    -fx-background-radius: 8;
+}
+#left{
+    -fx-background-color: #F4D03F;
+}
+
+#errorContainer {
+    -fx-background-color: #ffffffb3;
+    -fx-background-radius: 10;
+}
+#error {
+    -fx-text-fill: red;
+}
+.label{
+    -fx-text-fill: white;
+}
+.button{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+.button:hover {
+     -fx-background-color: #ffcc00;
+}
+
+.button:focused{
+    -fx-background-color: #ffcc00;
+}

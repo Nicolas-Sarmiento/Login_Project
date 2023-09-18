@@ -1,0 +1,17 @@
+#root{
+     -fx-background-color: #F4D03F;
+}
+.button{
+    -fx-background-color: #c4d01f;
+    -fx-background-radius: 10;
+    -fx-max-width: 200;
+}
+.button:hover {
+    -fx-background-color: #ffcc00;
+}
+#container{
+    -fx-background-color: #ffffff;
+    -fx-max-height: 444;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}

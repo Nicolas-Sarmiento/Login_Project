@@ -1,0 +1,24 @@
+#header {
+    -fx-background-color: #F4D03F;
+    -fx-pref-height: 50;
+    -fx-font-family: sans-serif;
+}
+
+#home{
+    -fx-background-color: none;
+}
+
+#changePassword{
+    -fx-background-color: none;
+}
+
+#name{
+    -fx-padding: 0px 0px 0px 15px;
+    -fx-font-size: 14px;
+    -fx-pref-width: 100px;
+}
+
+#info{
+    -fx-font-size: 15px;
+
+}

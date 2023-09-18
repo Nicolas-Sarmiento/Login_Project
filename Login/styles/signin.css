@@ -1,0 +1,91 @@
+#root{
+    -fx-background-color: #fcf3d9;
+}
+#main{
+    -fx-pref-width: 500px;
+    -fx-padding: 20px;
+}
+#form{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-max-width: 600px;
+    -fx-padding: 30px;
+
+}
+
+.tag{
+    -fx-pref-width: 100;
+    -fx-font-size: 15px;
+}
+.choice-box{
+    -fx-background-radius: 5px;
+    -fx-mark-color: #2e2e2e;
+}
+
+.choice-box .context-menu{
+    -fx-background-color:#d1d1d1;
+}
+
+.choice-box .menu-item:focused{
+    -fx-background-color: #F4D03F;
+}
+
+.choice-box .menu-item:focused > .label{
+    -fx-text-fill: #000000;
+}
+
+
+.text-field{
+    -fx-prompt-text-fill: rgba(161, 126, 0, 0.9);
+
+}
+
+.input{
+    -fx-max-width: 300px;
+    -fx-background-color: #d1d1d1;
+    -fx-border-style: solid;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-font-size: 15px;
+}
+.errorInput{
+     -fx-border-color: transparent transparent red transparent;
+}
+
+.input:focused{
+     -fx-border-color: transparent transparent #2e2e2e transparent;
+}
+
+#summit{
+    -fx-background-color: #000000;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #F4D03F;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+#summit:hover{
+    -fx-background-color: #F4D03F;
+    -fx-text-fill: #000000;
+}
+#summit:focused{
+   -fx-background-color: #F4D03F;
+   -fx-text-fill: #000000;
+}
+
+.errorLabel{
+    -fx-text-fill: red;
+}
+
+#messageContainer{
+    -fx-max-width: 400px;
+    -fx-background-color: rgba(47, 47, 47, 0.7);
+    -fx-background-radius: 10px;
+}
+#message{
+    -fx-font-size: 15px;
+    -fx-pref-height: 100px;
+    -fx-text-fill: #ffffff;
+}

@@ -5,7 +5,6 @@ import co.edu.uptc.model.persontypes.Administrator;
 import co.edu.uptc.model.persontypes.Professor;
 import co.edu.uptc.model.persontypes.Student;
 import co.edu.uptc.utilities.JsonStorageUtilities;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,22 +38,6 @@ public class LoginController {
     }
 
     /**
-     *
-     */
-    //CARGÁ A LA LISTA LAS PERSONAS CON SUS RESPECTIVAS CUENTAS
-    public void loadPersons(){
-//        List<Person> defaultPersons = new ArrayList<>();
-//        defaultPersons.add(new Student("202210568","manuel","Martinez",new Account("202210568", "manuel.martinez", "Masfx83", Roles.STUDENT.name(), "manuel.martinez@uptc.edu.co")));
-//        defaultPersons.add(new Student("2020154","Juan", "Velandia Fonseca",new Account("2020154", "juan.velandia","njksAPO293",Roles.STUDENT.name(), "juan.velandia@uptc.edu.co")));
-//        defaultPersons.add(new Student("2022159", "Maria", "Rodriguez Vega",new Account("2022159", "maria.rodriguez01","HJAkjsf234",Roles.STUDENT.name(), "maria.rodriguez01@uptc.edu.co")));
-//        defaultPersons.add(new Professor("46389778", "Johana", "Torres Perez",new Account("46389778", "johana.torres","JKJfsdhf334",Roles.PROFESSOR.name(), "johana.torres@uptc.edu.co")));
-//        defaultPersons.add(new Professor("10953483", "Ivan", "Mendoza",new Account("10953483","ivan.mendoza","HJ23jkil",Roles.PROFESSOR.name(), "ivan.mendoza@uptc.edu.co")));
-//        defaultPersons.add(new Administrator("47865421", "Laura","Castillo",new Account("47865421","laura.castillo","1",Roles.ADMINISTRATOR.name(), "laura.castillo@uptc.edu.co")));
-//        this.personController.loadPeople(defaultPersons);
-
-    }
-
-    /**
      * Main method, check the name and count if it matches
      * any user, it brings it and saves it in loggedAcount.
      * also 
@@ -67,7 +50,6 @@ public class LoginController {
         if(acc.findAccount(nameUser, password) != null){
             loggedAcount = acc.findAccount(nameUser, password);
             loggedPerson = personController.findPersonById(loggedAcount.getId());
-            System.out.println(loggedPerson);
             return true;
         }
         return false;
@@ -91,11 +73,12 @@ public class LoginController {
             } else if(loggedAcount != null && loggedAcount.getPassword().equals(oldpassword)){
 
                 boolean methodAnswer = acc.setNewPassword(loggedAcount.getUserName(),oldpassword, newPassword );
-                loggedAcount = acc.findAccount(loggedAcount.getUserName(), newPassword);
 
                 if (methodAnswer){
+                    loggedAcount = acc.findAccount(loggedAcount.getUserName(), newPassword);
                     this.personController.assingAccount(loggedPerson.getId(), this.loggedAcount);
                     this.personController.updateInformationFile();
+                    this.acc.updateInformationFile();
                 }
                 return methodAnswer;
 
@@ -157,7 +140,7 @@ public class LoginController {
     }
 
     public String getName(){
-        return this.loggedPerson.getName() + " " + this.loggedPerson.getLastname();
+        return this.loggedPerson.getName();
     }
     /**
      * Method to view the information of the account that is logged in
@@ -226,5 +209,8 @@ public class LoginController {
     }
     public JsonStorageUtilities getJsonStorageUtilities() {
         return jsonStorageUtilities;
+    }
+    public PersonController getPersonController() {
+        return personController;
     }
 }
