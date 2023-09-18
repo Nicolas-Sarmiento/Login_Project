@@ -87,20 +87,20 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
             }
         }
         if (e.getSource() == this.changePassword.getConfirmButton()){
-            String old = changePassword.oldPasswordField.getText();
+            String old = changePassword.getOldPasswordField().getText();
             String newPassword = "";
-            if(old.equals(controller.getLoggedPerson().getAccount().getPassword())){ // Usar equals() para comparar cadenas
-                newPassword = changePassword.newPasswordField.getText();
-                if(newPassword.equals(changePassword.newPasswordFieldSecond.getText())){ // Usar equals() para comparar cadenas
+            if(old.equals(controller.getLoggedPerson().getAccount().getPassword())){
+                newPassword = changePassword.getNewPasswordField().getText();
+                if(newPassword.equals(changePassword.getNewPasswordFieldSecond().getText())){
                     if(controller.changePassword(old, newPassword)){
                         changePassword.setNewPasswordField("");
                         changePassword.setNewPasswordFieldSecond("");
                         changePassword.setOldPasswordField("");
                         changePassword.passwordChangeSuccesfully();
-                    }else{
-                        //changePassword.changeMsgError.setVisible(true);
                     }
                 }
+            }else{
+                this.changePassword.getIncorrectPassword().setVisible(true);
             }
         }
 

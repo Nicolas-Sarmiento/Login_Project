@@ -1,6 +1,10 @@
 package co.edu.uptc.view;
 
 import co.edu.uptc.controller.LoginController;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -11,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import java.io.File;
 /**
@@ -25,11 +30,14 @@ public class ChangePasswordOptionConfig extends Header {
     Label newPassword;
     Label changePasswordMessage;
     Label newPasswordErrorLabel;
+    Label incorrectPassword;
     VBox optionInfoContainer;
-    TextField newPasswordField;
-    TextField newPasswordFieldSecond;
-    TextField oldPasswordField;
+    VBox container;
+    private TextField newPasswordField;
+    private TextField newPasswordFieldSecond;
+    private TextField oldPasswordField;
     VBox root;
+    HBox containerError;
     LoginView loginView;
     /**
      * Constructs a new ChangePasswordOptionConfig instance.
@@ -40,10 +48,12 @@ public class ChangePasswordOptionConfig extends Header {
     public ChangePasswordOptionConfig(LoginView loginView, Button button){
         super(button);
         this.loginView = loginView;
-        this.changePasswordMessage = new Label("La contraseña se ha cambiado satisfactoriamente.");
+        this.changePasswordMessage = new Label("La contraseña se ha cambiado satisfactoriamente.");//sigue aparecinedo pegado al lado izquierdo de la pantalla
         this.newPasswordErrorLabel = new Label("Las contraselas no coinciden");
-        this.changePasswordMessage.setVisible(false);
+        this.incorrectPassword = new Label("Contrasela incorrecta");
+        changePasswordMessage.setVisible(false);
         this.newPasswordErrorLabel.setVisible(false);
+        this.incorrectPassword.setVisible(false);
     }
     /**
      * Creates and configures the UI elements for the change password view.
@@ -55,8 +65,15 @@ public class ChangePasswordOptionConfig extends Header {
         this.passwordChangeOptions();
 
         this.optionInfoContainer = new VBox();
-        this.optionInfoContainer.setAlignment(Pos.CENTER);
-        optionInfoContainer.getChildren().addAll(this.oldPassword, this.newPasswordErrorLabel, this.oldPasswordField, this.newPassword, this.newPasswordField, this.newPasswordSecond,this.newPasswordFieldSecond, this.confirmButton, this.changePasswordMessage);
+        this.containerError = new HBox();
+        this.container = new VBox();
+        this.optionInfoContainer.getChildren().addAll(this.oldPassword, this.oldPasswordField,this.incorrectPassword, this.newPassword, this.newPasswordField, this.newPasswordSecond,this.newPasswordFieldSecond,this.newPasswordErrorLabel, this.confirmButton);
+        this.containerError.getChildren().addAll(changePasswordMessage);//necesito que esto este centrado debejo de optionInfoContainer
+
+        this.optionInfoContainer.setId("general");
+        this.containerError.setId("error");
+        this.changePasswordMessage.setId("succesfully");
+
         oldPasswordField.setVisible(true);
         newPasswordField.setVisible(true);
         confirmButton.setVisible(true);
@@ -64,12 +81,19 @@ public class ChangePasswordOptionConfig extends Header {
         newPassword.setVisible(true);
         newPasswordSecond.setVisible(true);
         newPasswordFieldSecond.setVisible(true);
+        containerError.setVisible(false);
 
-        root = new VBox();
-        root.getChildren().addAll(getHeader(), this.optionInfoContainer);
+        container.getChildren().addAll(this.optionInfoContainer, this.containerError);
+        container.setAlignment(Pos.CENTER);
+        this.root = new VBox();
+        root.getChildren().addAll(getHeader(),container);
+
+        VBox.setMargin(root, new Insets(0, 0, 0, 0));
+
         this.setName(this.loginView.controller.getName());
+        root.setId("root");
         Scene scene = new Scene(root,1000,600);
-        scene.getStylesheets().add(new File("./styles/header.css").toURI().toString());
+        scene.getStylesheets().add(new File("./styles/changePassword.css").toURI().toString());
         return scene;
     }
     // Private method to configure password change options
@@ -77,25 +101,23 @@ public class ChangePasswordOptionConfig extends Header {
         newPasswordField = new TextField();
         newPassword = new Label("Digita tu nueva contraseña:");
         newPasswordField.setId("newPasswordField");
-        newPasswordField.setAlignment(Pos.CENTER);
         newPasswordField.setMaxWidth(200);
 
         oldPasswordField = new TextField();
         oldPassword = new Label("Digita tu anterior contraseña:");
         oldPasswordField.setId("oldPasswordField");
         oldPasswordField.setMaxWidth(200);
-        oldPasswordField.setAlignment(Pos.CENTER);
 
         newPasswordSecond = new Label("Digita tu nueva contraseña otra vez:");
         newPasswordFieldSecond = new TextField();
         newPasswordFieldSecond.setId("newPasswordSecond");
         newPasswordFieldSecond.setMaxWidth(200);
-        newPasswordFieldSecond.setAlignment(Pos.CENTER);
 
         confirmButton = new Button("Confirmar");
-        confirmButton.setFont( new Font(18));
+        confirmButton.setFont( new Font(14));
         confirmButton.setId("confirmButton");
-        confirmButton.setAlignment(Pos.CENTER);
+        incorrectPassword.setId("incorrect");
+        animation();
 
         newPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
             validatePasswords();
@@ -124,8 +146,21 @@ public class ChangePasswordOptionConfig extends Header {
             newPasswordFieldSecond.setStyle("-fx-border-color: red;");
         }
     }
+    public void animation(){
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #F7DC6F;")),
+                new KeyFrame(Duration.seconds(1), new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #85C1E9;")),
+                new KeyFrame(Duration.seconds(2), new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #F1948A;"))
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        confirmButton.setOnMouseEntered(event -> timeline.play());
+
+        confirmButton.setOnMouseExited(event -> timeline.pause());
+    }
 
     public void passwordChangeSuccesfully(){
+        containerError.setVisible(true);
         changePasswordMessage.setVisible(true);
     }
 
@@ -155,5 +190,9 @@ public class ChangePasswordOptionConfig extends Header {
 
     public void setOldPasswordField(String oldPasswordField) {
         this.oldPasswordField.setText(oldPasswordField);
+    }
+
+    public Label getIncorrectPassword() {
+        return incorrectPassword;
     }
 }
