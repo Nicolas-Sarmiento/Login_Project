@@ -1,6 +1,6 @@
 #header {
     -fx-background-color: #F4D03F;
-    -fx-pref-height: 50;
+    -fx-min-height: 50;
     -fx-font-family: sans-serif;
 }
 
