@@ -23,8 +23,7 @@ public class ForumView extends Header {
         VBox forumContent = new VBox();
 
         for (int i = 0; i < 50; i++){
-            Button btn = new Button("foro" + i);
-            btn.setPrefWidth(150);
+            ForumButton btn = new ForumButton("Foro" + i, i);
             forums.getChildren().add(btn);
         }
 

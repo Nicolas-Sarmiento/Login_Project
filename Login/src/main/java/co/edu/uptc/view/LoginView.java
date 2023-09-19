@@ -1,6 +1,7 @@
 package co.edu.uptc.view;
 
 import co.edu.uptc.controller.LoginController;
+import co.edu.uptc.view.forum.ForumView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +21,7 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     LoginController controller;
     LoginListUsers loginListUsers;
     ChangePasswordOptionConfig changePassword;
+    ForumView forums;
     Button home;
     /**
      * Constructs a new LoginView instance and initializes its components.
@@ -33,6 +35,8 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         this.loginListUsers = new LoginListUsers(this, home);
         this.changePassword = new ChangePasswordOptionConfig(this,home);
         this.loginDashBoard = new LoginDashBoard(this);
+
+        this.forums = new ForumView(this, this.home);
     }
     /**
      * The entry point for the JavaFX application.
@@ -43,8 +47,8 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        this.stage.setScene(this.loginPanel.login());
-        //this.stage.setScene(this.singInView.singIn());
+        //this.stage.setScene(this.loginPanel.login());
+        this.stage.setScene(this.forums.Forum());
         this.stage.setTitle("Login UPTC");
         this.stage.show();
     }
@@ -129,4 +133,6 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
         }
 
     }
+
+    public LoginController getController(){return  this.controller;}
 }
