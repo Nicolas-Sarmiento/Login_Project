@@ -14,7 +14,7 @@ public class ForumButton extends Button {
     public ForumButton(String msg, int id){
         super(msg);
         this.index = id;
-        this.getStylesheets().add( new File("./styles/ForumButton.css").toURI().toString());
+        this.getStylesheets().add( new File("./styles/forum/ForumButton.css").toURI().toString());
     }
 
     public int getIndex() {

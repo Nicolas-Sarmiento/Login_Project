@@ -133,5 +133,13 @@ public class ForumController {
         return answers;
     }
 
+    public int getForumsLen(){return this.forums.size();}
+    public String getForumTitle(int index){
+        try {
+            return this.forums.get(index).getTitulo();
+        }catch (IndexOutOfBoundsException e){ return "";}
+    }
+
+
 
 }
