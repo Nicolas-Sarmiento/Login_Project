@@ -3,6 +3,7 @@ package co.edu.uptc.view.forum;
 import co.edu.uptc.controller.ForumController;
 import co.edu.uptc.view.Header;
 import co.edu.uptc.view.LoginView;
+import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -28,6 +30,8 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     Label forumName;
     VBox forums;
     HBox infoContainer;
+    TextField textField;
+    Button buttonSend;
 
     public ForumView(LoginView parent, Button home){
         super(home);
@@ -107,15 +111,26 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     }
 
     public void settingForumContent(){
-        this.forumContent = new VBox();
+        this.textField = new TextField();
+        ImageView addIcon = new ImageView(new File("./imgs/send.png").toURI().toString());
+        this.buttonSend = new Button("", addIcon);
+        this.buttonSend.setId("send");
+
+        HBox contetBoxText = new HBox();
+        HBox.setHgrow(textField, Priority.ALWAYS);
+        contetBoxText.getChildren().addAll(textField, buttonSend);
+
+        forumContent = new VBox();
         this.forumContent.setId("ForumContent");
         HBox.setHgrow(this.forumContent, Priority.ALWAYS);
+
         VBox forumNameContainer = new VBox();
         this.forumName = new Label();
+
         forumNameContainer.setAlignment(Pos.CENTER);
         forumNameContainer.getChildren().add(forumName);
 
-        this.forumContent.getChildren().add(forumNameContainer);
+        this.forumContent.getChildren().addAll(forumNameContainer, contetBoxText);
 
     }
 

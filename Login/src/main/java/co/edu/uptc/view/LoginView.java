@@ -47,8 +47,8 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        //this.stage.setScene(this.loginPanel.login());
-        this.stage.setScene(this.forums.Forum());
+        this.stage.setScene(this.loginPanel.login());
+        //this.stage.setScene(this.forums.Forum());
         this.stage.setTitle("Login UPTC");
         this.stage.show();
     }
