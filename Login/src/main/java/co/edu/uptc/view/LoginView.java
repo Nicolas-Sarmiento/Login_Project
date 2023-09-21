@@ -128,6 +128,11 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
             this.stage.setScene(loginPanel.login());
         }
 
+        if(e.getSource() == this.loginDashBoard.btnOption5){
+            this.stage.setTitle("Forums");
+            this.stage.setScene(forums.Forum());
+        }
+
         if(e.getSource() == this.home){
             this.stage.setScene(loginDashBoard.dashBoard());
         }
