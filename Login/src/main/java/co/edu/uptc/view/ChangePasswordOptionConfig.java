@@ -148,9 +148,9 @@ public class ChangePasswordOptionConfig extends Header {
     }
     public void animation(){
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #F7DC6F;")),
-                new KeyFrame(Duration.seconds(1), new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #85C1E9;")),
-                new KeyFrame(Duration.seconds(2), new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #F1948A;"))
+                new KeyFrame(Duration.seconds(1), new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #F7DC6F;")),
+                new KeyFrame(Duration.seconds(2), new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #85C1E9;")),
+                new KeyFrame(Duration.seconds(3), new KeyValue(confirmButton.styleProperty(), "-fx-background-color: #F1948A;"))
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
 
