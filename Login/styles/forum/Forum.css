@@ -3,13 +3,28 @@
 }
 #Info{
     -fx-max-width: 350px;
-    -fx-background-color: green;
+
+
 }
 #InfoLabel{
     -fx-min-width: 200px;
+    -fx-pref-height: 30px;
+}
+#add{
+    -fx-margin: 10px;
+    -fx-background-color: #ffdf52;
 }
 #ChatContainer{
-    -fx-background-color: red;
-    -fx-min-height: 500px;
-    -fx-max-width: 350px;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: transparent #474747 transparent transparent;
+
+}
+
+.scroll-pane{
+    -fx-background-color: transparent;
+}
+
+#ForumContent{
+
 }

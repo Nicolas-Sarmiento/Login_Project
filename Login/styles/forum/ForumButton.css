@@ -1,5 +1,16 @@
 .button{
- -fx-max-width: 350;
- -fx-background-color: #ff22ff;
- -fx-font-size: 14px;
+    -fx-max-width: 350;
+     -fx-padding: 5px;
+
+}
+.first{
+    -fx-background-color: #ffdf52;
+}
+
+.second{
+    -fx-background-color: #f7f5b2;
+}
+.button:hover {
+    -fx-background-color: #1c1c1c ;
+    -fx-text-fill: #fad70f;
 }
