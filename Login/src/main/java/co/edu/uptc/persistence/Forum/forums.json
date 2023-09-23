@@ -18,5 +18,15 @@
     "titulo": "Foro de los unicornios invisibles",
     "DescripcionDelForo": "Cualquier teoria es valida",
     "answerForum": []
+  },
+  {
+    "titulo": "Foro jose",
+    "DescripcionDelForo": "Descripcion",
+    "answerForum": []
+  },
+  {
+    "titulo": "Foro prueba 2",
+    "DescripcionDelForo": "hola en este foro tendras que subir los aporte conrrespondientes al parcial",
+    "answerForum": []
   }
 ]
