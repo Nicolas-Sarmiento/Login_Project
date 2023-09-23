@@ -5,11 +5,13 @@ import co.edu.uptc.model.Answer;
 import co.edu.uptc.model.Forum;
 import co.edu.uptc.view.Header;
 import co.edu.uptc.view.LoginView;
+import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -21,6 +23,9 @@ import javafx.scene.text.FontWeight;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ForumView extends Header  implements EventHandler<ActionEvent> {
     LoginView parent;
@@ -33,18 +38,27 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     HBox infoContainer;
     TextArea textArea;
     Button buttonSend;
+
     ArrayList<Label> msg;
     Forum forumAux;
     HBox contetBoxText;
     VBox contentMsg;
     ScrollPane scrollPaneMsg;
 
+    CreateForum createForum;
+
+
     public ForumView(LoginView parent, Button home){
         super(home);
         this.parent = parent;
         this.forumController = new ForumController();
+
         this.msg = new ArrayList<>();
         forumAux = new Forum();
+
+        this.createForum = new CreateForum(this);
+
+
     }
 
     public Scene Forum(){
@@ -110,12 +124,13 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
 
         VBox addContainer = new VBox();
         ImageView addIcon = new ImageView(new File("./imgs/add.png").toURI().toString());
-        this.add = new Button("Nuevo", addIcon);
+        this.add = new Button("Nuevo", addIcon); //Al presionar este boton no consigo que haga lo que uiero
         this.add.setId("add");
+        this.add.setOnAction(this);
         VBox.setMargin(this.add, new Insets(0, 5, 0, 0));
         addContainer.getChildren().add(add);
         addContainer.setId("AddContainer");
-        infoContainer.getChildren().add(addContainer);
+        infoContainer.getChildren().addAll(addContainer);
     }
 
     public void settingForumContent(){
@@ -137,8 +152,8 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         VBox.setVgrow(scrollPaneMsg, Priority.ALWAYS);
 
         settingBoxText();
-
-        this.forumContent.getChildren().addAll(forumNameContainer, scrollPaneMsg, contetBoxText);
+        this.forumContent.getChildren().addAll(forumNameContainer,scrollPaneMsg, contetBoxText, this.createForum.principalCreateForum());
+        //this.forumContent.getChildren().addAll(forumNameContainer,scrollPaneMsg, contetBoxText);
     }
 
     private void settingSpaceMsg() {
@@ -182,8 +197,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent e) {
 
-        if (e.getSource() instanceof ForumButton btn) {
-
+        if (e.getSource() instanceof ForumButton btn){
             this.scrollPaneMsg.setVisible(true);
             this.contetBoxText.setVisible(true);
             this.forumController.selectForum((btn.getIndex()));
@@ -211,6 +225,35 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
                 this.msg.clear();
                 settingSpaceMsg();
                 textArea.clear();
+            }
+        }
+
+        System.out.println("antes");
+
+        if(e.getSource() == this.add){
+            createForum.getContainerCreate().setVisible(true);
+        }
+        if(e.getSource() == this.createForum.getSearchInfo()){
+            System.out.println("entro");
+            String nameForum = createForum.getNameForumField().getText();
+            String descriptionForum = createForum.getDecriptionForumField().getText();
+
+            if(!this.forumController.checkIfItExist(nameForum)){
+                if(forumController.createdForum(nameForum, descriptionForum)){
+                    this.createForum.msgGeneralM("0");
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(() -> {
+                                createForum.getContainerCreate().setVisible(false);
+                            });
+                        }
+                    }, 3000);
+                }
+            }else{
+                System.out.println("MEnsaje de error");
+                this.createForum.msgGeneralM("3");
             }
         }
     }

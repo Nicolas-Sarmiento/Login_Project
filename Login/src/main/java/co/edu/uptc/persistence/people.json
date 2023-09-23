@@ -48,6 +48,18 @@
     }
   },
   {
+    "id": "6587345",
+    "name": "Roberto",
+    "lastname": "Carlos",
+    "account": {
+      "id": "6587345",
+      "userName": "roberto.carlos",
+      "password": "81TCQcp",
+      "role": "STUDENT",
+      "email": "roberto.carlos@uptc.edu.co"
+    }
+  },
+  {
     "id": "32589",
     "name": "Jose",
     "lastname": "Salamanca",
