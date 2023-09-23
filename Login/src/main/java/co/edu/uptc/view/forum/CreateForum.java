@@ -51,7 +51,6 @@ public class CreateForum {
                 msgGeneralM("2");
                 return;
             } else {
-                //msgGeneralM("0");
                 forumView.handle(new ActionEvent(searchInfo, searchInfo));
             }
         });
@@ -63,6 +62,7 @@ public class CreateForum {
         containerCreate.getChildren().addAll(this.nameForum, this.nameForumField,this.descriptionForum, this.decriptionForumField, this.searchInfo, this.containerMsg);
         containerCreate.setAlignment(Pos.CENTER);
         containerCreate.setVisible(false);
+        containerCreate.setId("general");
         this.containerCreate.getStylesheets().add(new File("./styles/forum/CreateForum.css").toURI().toString());
         return containerCreate;
     }
