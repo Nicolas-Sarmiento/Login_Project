@@ -22,7 +22,6 @@ public class LoginView {
     private final String errorMessage;
     private final ForumController forumController;
 
-
     public LoginView(){
         this.util = new InputLibrary();
         this.loginController = new LoginController();

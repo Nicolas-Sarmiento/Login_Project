@@ -12,7 +12,10 @@ public class Forum {
         DescripcionDelForo = descripcionDelForo;
         this.answerForum = new ArrayList<>();
     }
-   
+
+    public Forum() {
+    }
+
     public String getTitulo() {
         return titulo;
     }
