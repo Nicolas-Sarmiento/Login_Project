@@ -104,10 +104,10 @@ public class CreateForum {
 
         nameForumField.textProperty().addListener((observable, oldValue, newValue) -> {
             controlVoid();
-        });;
+        });
         decriptionForumField.textProperty().addListener((observable, oldValue, newValue) -> {
             controlVoid();
-        });;
+        });
     }
     public void controlVoid() {
         String nameIsNull = nameForumField.getText();

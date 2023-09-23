@@ -147,14 +147,11 @@ public class ForumController {
 
     public boolean checkIfItExist(String title){
         for (Forum forum: forums) {
-            System.out.println(forum.getTitulo().equals(title));
             if (forum.getTitulo().equals(title)){
                 return true;
             }
         }
         return false;
     }
-
-
-
+    
 }

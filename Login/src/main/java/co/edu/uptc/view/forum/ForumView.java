@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -35,17 +36,18 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     VBox forumContent;
     Label forumName;
     VBox forums;
+    VBox forumNameContainer;
     HBox infoContainer;
     TextArea textArea;
     Button buttonSend;
-
     ArrayList<Label> msg;
     Forum forumAux;
     HBox contetBoxText;
     VBox contentMsg;
     ScrollPane scrollPaneMsg;
-
     CreateForum createForum;
+    StackPane stackPane;
+    VBox sectionWrite;
 
 
     public ForumView(LoginView parent, Button home){
@@ -124,7 +126,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
 
         VBox addContainer = new VBox();
         ImageView addIcon = new ImageView(new File("./imgs/add.png").toURI().toString());
-        this.add = new Button("Nuevo", addIcon); //Al presionar este boton no consigo que haga lo que uiero
+        this.add = new Button("Nuevo", addIcon);
         this.add.setId("add");
         this.add.setOnAction(this);
         VBox.setMargin(this.add, new Insets(0, 5, 0, 0));
@@ -140,7 +142,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
 
         contentMsg = new VBox();
         VBox.setVgrow(contentMsg, Priority.ALWAYS);
-        VBox forumNameContainer = new VBox();
+        forumNameContainer = new VBox();
         this.forumName = new Label();
 
         forumNameContainer.setAlignment(Pos.CENTER);
@@ -152,8 +154,14 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         VBox.setVgrow(scrollPaneMsg, Priority.ALWAYS);
 
         settingBoxText();
-        this.forumContent.getChildren().addAll(forumNameContainer,scrollPaneMsg, contetBoxText, this.createForum.principalCreateForum());
-        //this.forumContent.getChildren().addAll(forumNameContainer,scrollPaneMsg, contetBoxText);
+
+        this.sectionWrite = new VBox();
+        this.sectionWrite.getChildren().addAll(forumNameContainer, scrollPaneMsg,contetBoxText);
+
+        this.stackPane = new StackPane();
+        stackPane.setId("stackPane");
+        this.stackPane.getChildren().addAll(this.sectionWrite, this.createForum.principalCreateForum());
+        this.forumContent.getChildren().add(stackPane);
     }
 
     private void settingSpaceMsg() {
@@ -198,6 +206,10 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
 
         if (e.getSource() instanceof ForumButton btn){
+            this.createForum.getContainerCreate().setVisible(false);
+
+            this.sectionWrite.setVisible(true);
+            this.forumNameContainer.setVisible(true);
             this.scrollPaneMsg.setVisible(true);
             this.contetBoxText.setVisible(true);
             this.forumController.selectForum((btn.getIndex()));
@@ -228,13 +240,15 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
             }
         }
 
-        System.out.println("antes");
-
         if(e.getSource() == this.add){
+            //forumNameContainer, scrollPaneMsg,contetBoxText
             createForum.getContainerCreate().setVisible(true);
+            this.sectionWrite.setVisible(false);
+            this.scrollPaneMsg.setVisible(false);
+            this.contetBoxText.setVisible(false);
+            this.forumNameContainer.setVisible(false);
         }
         if(e.getSource() == this.createForum.getSearchInfo()){
-            System.out.println("entro");
             String nameForum = createForum.getNameForumField().getText();
             String descriptionForum = createForum.getDecriptionForumField().getText();
 
@@ -252,7 +266,6 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
                     }, 3000);
                 }
             }else{
-                System.out.println("MEnsaje de error");
                 this.createForum.msgGeneralM("3");
             }
         }
