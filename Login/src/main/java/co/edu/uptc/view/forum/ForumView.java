@@ -135,6 +135,16 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         infoContainer.getChildren().addAll(addContainer);
     }
 
+    /**
+     * Sets up the content layout for a forum interface, which includes a forum name,
+     * a message display area with scrolling functionality, a text input box for adding comments,
+     * and other associated UI components.
+     *
+     * This method initializes and configures a VBox ('forumContent') as the main container
+     * for the forum content. It sets an identifier ("ForumContent") for styling purposes.
+     * The 'scrollPaneMsg' is initially set to be invisible, and appropriate growth priorities
+     * are set for various UI components to ensure proper layout behavior.
+     */
     public void settingForumContent(){
         forumContent = new VBox();
         this.forumContent.setId("ForumContent");
@@ -161,9 +171,22 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         this.stackPane = new StackPane();
         stackPane.setId("stackPane");
         this.stackPane.getChildren().addAll(this.sectionWrite, this.createForum.principalCreateForum());
+        VBox.setVgrow(stackPane, Priority.ALWAYS);
         this.forumContent.getChildren().add(stackPane);
     }
 
+    /**
+     * Populates a UI container with messages from a logged forum, including user names
+     * and their corresponding messages. This method checks if there are any answers
+     * in the logged forum and displays them in a formatted manner.
+     *
+     * If there are answers in the forum, it iterates through each answer, retrieves the
+     * user's name and message, and adds them as Label components to the 'contentMsg'
+     * UI container. Each user's name is given the identifier "UserName," and each message
+     * is given the identifier "Msg."
+     *
+     * If there are no answers in the forum, the 'contentMsg' UI container is cleared.
+     */
     private void settingSpaceMsg() {
         if(this.forumController.getLoggedForum().getAnswerForum().size() > 0){
 
@@ -184,6 +207,17 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * Initializes and configures the user interface components for entering comments
+     * within a content box, including a TextArea for text input and a Button for sending comments.
+     *
+     * This method sets up a horizontal box (HBox) containing the TextArea and the Button.
+     * The TextArea is configured with a prompt text and a preferred row count of 2.
+     * The Button is configured with an image icon for sending, and its action is handled by
+     * the current class.
+     *
+     * The HBox is given an identifier ("BoxText") and initially set to be invisible.
+     */
     private void settingBoxText() {
         this.contetBoxText = new HBox();
 
