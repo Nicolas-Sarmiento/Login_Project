@@ -2,7 +2,23 @@
   {
     "titulo": "Foro de los unicornios invisibles",
     "DescripcionDelForo": "Cualquier teoria es valida",
-    "answerForum": [],
+    "answerForum": [
+      {
+        "answer": "XD",
+        "person": {
+          "id": "789321",
+          "name": "Manuel",
+          "lastname": "Salamanca",
+          "account": {
+            "id": "789321",
+            "userName": "manuel.salamanca",
+            "password": "02WRBkp",
+            "role": "STUDENT",
+            "email": "manuel.salamanca@uptc.edu.co"
+          }
+        }
+      }
+    ],
     "course": {
       "name": "Programacion",
       "id": "O41",
@@ -35,7 +51,8 @@
       "name": "Teoría General de Sistemas",
       "id": "G10",
       "idStudents": [
-        "2020154"
+        "2020154",
+        "789321"
       ],
       "idProfessor": "47865421"
     }
@@ -49,7 +66,8 @@
       "id": "G90",
       "idStudents": [
         "2022159",
-        "123455"
+        "123455",
+        "789321"
       ],
       "idProfessor": "47865421"
     }

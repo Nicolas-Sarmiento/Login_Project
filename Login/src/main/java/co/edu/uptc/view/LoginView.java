@@ -7,7 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 /**
  * This class represents the main application view for the login functionality.
@@ -47,8 +51,9 @@ public class LoginView  extends Application implements EventHandler<ActionEvent>
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
+        Image icon = new Image(new File("./imgs/uptcFlag.png").toURI().toString());
+        this.stage.getIcons().add(icon);
         this.stage.setScene(this.loginPanel.login());
-        //this.stage.setScene(this.forums.Forum());
         this.stage.setTitle("Login UPTC");
         this.stage.show();
     }
