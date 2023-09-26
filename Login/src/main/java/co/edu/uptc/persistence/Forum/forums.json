@@ -20,7 +20,7 @@
       }
     ],
     "course": {
-      "name": "Programacion",
+      "name": "Programacion II O41",
       "id": "O41",
       "idStudents": [
         "3425657",
@@ -35,7 +35,7 @@
     "DescripcionDelForo": "En la sala de un hospital murio simon",
     "answerForum": [],
     "course": {
-      "name": "Bases de datos",
+      "name": "Bases de datos I U84",
       "id": "U84",
       "idStudents": [
         "12345"
@@ -48,7 +48,7 @@
     "DescripcionDelForo": "Random",
     "answerForum": [],
     "course": {
-      "name": "Teoría General de Sistemas",
+      "name": "Teoría General de Sistemas G10",
       "id": "G10",
       "idStudents": [
         "2020154",

@@ -311,10 +311,13 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         if(e.getSource() == this.createForum.getSearchInfo()){
             String nameForum = createForum.getNameForumField().getText();
             String descriptionForum = createForum.getDecriptionForumField().getText();
+            String selectedOption = (String) createForum.getChoiceBox().getValue();
 
             if(!this.forumController.checkIfItExist(nameForum)){
-                if(forumController.createdForum(nameForum, descriptionForum, "Calculo II G90")){
+                if(forumController.createdForum(nameForum, descriptionForum, selectedOption)){
                     this.createForum.msgGeneralM("0");
+                    this.createForum.getNameForumField().setText("");
+                    this.createForum.getDecriptionForumField().setText("");
                     Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
                         @Override
@@ -330,5 +333,8 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
                 this.createForum.msgGeneralM("3");
             }
         }
+    }
+    public ForumController getForumController() {
+        return forumController;
     }
 }

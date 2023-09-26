@@ -26,7 +26,7 @@ public class CreateForum {
     private VBox containerMsg;
     private Button searchInfo;
     private ForumView forumView;
-    private ChoiceBox choiceBox;
+    private ChoiceBox<String> choiceBox;
     public CreateForum(){
 
     }
@@ -167,7 +167,4 @@ public class CreateForum {
         return choiceBox;
     }
 
-    public void setChoiceBox(ChoiceBox choiceBox) {
-        this.choiceBox = choiceBox;
-    }
 }
