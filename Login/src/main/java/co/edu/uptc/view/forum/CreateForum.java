@@ -1,26 +1,32 @@
 package co.edu.uptc.view.forum;
 
+import co.edu.uptc.model.Course;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.StringConverter;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CreateForum {
     private Label nameForum;
     private Label descriptionForum;
     private Label msgGeneral;
+    private Label msgCourse;
     private TextField nameForumField;
     private TextArea decriptionForumField;
     private VBox containerCreate;
     private VBox containerMsg;
     private Button searchInfo;
     private ForumView forumView;
+    private ChoiceBox choiceBox;
     public CreateForum(){
 
     }
@@ -30,6 +36,9 @@ public class CreateForum {
 
     public VBox principalCreateForum(){
         this.fieldControllGeneral();
+        this.setChoiceBox();
+        this.msgCourse = new Label("Por favor selecciona a que curso petenecera el foro");
+        msgCourse.setId("msgCourse");
         this.msgGeneral = new Label();
         msgGeneral.setId("msg");
         this.containerMsg = new VBox();
@@ -59,13 +68,27 @@ public class CreateForum {
         containerMsg.setVisible(false);
 
         this.containerCreate = new VBox();
-        containerCreate.getChildren().addAll(this.nameForum, this.nameForumField,this.descriptionForum, this.decriptionForumField, this.searchInfo, this.containerMsg);
+        containerCreate.getChildren().addAll(this.msgCourse,this.choiceBox, this.nameForum, this.nameForumField,this.descriptionForum, this.decriptionForumField, this.searchInfo, this.containerMsg);
         containerCreate.setAlignment(Pos.CENTER);
         containerCreate.setVisible(false);
         containerCreate.setId("general");
         this.containerCreate.getStylesheets().add(new File("./styles/forum/CreateForum.css").toURI().toString());
         return containerCreate;
     }
+    private void setChoiceBox(){
+        List<Course> courses = forumView.getForumController().getCourses();
+        List<String> coursesNames = courses.stream().map(Course::getName).collect(Collectors.toList());
+        this.choiceBox = new ChoiceBox();
+        choiceBox.setId("choiceBox");
+        try {
+            choiceBox.setValue(coursesNames.get(0));
+            choiceBox.getItems().addAll(coursesNames);
+        }catch (IndexOutOfBoundsException e){
+            choiceBox.setValue("No tienes cursos");
+        }
+    }
+
+
     public void msgGeneralM(String u){
 
         String errorVoid = "Tienes casillas vacias\nPor favor llena las casillas";
@@ -138,5 +161,13 @@ public class CreateForum {
 
     public VBox getContainerCreate() {
         return containerCreate;
+    }
+
+    public ChoiceBox getChoiceBox() {
+        return choiceBox;
+    }
+
+    public void setChoiceBox(ChoiceBox choiceBox) {
+        this.choiceBox = choiceBox;
     }
 }

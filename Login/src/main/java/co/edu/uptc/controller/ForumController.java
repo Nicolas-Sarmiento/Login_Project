@@ -25,7 +25,7 @@ public class ForumController {
     /**
      * The void constructor initializes the ArrayList
      */
-    public ForumController(){
+    public ForumController() {
         //forums=new ArrayList<>();
         jsonStorageUtilities = loginController.getJsonStorageUtilities();
         forums = (ArrayList<Forum>) jsonStorageUtilities.getExistingContentsForums();
@@ -34,14 +34,15 @@ public class ForumController {
 
     /**
      * This method allows you to be logged in by means of the forum number
+     *
      * @param i forum index to log in
      * @return if it was possible to log in
      */
-    public boolean selectForum(int i){
-        try{
+    public boolean selectForum(int i) {
+        try {
             this.loggedForum = forums.get(i);
             return true;
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
 
         }
         return false;
@@ -49,132 +50,155 @@ public class ForumController {
 
     /**
      * this method creates the forum
+     *
      * @param titleForum,description requirements to create the forum
      * @return if it was possible to create the forum
      */
-    public boolean createdForum(String titleForum,String description, String idCourse){
+    public boolean createdForum(String titleForum, String description, String idCourse) {
         Course course = searchCourseById(idCourse);
-        if(!course.getName().equals(idCourse)){
+        if (!course.getName().equals(idCourse)) {
             return false;
         }
-        Forum f=new Forum(titleForum,description,course);
+        Forum f = new Forum(titleForum, description, course);
         this.forums.add(f);
-        return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {}.getType());
+        return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {
+        }.getType());
     }
 
     /**
      * This method shows the forum with the answers
+     *
      * @return forum content
      */
-    public String seeForum(){
+    public String seeForum() {
         return this.loggedForum.toString();
     }
 
     /**
      * this method deletes a forum
+     *
      * @param c index of forum
      * @return if it was possible to delete the forum
      */
-    public boolean deleteForum(int c){
-        try{
+    public boolean deleteForum(int c) {
+        try {
             forums.remove(forums.get(c));
             //Volver a escribir el archivo
-            return jsonStorageUtilities.saveDataToFileForum(forums,"forums",new TypeToken<List<Forum>>() {}.getType());
-        }catch (IndexOutOfBoundsException e){
+            return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {
+            }.getType());
+        } catch (IndexOutOfBoundsException e) {
             return false;
         }
     }
 
     /**
      * This method shows all the titles of the forums that exist
+     *
      * @return names forums with index
      */
-    public String seeTitles(){
-        String aux="";
-        for (int i=0;i<forums.size();i++) {
-            aux+=(i+1)+" "+forums.get(i).getTitulo()+"\n";
+    public String seeTitles() {
+        String aux = "";
+        for (int i = 0; i < forums.size(); i++) {
+            aux += (i + 1) + " " + forums.get(i).getTitulo() + "\n";
         }
         return aux;
     }
 
     /**
      * this method adds a response to forum
+     *
      * @param comment comment to add
      * @return if it was possible to add a comment
      */
-    public boolean addComment(String comment, Person person){
+    public boolean addComment(String comment, Person person) {
         loggedForum.addAnswer(comment, person);
-        return jsonStorageUtilities.saveDataToFileForum(forums,"forums",new TypeToken<List<Forum>>() {}.getType());
+        return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {
+        }.getType());
     }
 
     /**
      * This method deletes an existing forum comment.
+     *
      * @param comment,person person with comment to delete
      * @return if it was possible to delete a comment
      */
-    public boolean deleteComment(String comment, Person person){
+    public boolean deleteComment(String comment, Person person) {
         ArrayList<Answer> aux = loggedForum.getAnswerForum();
         Answer auxAnswer = new Answer(comment, person);
-        for (int i=0;i<aux.size();i++) {
-            if (aux.get(i).equals(auxAnswer)){
+        for (int i = 0; i < aux.size(); i++) {
+            if (aux.get(i).equals(auxAnswer)) {
                 aux.remove(auxAnswer);
                 loggedForum.setAnswerForum(aux);
                 //Asignar el objeto loggedForum a el arreglo sobre escribiendolo
-                return jsonStorageUtilities.saveDataToFileForum(forums,"forums",new TypeToken<List<Forum>>() {}.getType());
+                return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {
+                }.getType());
             }
         }
         return false;
     }
 
-    public ArrayList<String> getOwnAnswers(Person p){
+    public ArrayList<String> getOwnAnswers(Person p) {
         ArrayList<String> answers = new ArrayList<>();
         ArrayList<Answer> aux = loggedForum.getAnswerForum();
-        for (Answer ans: aux){
+        for (Answer ans : aux) {
             try {
-                if (ans.getPerson().equals(p)){
+                if (ans.getPerson().equals(p)) {
                     answers.add(ans.getAnwers());
                 }
-            }catch (NullPointerException e){}
+            } catch (NullPointerException e) {
+            }
         }
 
         return answers;
     }
 
-    public int getForumsLen(){return this.forums.size();}
+    public int getForumsLen() {
+        return this.forums.size();
+    }
 
-    public String getForumTitle(int index){
+    public String getForumTitle(int index) {
         try {
             return this.forums.get(index).getTitulo();
-        }catch (IndexOutOfBoundsException e){ return "";}
+        } catch (IndexOutOfBoundsException e) {
+            return "";
+        }
     }
 
     public Forum getLoggedForum() {
         return loggedForum;
     }
 
-    public boolean checkIfItExist(String title){
-        for (Forum forum: forums) {
-            if (forum.getTitulo().equals(title)){
+    public boolean checkIfItExist(String title) {
+        for (Forum forum : forums) {
+            if (forum.getTitulo().equals(title)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Course searchCourseById(String nameCourse){
-        for (Course co:courses) {
-            if (co.getName().equals(nameCourse)){
+    public Course searchCourseById(String nameCourse) {
+        for (Course co : courses) {
+            if (co.getName().equals(nameCourse)) {
                 return co;
             }
         }
         return null;
     }
 
-    public ArrayList<String> getStudentsIdByCourse(int index){
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
+    public ArrayList<String> getStudentsIdByCourse(int index) {
         return this.forums.get(index).getCourse().getIdStudents();
     }
 
-    public String getProfessorIdByCourse(int index){
+    public String getProfessorIdByCourse(int index) {
         return this.forums.get(index).getCourse().getIdProfessor();
     }
 
