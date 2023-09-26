@@ -1,8 +1,8 @@
 package co.edu.uptc.view;
 
 import co.edu.uptc.utilities.InputLibrary;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +17,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * The SingInView class represents the view for user registration.
  * It extends the Header class and implements the EventHandler interface for handling events.
@@ -169,7 +172,7 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         this.id.getStyleClass().add("input");
         this.id.setPromptText("Ej: 202210583");
         this.id.textProperty().addListener(((observable, oldValue, newValue) -> {
-            validateIdStyle(this.id, this.idError, newValue);
+          validateIdStyle(this.id, this.idError, newValue);
         }));;
 
         this.idError = new Label();
@@ -254,8 +257,8 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
         }
 
         if ( this.util.containSpecialCharactersId(value)){
-            if (!error.getText().contains(" Sin caracteres especiales")){
-                error.setText(error.getText() + " Sin caracteres especiales");
+            if (!error.getText().contains(" Solo números.")){
+                error.setText(error.getText() + " Solo números.");
             }
         }
 
@@ -325,7 +328,16 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
      * @return True if the string is valid (meets the specified criteria), false otherwise
      */
     public boolean validateId(String str){
-        return  !str.isBlank() && !this.util.containSpecialCharactersId(str) && !str.contains(" ");
+        return  !str.isBlank() && !this.util.containSpecialCharactersId(str) && !str.contains(" ") && str.length() > 8;
+    }
+
+    /**
+     * This method change the visibility of the message error container
+     * @Author Nicolas Sarmiento
+     * @param b value of visibility
+     */
+    public void setVisibilityErrorMessage(boolean b){
+        this.messageContainer.setVisible(b);
     }
 
     /**
@@ -342,12 +354,24 @@ public class SingInView extends Header implements EventHandler<ActionEvent> {
                 if (respone){
                     this.parent.loginListUsers.addAccount(this.parent.controller.getPersonController().findPersonById(this.id.getText()).getAccount());
                     this.message.setText("Añadido con éxito!");
+                    this.name.setText("");
+                    this.lastName.setText("");
+                    this.id.setText("");
                 }else{
                     this.message.setText("Ha ocurrido un error!");
                 }
-                this.messageContainer.setVisible(true);
+                this.setVisibilityErrorMessage(true);
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Platform.runLater(() -> {
+                            setVisibilityErrorMessage(false);
+                        });
+                    }
+                }, 3000);
             }else {
-                this.message.setText("Los nombres no deben contener espacios al iniciar\n números o caracteres especiales.");
+                this.message.setText("Los nombres no deben contener espacios al iniciar\n números o caracteres especiales.\nLos códigos e identificaciones deben ser mayores de 8 dígitos");
                 this.messageContainer.setVisible(true);
             }
 
