@@ -20,13 +20,17 @@
 }
 #search {
     -fx-text-fill: white;
-    -fx-background-color: #BDBFF0;
+    -fx-background-color: #ffdf52;
     -fx-max-width: 60px;
     -fx-margin-top: 10px;
 }
 #msg {
     -fx-text-fill: #000000;
     -fx-font-size: 12px;
+}
+#msgCourse {
+    -fx-font-size: 12px;
+    -fx-padding: 0 0 10 0;
 }
 #containerMsg {
     -fx-font-family: "Courier New";
@@ -45,14 +49,28 @@
     -fx-padding: 10 0 10 0;
 }
 #general {
-    -fx-background-color: #edf7fc;
-    -fx-border-color: #737e85;
+    -fx-background-color: #FBFCF5;
     -fx-max-width: 300px;
-    -fx-max-height: 400px;
+    -fx-max-height: 600px;
     -fx-spacing: 6;
     -fx-padding: 10;
     -fx-alignment: center;
     -fx-background-radius: 10 10 10 10;
     -fx-border-radius: 5px;
+}
+#choiceBox .context-menu{
+    -fx-background-color:#d1d1d1;
+}
+
+#choiceBox .menu-item:focused{
+    -fx-background-color: #F4D03F;
+}
+#choiceBox {
+    -fx-max-width: 250;
+    -fx-max-height: 40;
+    -fx-background-color: #ffdf52;
+    -fx-border-color: #ffdf52;
+    -fx-border-radius: 5px;
+    -fx-margin-bottom: 10px;
 }
 
