@@ -55,6 +55,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     StackPane stackPane;
     VBox sectionWrite;
     ConfirmationButton confirmationButton;
+    Stage confirmationStage;
     int idForum;
 
     /**
@@ -366,14 +367,18 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
 
             Scene confirmationScene = confirmationButton.confirmAction();
 
-            Stage confirmationStage = new Stage();
+            this.confirmationStage = new Stage();
             confirmationStage.setScene(confirmationScene);
             confirmationStage.setTitle("Confirmación de Eliminación");
             confirmationStage.initModality(Modality.APPLICATION_MODAL);
             confirmationStage.showAndWait();
         }
         if(e.getSource() == confirmationButton.getConfirmButton()){
-            forumController.deleteForum(idForum);
+            if(forumController.deleteForum(idForum)){
+                confirmationStage.close();
+                this.settingForumsButtons();
+            }
+
         }
 
         if(e.getSource() == buttonSend){

@@ -77,7 +77,6 @@ public class CreateForum {
         return containerCreate;
     }
     private void setChoiceBox(){
-        System.out.println(forumView.getLoggedId());
         List<Course> courses = forumView.forumController.getCoursesByProfessorId(forumView.getLoggedId());
         List<String> coursesNames = courses.stream().map(Course::getName).collect(Collectors.toList());
         this.choiceBox = new ChoiceBox();

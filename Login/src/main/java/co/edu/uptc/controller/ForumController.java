@@ -56,9 +56,14 @@ public class ForumController {
      */
     public boolean createdForum(String titleForum, String description, String idCourse) {
         Course course = searchCourseById(idCourse);
+        if(course == null){
+            return false;
+        }
         if (!course.getName().equals(idCourse)) {
             return false;
         }
+
+
         Forum f = new Forum(titleForum, description, course);
         this.forums.add(f);
         return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {

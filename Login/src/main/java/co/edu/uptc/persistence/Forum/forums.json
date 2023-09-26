@@ -2,7 +2,53 @@
   {
     "titulo": "Foro de los unicornios invisibles",
     "DescripcionDelForo": "Cualquier teoria es valida",
-    "answerForum": [],
+    "answerForum": [
+      {
+        "answer": "f hsdfjsdf\n",
+        "person": {
+          "id": "47865421",
+          "name": "Laura",
+          "lastname": "Castillo",
+          "account": {
+            "id": "47865421",
+            "userName": "laura.castillo",
+            "password": "Password44",
+            "role": "ADMINISTRATOR",
+            "email": "laura.castillo@uptc.edu.co"
+          }
+        }
+      },
+      {
+        "answer": "fw ef\n",
+        "person": {
+          "id": "47865421",
+          "name": "Laura",
+          "lastname": "Castillo",
+          "account": {
+            "id": "47865421",
+            "userName": "laura.castillo",
+            "password": "Password44",
+            "role": "ADMINISTRATOR",
+            "email": "laura.castillo@uptc.edu.co"
+          }
+        }
+      },
+      {
+        "answer": " few\n",
+        "person": {
+          "id": "47865421",
+          "name": "Laura",
+          "lastname": "Castillo",
+          "account": {
+            "id": "47865421",
+            "userName": "laura.castillo",
+            "password": "Password44",
+            "role": "ADMINISTRATOR",
+            "email": "laura.castillo@uptc.edu.co"
+          }
+        }
+      }
+    ],
     "course": {
       "name": "Programacion II O41",
       "id": "O41",
