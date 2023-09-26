@@ -2,38 +2,7 @@
   {
     "titulo": "Foro de los unicornios invisibles",
     "DescripcionDelForo": "Cualquier teoria es valida",
-    "answerForum": [
-      {
-        "answer": "XD",
-        "person": {
-          "id": "789321",
-          "name": "Manuel",
-          "lastname": "Salamanca",
-          "account": {
-            "id": "789321",
-            "userName": "manuel.salamanca",
-            "password": "02WRBkp",
-            "role": "STUDENT",
-            "email": "manuel.salamanca@uptc.edu.co"
-          }
-        }
-      },
-      {
-        "answer": "JAJAJJAJA que pendejos los que juegan DOOM\n",
-        "person": {
-          "id": "47865421",
-          "name": "Laura",
-          "lastname": "Castillo",
-          "account": {
-            "id": "47865421",
-            "userName": "laura.castillo",
-            "password": "Password44",
-            "role": "ADMINISTRATOR",
-            "email": "laura.castillo@uptc.edu.co"
-          }
-        }
-      }
-    ],
+    "answerForum": [],
     "course": {
       "name": "Programacion II O41",
       "id": "O41",
@@ -77,7 +46,68 @@
   {
     "titulo": "Random",
     "DescripcionDelForo": "Random",
-    "answerForum": [],
+    "answerForum": [
+      {
+        "answer": "hjkhakjsdh",
+        "person": {
+          "id": "47865421",
+          "name": "Laura",
+          "lastname": "Castillo",
+          "account": {
+            "id": "47865421",
+            "userName": "laura.castillo",
+            "password": "Password44",
+            "role": "ADMINISTRATOR",
+            "email": "laura.castillo@uptc.edu.co"
+          }
+        }
+      },
+      {
+        "answer": "asdfasdjfh",
+        "person": {
+          "id": "47865421",
+          "name": "Laura",
+          "lastname": "Castillo",
+          "account": {
+            "id": "47865421",
+            "userName": "laura.castillo",
+            "password": "Password44",
+            "role": "ADMINISTRATOR",
+            "email": "laura.castillo@uptc.edu.co"
+          }
+        }
+      },
+      {
+        "answer": "\n",
+        "person": {
+          "id": "47865421",
+          "name": "Laura",
+          "lastname": "Castillo",
+          "account": {
+            "id": "47865421",
+            "userName": "laura.castillo",
+            "password": "Password44",
+            "role": "ADMINISTRATOR",
+            "email": "laura.castillo@uptc.edu.co"
+          }
+        }
+      },
+      {
+        "answer": "adsfjhasd\nasjdfhkajs\n",
+        "person": {
+          "id": "47865421",
+          "name": "Laura",
+          "lastname": "Castillo",
+          "account": {
+            "id": "47865421",
+            "userName": "laura.castillo",
+            "password": "Password44",
+            "role": "ADMINISTRATOR",
+            "email": "laura.castillo@uptc.edu.co"
+          }
+        }
+      }
+    ],
     "course": {
       "name": "Teoría General de Sistemas G10",
       "id": "G10",
