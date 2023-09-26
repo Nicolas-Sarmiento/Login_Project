@@ -1,6 +1,8 @@
 package co.edu.uptc.view.forum;
 
 import co.edu.uptc.controller.ForumController;
+import co.edu.uptc.model.Answer;
+import co.edu.uptc.model.Forum;
 import co.edu.uptc.view.Header;
 import co.edu.uptc.view.LoginView;
 import javafx.application.Platform;
@@ -11,14 +13,13 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,8 +36,15 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     Label forumName;
     VBox forums;
     HBox infoContainer;
-    TextField textField;
+    TextArea textArea;
     Button buttonSend;
+
+    ArrayList<Label> msg;
+    Forum forumAux;
+    HBox contetBoxText;
+    VBox contentMsg;
+    ScrollPane scrollPaneMsg;
+
     CreateForum createForum;
 
 
@@ -44,9 +52,15 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         super(home);
         this.parent = parent;
         this.forumController = new ForumController();
+
+        this.msg = new ArrayList<>();
+        forumAux = new Forum();
+
         this.createForum = new CreateForum(this);
 
+
     }
+
     public Scene Forum(){
         VBox root = new VBox();
         HBox forumContainer = new HBox();
@@ -120,37 +134,102 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     }
 
     public void settingForumContent(){
-        this.textField = new TextField();
-        ImageView addIcon = new ImageView(new File("./imgs/send.png").toURI().toString());
-        this.buttonSend = new Button("", addIcon);
-        this.buttonSend.setId("send");
-
-        HBox contetBoxText = new HBox();
-        HBox.setHgrow(textField, Priority.ALWAYS);
-        contetBoxText.getChildren().addAll(textField, buttonSend);
-        contetBoxText.setVisible(true);
-
         forumContent = new VBox();
         this.forumContent.setId("ForumContent");
         HBox.setHgrow(this.forumContent, Priority.ALWAYS);
 
+        contentMsg = new VBox();
+        VBox.setVgrow(contentMsg, Priority.ALWAYS);
         VBox forumNameContainer = new VBox();
         this.forumName = new Label();
 
         forumNameContainer.setAlignment(Pos.CENTER);
         forumNameContainer.getChildren().add(forumName);
 
-        this.forumContent.getChildren().addAll(forumNameContainer, contetBoxText, this.createForum.principalCreateForum());
+        scrollPaneMsg = new ScrollPane(contentMsg);
+        scrollPaneMsg.setFitToWidth(true);
+        scrollPaneMsg.setVisible(false);
+        VBox.setVgrow(scrollPaneMsg, Priority.ALWAYS);
 
+        settingBoxText();
+        this.forumContent.getChildren().addAll(forumNameContainer,scrollPaneMsg, contetBoxText, this.createForum.principalCreateForum());
+        //this.forumContent.getChildren().addAll(forumNameContainer,scrollPaneMsg, contetBoxText);
+    }
+
+    private void settingSpaceMsg() {
+        if(this.forumController.getLoggedForum().getAnswerForum().size() > 0){
+
+            for (int i = 0; i < this.forumController.getLoggedForum().getAnswerForum().size(); i++) {
+                Label userMsg = new Label(this.forumController.getLoggedForum().getAnswerForum().get(i).getPerson().getName() + " " + this.forumController.getLoggedForum().getAnswerForum().get(i).getPerson().getLastname());
+                userMsg.setId("UserName");
+                Label textMsg = new Label(this.forumController.getLoggedForum().getAnswerForum().get(i).getAnwers());
+                textMsg.setId("Msg");
+                msg.add(userMsg);
+                msg.add(textMsg);
+            }
+
+            for (int i = 0; i < msg.size(); i++) {
+                contentMsg.getChildren().add(msg.get(i));
+            }
+        }else {
+            contentMsg.getChildren().clear();
+        }
+    }
+
+    private void settingBoxText() {
+        this.contetBoxText = new HBox();
+
+        this.textArea = new TextArea();
+        textArea.setPromptText("Escribe aquí tus comentarios");
+        textArea.setPrefRowCount(2);
+
+        ImageView addIcon = new ImageView(new File("./imgs/send.png").toURI().toString());
+        this.buttonSend = new Button("", addIcon);;
+        this.buttonSend.setId("send");
+        this.buttonSend.setOnAction(this);
+
+        HBox.setHgrow(textArea, Priority.ALWAYS);
+        this.contetBoxText.getChildren().addAll(textArea, buttonSend);
+        this.contetBoxText.setId("BoxText");
+        this.contetBoxText.setVisible(false);
     }
 
     @Override
     public void handle(ActionEvent e) {
+
         if (e.getSource() instanceof ForumButton btn){
-            System.out.println("ENtro n");
+            this.scrollPaneMsg.setVisible(true);
+            this.contetBoxText.setVisible(true);
+            this.forumController.selectForum((btn.getIndex()));
             this.forumName.setText(this.forumController.getForumTitle(btn.getIndex()));
+            contentMsg.getChildren().clear();
+
+            if (forumAux == null){
+                settingSpaceMsg();
+                forumAux = this.forumController.getLoggedForum();
+            }else {
+                msg.clear();
+                if (!this.forumAux.equals(this.forumController.getLoggedForum())) {
+                    forumAux = this.forumController.getLoggedForum();
+                    settingSpaceMsg();
+                }else {
+                    settingSpaceMsg();
+                }
+            }
         }
+
+        if(e.getSource() == buttonSend){
+            if(!textArea.getText().isEmpty()){
+                this.forumController.addComment(textArea.getText(), parent.getController().getLoggedPerson());
+                this.contentMsg.getChildren().clear();
+                this.msg.clear();
+                settingSpaceMsg();
+                textArea.clear();
+            }
+        }
+
         System.out.println("antes");
+
         if(e.getSource() == this.add){
             createForum.getContainerCreate().setVisible(true);
         }

@@ -36,7 +36,7 @@ public class ForumController {
      */
     public boolean selectForum(int i){
         try{
-            this.loggedForum=forums.get(i);
+            this.loggedForum = forums.get(i);
             return true;
         }catch (IndexOutOfBoundsException e){
 
@@ -134,10 +134,15 @@ public class ForumController {
     }
 
     public int getForumsLen(){return this.forums.size();}
+
     public String getForumTitle(int index){
         try {
             return this.forums.get(index).getTitulo();
         }catch (IndexOutOfBoundsException e){ return "";}
+    }
+
+    public Forum getLoggedForum() {
+        return loggedForum;
     }
 
     public boolean checkIfItExist(String title){
@@ -149,6 +154,7 @@ public class ForumController {
         }
         return false;
     }
+
 
 
 }
