@@ -41,6 +41,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     TextArea textArea;
     Button buttonSend;
     ArrayList<Label> msg;
+    ArrayList<ForumButton> forumButtons;
     Forum forumAux;
     HBox contetBoxText;
     VBox contentMsg;
@@ -59,7 +60,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         forumAux = new Forum();
 
         this.createForum = new CreateForum(this);
-
+        this.forumButtons = new ArrayList<>();
 
     }
 
@@ -97,8 +98,16 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     }
 
     private void settingForumsButtons(){
-        for (int i = 0; i < this.forumController.getForumsLen(); i++){
-            ForumButton btn = new ForumButton(this.forumController.getForumTitle(i), i);
+        this.forums.getChildren().removeAll(this.forumButtons);
+        this.forumButtons = new ArrayList<>();
+        String id = this.parent.getController().getLoggedPerson().getId();
+        if (this.parent.getController().showRol().equals("ADMINISTRATOR") || this.parent.getController().showRol().equals("PROFESSOR") ){
+            this.adminForums(id);
+        }else {
+            this.studentForums(id);
+        }
+        for (int i = 0; i < this.forumButtons.size(); i++){
+            ForumButton btn = this.forumButtons.get(i);
             String color = "";
             if (i % 2 == 0){
                 btn.getStyleClass().add("first");
@@ -108,6 +117,23 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
             btn.setOnAction(this);
             VBox.setMargin(btn, new Insets(5, 0, 5, 0));
             this.forums.getChildren().add(btn);
+        }
+    }
+
+    private void adminForums(String id){
+
+        for (int i = 0; i < this.forumController.getForumsLen(); i++){
+            if (!id.equals(this.forumController.getProfessorIdByCourse(i))) continue;
+            ForumButton btn = new ForumButton(this.forumController.getForumTitle(i), this.forumButtons.size());
+            this.forumButtons.add(btn);
+        }
+    }
+
+    private void studentForums(String id){
+        for (int i = 0; i < this.forumController.getForumsLen(); i++){
+            if (!this.forumController.getStudentsIdByCourse(i).contains(id)) continue;
+            ForumButton btn = new ForumButton(this.forumController.getForumTitle(i), this.forumButtons.size());
+            this.forumButtons.add(btn);
         }
     }
 
@@ -287,7 +313,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
             String descriptionForum = createForum.getDecriptionForumField().getText();
 
             if(!this.forumController.checkIfItExist(nameForum)){
-                if(forumController.createdForum(nameForum, descriptionForum, "")){
+                if(forumController.createdForum(nameForum, descriptionForum, "Calculo II G90")){
                     this.createForum.msgGeneralM("0");
                     Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
@@ -298,6 +324,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
                             });
                         }
                     }, 3000);
+                    this.settingForumsButtons();
                 }
             }else{
                 this.createForum.msgGeneralM("3");
