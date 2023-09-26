@@ -1,6 +1,6 @@
 [
   {
-    "name": "Fisica",
+    "name": "Fisica I K95",
     "id": "K95",
     "idProfessor": "46389778",
     "idStudents": [
@@ -11,7 +11,7 @@
 
   },
   {
-    "name": "Programacion",
+    "name": "Programacion II O41",
     "id": "O41",
     "idProfessor": "10953483",
     "idStudents": [
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "name": "Ingles",
+    "name": "Ingles IV G59",
     "id": "G59",
     "idProfessor": "43654785",
     "idStudents": [
@@ -29,7 +29,7 @@
     ]
   },
   {
-    "name": "Economia",
+    "name": "Economia M11",
     "id": "M11",
     "idProfessor": "34789612",
     "idStudents": [
@@ -37,7 +37,7 @@
     ]
   },
   {
-    "name": "Bases de datos",
+    "name": "Bases de datos I U84",
     "id": "U84",
     "idProfessor": "1006784563",
     "idStudents": [
@@ -45,16 +45,16 @@
     ]
   },
   {
-    "name": "Calculo II",
+    "name": "Calculo II G90",
     "id": "G90",
-    "idProfessor": "6378264",
+    "idProfessor": "47865421",
     "idStudents": [
       2022159,
       123455
     ]
   },
   {
-    "name": "Probabilidad y estadistica",
+    "name": "Probabilidad y estadistica N40",
     "id": "N40",
     "idProfessor": "8678435",
     "idStudents": [
@@ -62,15 +62,15 @@
     ]
   },
   {
-    "name": "Teoría General de Sistemas",
+    "name": "Teoría General de Sistemas G10",
     "id": "G10",
-    "idProfessor": "984938",
+    "idProfessor": "47865421",
     "idStudents": [
       2020154
     ]
   },
   {
-    "name": "Matemáticas Discretas",
+    "name": "Matemáticas Discretas B33",
     "id": "B33",
     "idProfessor": "326675622",
     "idStudents": [

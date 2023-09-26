@@ -54,11 +54,11 @@ public class ForumController {
      */
     public boolean createdForum(String titleForum,String description, String idCourse){
         Course course = searchCourseById(idCourse);
-        if(!course.getId().equals(idCourse)){
+        if(!course.getName().equals(idCourse)){
             return false;
         }
         Forum f=new Forum(titleForum,description,course);
-        forums.add(f);
+        this.forums.add(f);
         return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {}.getType());
     }
 
@@ -168,6 +168,14 @@ public class ForumController {
             }
         }
         return null;
+    }
+
+    public ArrayList<String> getStudentsIdByCourse(int index){
+        return this.forums.get(index).getCourse().getIdStudents();
+    }
+
+    public String getProfessorIdByCourse(int index){
+        return this.forums.get(index).getCourse().getIdProfessor();
     }
 
 }
