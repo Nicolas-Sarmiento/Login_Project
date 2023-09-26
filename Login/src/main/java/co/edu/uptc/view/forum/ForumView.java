@@ -314,7 +314,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     }
 
     private void sendMessage(){
-        if(!textArea.getText().isEmpty()){
+        if(!textArea.getText().isBlank()){
             this.forumController.addComment(textArea.getText(), parent.getController().getLoggedPerson());
             this.contentMsg.getChildren().clear();
             this.msg.clear();
