@@ -11,7 +11,10 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * The ConfirmationButton class represents a confirmation button used in the forum's user interface.
+ * It allows the user to confirm an action and provides a confirmation label.
+ */
 public class ConfirmationButton {
     private Scene scene;
     private Label msgDone;
@@ -19,9 +22,20 @@ public class ConfirmationButton {
     private VBox generalContainer;
     private Button confirmButton;
     private ForumView forumView;
+    /**
+     * Constructor for the ConfirmationButton class.
+     *
+     * @param forumView The forum view associated with the confirmation button.
+     */
     public ConfirmationButton(ForumView forumView){
         this.forumView = forumView;
     }
+    /**
+     * Method to perform the confirmation action. It creates and configures the user interface
+     * for action confirmation.
+     *
+     * @return The configured scene for action confirmation.
+     */
     public Scene confirmAction(){
         this.hecho = new Label("Hecho");
         hecho.setId("msgD");
@@ -44,12 +58,21 @@ public class ConfirmationButton {
         return scene;
     }
 
+    /**
+     * Configures the action of the confirmation button to call the event handler of the forum view
+     * and displays the confirmation label.
+     */
     public void actionButton(){
         confirmButton.setOnAction(event -> {
             forumView.handle(new ActionEvent(confirmButton, confirmButton));
             hecho.setVisible(true);
         });
     }
+    /**
+     * Gets the confirmation button.
+     *
+     * @return The confirmation button.
+     */
     public Button getConfirmButton() {
         return confirmButton;
     }

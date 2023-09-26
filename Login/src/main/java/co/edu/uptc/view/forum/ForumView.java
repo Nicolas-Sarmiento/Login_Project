@@ -82,7 +82,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
      * This method creates the main Scene for Forums
      * @return the forum Scene
      */
-    public Scene Forum(){
+    public Scene forum(){
         VBox root = new VBox();
         HBox forumContainer = new HBox();
         VBox.setVgrow(forumContainer, Priority.ALWAYS);

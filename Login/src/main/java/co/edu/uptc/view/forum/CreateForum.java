@@ -14,7 +14,11 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * The CreateForum class represents a user interface for creating a new forum in the application.
+ * It allows the user to input the necessary details for forum creation, such as name and description,
+ * and associates the forum with a specific course.
+ */
 public class CreateForum {
     private Label nameForum;
     private Label descriptionForum;
@@ -28,13 +32,27 @@ public class CreateForum {
     private ForumView forumView;
     private ChoiceBox<String> choiceBox;
     private String idG = "";
+
+    /**
+     * Constructor for the CreateForum class.
+     */
     public CreateForum(){
 
     }
+    /**
+     * Constructor for the CreateForum class that associates it with a ForumView.
+     *
+     * @param forumView The ForumView to associate with this CreateForum instance.
+     */
     public CreateForum(ForumView forumView){
         this.forumView = forumView;
     }
 
+    /**
+     * Creates the main user interface for forum creation, including input fields and controls.
+     *
+     * @return The VBox containing the forum creation interface.
+     */
     public VBox principalCreateForum(){
         this.fieldControllGeneral();
         this.setChoiceBox();
@@ -76,6 +94,9 @@ public class CreateForum {
         this.containerCreate.getStylesheets().add(new File("./styles/forum/CreateForum.css").toURI().toString());
         return containerCreate;
     }
+    /**
+     * Sets up the ChoiceBox to display available courses for forum association.
+     */
     private void setChoiceBox(){
         List<Course> courses = forumView.forumController.getCoursesByProfessorId(forumView.getLoggedId());
         List<String> coursesNames = courses.stream().map(Course::getName).collect(Collectors.toList());
@@ -88,8 +109,11 @@ public class CreateForum {
             choiceBox.setValue("No tienes cursos");
         }
     }
-
-
+    /**
+     * Displays appropriate messages based on given error codes.
+     *
+     * @param errorCode The error code specifying the type of message to display.
+     */
     public void msgGeneralM(String u){
 
         String errorVoid = "Tienes casillas vacias\nPor favor llena las casillas";
@@ -116,6 +140,9 @@ public class CreateForum {
                 break;
         }
     }
+    /**
+     * Sets up and configures the input fields for forum creation and controls for empty input.
+     */
     public void fieldControllGeneral(){
         this.nameForumField = new TextField();
         nameForumField.setId("nameForum");
@@ -133,6 +160,9 @@ public class CreateForum {
             controlVoid();
         });
     }
+    /**
+     * Controls the appearance of input fields based on whether they are empty or not.
+     */
     public void controlVoid() {
         String nameIsNull = nameForumField.getText();
         String descriptionIsNull = decriptionForumField.getText();
