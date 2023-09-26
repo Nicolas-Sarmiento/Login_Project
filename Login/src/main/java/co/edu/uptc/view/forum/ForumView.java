@@ -151,7 +151,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
 
         for (int i = 0; i < this.forumController.getForumsLen(); i++){
             if (!id.equals(this.forumController.getProfessorIdByCourse(i))) continue;
-            ForumButton btn = new ForumButton(this.forumController.getForumTitle(i), i);
+            ForumButton btn = new ForumButton(this,this.forumController.getForumTitle(i), i);
             this.forumButtons.add(btn);
         }
     }
@@ -164,7 +164,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     private void studentForums(String id){
         for (int i = 0; i < this.forumController.getForumsLen(); i++){
             if (!this.forumController.getStudentsIdByCourse(i).contains(id)) continue;
-            ForumButton btn = new ForumButton(this.forumController.getForumTitle(i), i);
+            ForumButton btn = new ForumButton(this,this.forumController.getForumTitle(i), i);
             this.forumButtons.add(btn);
         }
     }
@@ -341,6 +341,13 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
                     settingSpaceMsg();
                 }
             }
+        }
+
+        if (e.getSource() instanceof MenuItem){
+            MenuItem mi = (MenuItem) e.getSource();
+            int idForum = Integer.parseInt(mi.getId()); // Id del foro a borrar
+
+            //Aqui coloque la confirmación y ya con el id lo puede borrar :)
         }
 
         if(e.getSource() == buttonSend){
