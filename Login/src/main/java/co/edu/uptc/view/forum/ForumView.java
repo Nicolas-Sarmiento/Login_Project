@@ -1,33 +1,36 @@
 package co.edu.uptc.view.forum;
 
 import co.edu.uptc.controller.ForumController;
-import co.edu.uptc.model.Answer;
 import co.edu.uptc.model.Forum;
 import co.edu.uptc.view.Header;
 import co.edu.uptc.view.LoginView;
 import javafx.application.Platform;
-import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This is the class for the forum. This class create a
+ * complete scene for the forum view. It contains a sidebar with
+ * all the forums that the person logged has, and when the user select
+ * one, on the right side all the forum answers are shown. The scene also
+ * has a button and a StakPane that allows Administrators to create new Forums.
+ * @Author Nicolas Sarmiento, Jose Luis Salamanca, Julian Díaz
+ */
 public class ForumView extends Header  implements EventHandler<ActionEvent> {
     LoginView parent;
     ForumController forumController;
@@ -50,7 +53,12 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     StackPane stackPane;
     VBox sectionWrite;
 
-
+    /**
+     * The constructor creates instances of  some variables like
+     * forumController, forumAux and the auxiliar Collections
+     * @param parent it is the application
+     * @param home home Button that includes the header
+     */
     public ForumView(LoginView parent, Button home){
         super(home);
         this.parent = parent;
@@ -64,6 +72,10 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
 
     }
 
+    /**
+     * This method creates the main Scene for Forums
+     * @return the forum Scene
+     */
     public Scene Forum(){
         VBox root = new VBox();
         HBox forumContainer = new HBox();
@@ -82,6 +94,12 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         return scene;
     }
 
+    /**
+     * This method is for create the sidebar chat Forums.
+     * Its components are a scroll pane for forum buttons,
+     * a container for a text info and the new Forum button
+     * if the logged person is Administrator.
+     */
     public void settingForumsContainer(){
         this.forums = new VBox();
         this.settingForumsButtons();
@@ -97,6 +115,10 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         chatForum.setId("ChatContainer");
     }
 
+    /**
+     * This method load the forum Buttons. Validates if the person is
+     * all the forums. Also, it gives different style to the buttons.
+     */
     private void settingForumsButtons(){
         this.forums.getChildren().removeAll(this.forumButtons);
         this.forumButtons = new ArrayList<>();
@@ -120,6 +142,11 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * Load the forum Buttons in the Forum Button collection.
+     * The buttons are selected if the forum contains the admin id.
+     * @param id Person logged id.
+     */
     private void adminForums(String id){
 
         for (int i = 0; i < this.forumController.getForumsLen(); i++){
@@ -129,6 +156,11 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * Load the forum Buttons in the Forum Button collection.
+     * The buttons are selected if the forum contains the student id.
+     * @param id Person logged id.
+     */
     private void studentForums(String id){
         for (int i = 0; i < this.forumController.getForumsLen(); i++){
             if (!this.forumController.getStudentsIdByCourse(i).contains(id)) continue;
@@ -137,6 +169,11 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * This method sets up the container above the forum Button container
+     * It always displays a decorative text and when the user is an Administrator.
+     * It displays a button that allows to create Forums.
+     */
     private void settingInfoContainer(){
         this.infoContainer = new HBox();
         infoContainer.setId("Info");
@@ -251,6 +288,12 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         textArea.setPromptText("Escribe aquí tus comentarios");
         textArea.setPrefRowCount(2);
 
+        textArea.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)){
+                this.sendMessage();
+            }
+        });
+
         ImageView addIcon = new ImageView(new File("./imgs/send.png").toURI().toString());
         this.buttonSend = new Button("", addIcon);;
         this.buttonSend.setId("send");
@@ -260,6 +303,16 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         this.contetBoxText.getChildren().addAll(textArea, buttonSend);
         this.contetBoxText.setId("BoxText");
         this.contetBoxText.setVisible(false);
+    }
+
+    private void sendMessage(){
+        if(!textArea.getText().isEmpty()){
+            this.forumController.addComment(textArea.getText(), parent.getController().getLoggedPerson());
+            this.contentMsg.getChildren().clear();
+            this.msg.clear();
+            settingSpaceMsg();
+            textArea.clear();
+        }
     }
 
     @Override
@@ -291,13 +344,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         }
 
         if(e.getSource() == buttonSend){
-            if(!textArea.getText().isEmpty()){
-                this.forumController.addComment(textArea.getText(), parent.getController().getLoggedPerson());
-                this.contentMsg.getChildren().clear();
-                this.msg.clear();
-                settingSpaceMsg();
-                textArea.clear();
-            }
+            this.sendMessage();
         }
 
         if(e.getSource() == this.add){

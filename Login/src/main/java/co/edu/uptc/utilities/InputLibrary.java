@@ -139,7 +139,7 @@ public class InputLibrary {
 
 
     public boolean containSpecialCharactersId(String input){
-       return !input.matches("[a-zA-Z0-9]+");
+       return !input.matches("[0-9]+");
     }
     public boolean containSpecialCharactersNums(String input){
         return !input.matches("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+");
