@@ -1,0 +1,14 @@
+#containerDelete {
+    -fx-alignment: center;
+}
+
+#msg {
+    -fx-font-size: 18px;
+}
+
+.button {
+    -fx-background-color: #FFD700;
+}
+.confirm-button {
+    -fx-background-color: #FFD700;
+}
