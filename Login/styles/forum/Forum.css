@@ -1,7 +1,3 @@
-#ForumContainer{
-    -fx-background-color: blue;
-}
-
 #Info{
     -fx-max-width: 350px;
 
@@ -53,4 +49,13 @@
 
 #send{
     -fx-max-height: 200px;
+    -fx-background-color:#ffdf52;
+}
+
+.menu-item{
+    -fx-background-color: #ffdf52;
+}
+
+.menu-item .label{
+    -fx-text-fill: black;
 }
