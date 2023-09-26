@@ -287,7 +287,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
             String descriptionForum = createForum.getDecriptionForumField().getText();
 
             if(!this.forumController.checkIfItExist(nameForum)){
-                if(forumController.createdForum(nameForum, descriptionForum)){
+                if(forumController.createdForum(nameForum, descriptionForum, "")){
                     this.createForum.msgGeneralM("0");
                     Timer timer = new Timer();
                     timer.schedule(new TimerTask() {

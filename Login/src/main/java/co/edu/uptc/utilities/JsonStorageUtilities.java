@@ -1,6 +1,7 @@
 package co.edu.uptc.utilities;
 
 import co.edu.uptc.model.Account;
+import co.edu.uptc.model.Course;
 import co.edu.uptc.model.Forum;
 import co.edu.uptc.model.Person;
 import co.edu.uptc.model.persontypes.Administrator;
@@ -28,6 +29,7 @@ public class JsonStorageUtilities {
     private List<Person> existingContentsPersons = new ArrayList<>();
     private List<Account> existingContentsAccounts = new ArrayList<>();
     private List<Forum> existingContentsForums = new ArrayList<>();
+    private List<Course> existingContentsCourse = new ArrayList<>();
     private static final String FILEPATH = "./src/main/java/co/edu/uptc/persistence/";
     private static final String FILEPATHFORUM = "./src/main/java/co/edu/uptc/persistence/Forum/";
     private static final String EXTENSION = ".json";
@@ -43,6 +45,7 @@ public class JsonStorageUtilities {
         readPersons("people");
         readAccounts("accounts");
         readForums("Forum/forums");
+        readCourses("Forum/course");
     }
 
     //Probablemente nunca se use / Este comentario es provisional, por eso el español
@@ -152,6 +155,9 @@ public class JsonStorageUtilities {
     public void readForums(String filename){
         existingContentsForums.addAll(readContentFromFile(filename, new TypeToken<List<Forum>>() {}.getType()));
     }
+    public void readCourses(String filename){
+        existingContentsCourse.addAll(readContentFromFile(filename, new TypeToken<List<Course>>() {}.getType()));
+    }
     //Error 404
     public void saveAccounts(HashSet<Account> accountList) {
         try {
@@ -195,5 +201,8 @@ public class JsonStorageUtilities {
 
     public void setExistingContentsForums(List<Forum> existingContentsForums) {
         this.existingContentsForums = existingContentsForums;
+    }
+    public List<Course> getExistingContentsCourse() {
+        return existingContentsCourse;
     }
 }

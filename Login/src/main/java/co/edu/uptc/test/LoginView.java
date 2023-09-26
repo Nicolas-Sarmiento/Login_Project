@@ -317,7 +317,7 @@ public class LoginView {
                     System.out.println("+--------------+ NEW FORUM +--------------+");
                     forumTitle = this.util.inputString("Forum Title: ", "Title must be not blank");
                     description = this.util.inputString("Descritpion: ", "Description is necessary");
-                    System.out.println(this.forumController.createdForum(forumTitle, description)? "Forum added successfully" : "Error :(");
+                    System.out.println(this.forumController.createdForum(forumTitle, description,"")? "Forum added successfully" : "Error :(");
                     break;
                 case 2:
                     System.out.println(this.forumController.seeTitles());

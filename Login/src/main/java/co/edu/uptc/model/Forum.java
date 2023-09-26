@@ -7,10 +7,13 @@ public class Forum {
     private String titulo;
     private String DescripcionDelForo;
     private ArrayList<Answer> answerForum;
-    public Forum(String titulo, String descripcionDelForo) {
+    private Course course;
+    public Forum(String titulo, String descripcionDelForo, Course course) {
         this.titulo = titulo;
-        DescripcionDelForo = descripcionDelForo;
+        this.DescripcionDelForo = descripcionDelForo;
+        this.course = course;
         this.answerForum = new ArrayList<>();
+
     }
 
     public Forum() {
@@ -71,5 +74,13 @@ public class Forum {
             forum += div + "\n"+ ans.toString() + "\n";
         }
         return forum;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

@@ -1,6 +1,7 @@
 package co.edu.uptc.controller;
 
 import co.edu.uptc.model.Answer;
+import co.edu.uptc.model.Course;
 import co.edu.uptc.model.Forum;
 import co.edu.uptc.model.Person;
 import co.edu.uptc.utilities.JsonStorageUtilities;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 public class ForumController {
     private ArrayList<Forum> forums;
+    private ArrayList<Course> courses;
     private Forum loggedForum;
     private JsonStorageUtilities jsonStorageUtilities;
     private LoginController loginController = new LoginController();
@@ -27,6 +29,7 @@ public class ForumController {
         //forums=new ArrayList<>();
         jsonStorageUtilities = loginController.getJsonStorageUtilities();
         forums = (ArrayList<Forum>) jsonStorageUtilities.getExistingContentsForums();
+        courses = (ArrayList<Course>) jsonStorageUtilities.getExistingContentsCourse();
     }
 
     /**
@@ -49,8 +52,12 @@ public class ForumController {
      * @param titleForum,description requirements to create the forum
      * @return if it was possible to create the forum
      */
-    public boolean createdForum(String titleForum,String description){
-        Forum f=new Forum(titleForum,description);
+    public boolean createdForum(String titleForum,String description, String idCourse){
+        Course course = searchCourseById(idCourse);
+        if(!course.getId().equals(idCourse)){
+            return false;
+        }
+        Forum f=new Forum(titleForum,description,course);
         forums.add(f);
         return jsonStorageUtilities.saveDataToFileForum(forums, "forums", new TypeToken<List<Forum>>() {}.getType());
     }
@@ -152,6 +159,15 @@ public class ForumController {
             }
         }
         return false;
+    }
+
+    public Course searchCourseById(String nameCourse){
+        for (Course co:courses) {
+            if (co.getName().equals(nameCourse)){
+                return co;
+            }
+        }
+        return null;
     }
 
 }

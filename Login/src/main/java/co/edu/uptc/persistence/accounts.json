@@ -14,18 +14,11 @@
     "email": "alvaro.perez@uptc.edu.co"
   },
   {
-    "id": "696969",
-    "userName": "fredy.alarcon01",
-    "password": "13UJCdp",
-    "role": "ADMINISTRATOR",
-    "email": "fredy.alarcon01@uptc.edu.co"
-  },
-  {
-    "id": "46389778",
-    "userName": "johana.torres",
-    "password": "JKJfsdhf334",
+    "id": "326675622",
+    "userName": "alex.amarillo",
+    "password": "46NFJwa",
     "role": "PROFESSOR",
-    "email": "johana.torres@uptc.edu.co"
+    "email": "alex.amarillo@uptc.edu.co"
   },
   {
     "id": "12345",
@@ -42,11 +35,18 @@
     "email": "maria.rodriguez01@uptc.edu.co"
   },
   {
-    "id": "6587345",
-    "userName": "roberto.carlos",
-    "password": "81TCQcp",
-    "role": "STUDENT",
-    "email": "roberto.carlos@uptc.edu.co"
+    "id": "984938",
+    "userName": "gustavo.fring",
+    "password": "68FBVpk",
+    "role": "PROFESSOR",
+    "email": "gustavo.fring@uptc.edu.co"
+  },
+  {
+    "id": "43769634",
+    "userName": "walter.white",
+    "password": "02KWPpn",
+    "role": "PROFESSOR",
+    "email": "walter.white@uptc.edu.co"
   },
   {
     "id": "4387582",
@@ -54,13 +54,6 @@
     "password": "48IAGqy",
     "role": "SECRETARY",
     "email": "maria.torres@uptc.edu.co"
-  },
-  {
-    "id": "202210568",
-    "userName": "manuel.martinez",
-    "password": "Masfx83",
-    "role": "STUDENT",
-    "email": "manuel.martinez@uptc.edu.co"
   },
   {
     "id": "123455",
@@ -77,6 +70,83 @@
     "email": "laura.castillo@uptc.edu.co"
   },
   {
+    "id": "1006784563",
+    "userName": "jairo.riaño",
+    "password": "10EBRsc",
+    "role": "PROFESSOR",
+    "email": "jairo.riaño@uptc.edu.co"
+  },
+  {
+    "id": "696969",
+    "userName": "fredy.alarcon01",
+    "password": "13UJCdp",
+    "role": "ADMINISTRATOR",
+    "email": "fredy.alarcon01@uptc.edu.co"
+  },
+  {
+    "id": "46389778",
+    "userName": "johana.torres",
+    "password": "JKJfsdhf334",
+    "role": "PROFESSOR",
+    "email": "johana.torres@uptc.edu.co"
+  },
+  {
+    "id": "574835",
+    "userName": "julian.diaz",
+    "password": "74AWAmv",
+    "role": "STUDENT",
+    "email": "julian.diaz@uptc.edu.co"
+  },
+  {
+    "id": "6587345",
+    "userName": "roberto.carlos",
+    "password": "81TCQcp",
+    "role": "STUDENT",
+    "email": "roberto.carlos@uptc.edu.co"
+  },
+  {
+    "id": "34789612",
+    "userName": "jaime.orduz",
+    "password": "78TBQwa",
+    "role": "PROFESSOR",
+    "email": "jaime.orduz@uptc.edu.co"
+  },
+  {
+    "id": "789321",
+    "userName": "manuel.salamanca",
+    "password": "02WRBkp",
+    "role": "STUDENT",
+    "email": "manuel.salamanca@uptc.edu.co"
+  },
+  {
+    "id": "202210568",
+    "userName": "manuel.martinez",
+    "password": "Masfx83",
+    "role": "STUDENT",
+    "email": "manuel.martinez@uptc.edu.co"
+  },
+  {
+    "id": "8678435",
+    "userName": "jesse.pinkman",
+    "password": "52XVTsg",
+    "role": "PROFESSOR",
+    "email": "jesse.pinkman@uptc.edu.co"
+  },
+  {
+    "id": "6784536",
+    "userName": "steven.sanchez",
+    "password": "54HLVcj",
+    "role": "STUDENT",
+    "email": "steven.sanchez@uptc.edu.co"
+  },
+  {
+    "id": "43654785",
+    "userName": "edwin.briñez",
+    "password": "49WCIgw",
+    "role": "PROFESSOR",
+    "email": "edwin.briñez@uptc.edu.co"
+  },
+  {
     "id": "32589",
     "userName": "jose.salamanca",
     "password": "fh543YY",
@@ -91,11 +161,11 @@
     "email": "juan.velandia@uptc.edu.co"
   },
   {
-    "id": "1006784563",
-    "userName": "jairo.riaño",
-    "password": "10EBRsc",
-    "role": "PROFESSOR",
-    "email": "jairo.riaño@uptc.edu.co"
+    "id": "3425657",
+    "userName": "nicolas.sarmiento",
+    "password": "88KRRfw",
+    "role": "STUDENT",
+    "email": "nicolas.sarmiento@uptc.edu.co"
   },
   {
     "id": "10953483",

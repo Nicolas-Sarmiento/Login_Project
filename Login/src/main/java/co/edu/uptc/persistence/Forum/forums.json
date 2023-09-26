@@ -8,5 +8,10 @@
     "titulo": "Foro prueba 2",
     "DescripcionDelForo": "En la sala de un hospital murio simon",
     "answerForum": []
+  },
+  {
+    "titulo": "Random",
+    "DescripcionDelForo": "Random",
+    "answerForum": []
   }
 ]
