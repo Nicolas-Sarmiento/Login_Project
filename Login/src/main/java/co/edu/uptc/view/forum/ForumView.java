@@ -289,8 +289,11 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         textArea.setPrefRowCount(2);
 
         textArea.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode().equals(KeyCode.ENTER)){
+            if (keyEvent.getCode().equals(KeyCode.ENTER) && !keyEvent.isShiftDown()){
                 this.sendMessage();
+            }
+            if (keyEvent.getCode().equals(KeyCode.ENTER) && keyEvent.isShiftDown()){
+                this.textArea.appendText("\n");
             }
         });
 
