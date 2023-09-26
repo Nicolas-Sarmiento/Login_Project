@@ -117,33 +117,5 @@
       ],
       "idProfessor": "47865421"
     }
-  },
-  {
-    "titulo": "asdfasdfasdfasdf",
-    "DescripcionDelForo": "asdfasdfasdf",
-    "answerForum": [],
-    "course": {
-      "name": "Calculo II G90",
-      "id": "G90",
-      "idStudents": [
-        "2022159",
-        "123455",
-        "789321"
-      ],
-      "idProfessor": "47865421"
-    }
-  },
-  {
-    "titulo": "hfuidsbcbsdjf",
-    "DescripcionDelForo": "siu",
-    "answerForum": [],
-    "course": {
-      "name": "Teoría General de Sistemas G10",
-      "id": "G10",
-      "idStudents": [
-        "2020154"
-      ],
-      "idProfessor": "47865421"
-    }
   }
 ]

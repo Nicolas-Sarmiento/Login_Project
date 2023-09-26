@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,6 +54,8 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     CreateForum createForum;
     StackPane stackPane;
     VBox sectionWrite;
+    ConfirmationButton confirmationButton;
+    int idForum;
 
     /**
      * The constructor creates instances of  some variables like
@@ -63,6 +67,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         super(home);
         this.parent = parent;
         this.forumController = new ForumController();
+        this.confirmationButton = new ConfirmationButton(this);
 
         this.msg = new ArrayList<>();
         forumAux = new Forum();
@@ -349,8 +354,26 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
         if (e.getSource() instanceof MenuItem){
             MenuItem mi = (MenuItem) e.getSource();
             int idForum = Integer.parseInt(mi.getId()); // Id del foro a borrar
+            String tittle = forumController.getForumTitle(idForum);
 
-            //Aqui coloque la confirmación y ya con el id lo puede borrar :)
+            //Aqui coloque la confirmación por el boton de la ecena confirmbutton
+
+
+        }
+        if (e.getSource() instanceof MenuItem) {
+            MenuItem mi = (MenuItem) e.getSource();
+            this.idForum = Integer.parseInt(mi.getId());
+
+            Scene confirmationScene = confirmationButton.confirmAction();
+
+            Stage confirmationStage = new Stage();
+            confirmationStage.setScene(confirmationScene);
+            confirmationStage.setTitle("Confirmación de Eliminación");
+            confirmationStage.initModality(Modality.APPLICATION_MODAL);
+            confirmationStage.showAndWait();
+        }
+        if(e.getSource() == confirmationButton.getConfirmButton()){
+            forumController.deleteForum(idForum);
         }
 
         if(e.getSource() == buttonSend){

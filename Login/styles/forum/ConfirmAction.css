@@ -5,6 +5,9 @@
 #msg {
     -fx-font-size: 18px;
 }
+#msgD {
+    -fx-font-size: 18px;
+}
 
 .button {
     -fx-background-color: #FFD700;
