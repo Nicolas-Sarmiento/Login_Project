@@ -36,6 +36,18 @@
     }
   },
   {
+    "id": "28738473874837",
+    "name": "Jhin",
+    "lastname": "De la torre",
+    "account": {
+      "id": "28738473874837",
+      "userName": "jhin.de",
+      "password": "83KGKsr",
+      "role": "STUDENT",
+      "email": "jhin.de@uptc.edu.co"
+    }
+  },
+  {
     "id": "202210568",
     "name": "manuel",
     "lastname": "Martinez",
@@ -93,6 +105,18 @@
       "password": "46NFJwa",
       "role": "PROFESSOR",
       "email": "alex.amarillo@uptc.edu.co"
+    }
+  },
+  {
+    "id": "1234565789",
+    "name": "asdfasdf",
+    "lastname": "asdfasdfasdf",
+    "account": {
+      "id": "1234565789",
+      "userName": "asdfasdf.asdfasdfasdf",
+      "password": "90MAHbs",
+      "role": "STUDENT",
+      "email": "asdfasdf.asdfasdfasdf@uptc.edu.co"
     }
   },
   {
