@@ -4,14 +4,14 @@ import co.edu.uptc.model.Account;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -36,7 +36,6 @@ public class LoginListUsers extends Header{
         this.parent = loginView;
         borderPane = new BorderPane();
         table = new TableView<Account>();
-        //addingRegisters();
         creationColumns();
     }
 
@@ -48,6 +47,7 @@ public class LoginListUsers extends Header{
         updateTable();
         table.setItems(accountList);
         borderPane.setCenter(table);
+        VBox.setVgrow(borderPane, Priority.ALWAYS);
         HBox header = this.getHeader();
         this.setOption("Ver cuentas");
         this.setName(parent.controller.getName());
@@ -56,7 +56,11 @@ public class LoginListUsers extends Header{
         return scene;
     }
 
-    // Método para actualizar la tabla con las cuentas actuales
+    /**
+     * Updates the table by synchronizing its content with the current list of accounts
+     * obtained from the associated controller's PersonController. It ensures that new
+     * accounts are added to the table, and accounts that are no longer present are removed.
+     */
     private void updateTable() {
         List<Account> updatedAccounts = parent.controller.getPersonController().getAccounts();
 
@@ -71,9 +75,7 @@ public class LoginListUsers extends Header{
         // Eliminar cuentas que ya no están presentes
         accountList.removeIf(account -> !updatedAccounts.contains(account));
     }
-    public void removeAccount(Account account) {
-        accountList.remove(account);
-    }
+
     /**
      * Method to add an account to the table.
      * @param account User account to be added.
@@ -82,15 +84,6 @@ public class LoginListUsers extends Header{
         accountList.add(account);
     }
 
-//    /**
-//     * Private method to add records to the
-//     * table from the controller's account list.
-//     */
-//    private void addingRegisters(){
-//        for (Account account: parent.controller.getPersonController().getAccounts()) {
-//            table.getItems().add(new Account(account.getId(), account.getUserName(), account.getPassword(), account.getRole(), account.getEmail()));
-//        }
-//    }
 
     /**
      *Private method to create the columns of the table.

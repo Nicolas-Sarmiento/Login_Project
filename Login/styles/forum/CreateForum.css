@@ -1,4 +1,4 @@
-#nameForum, #descriptionForum {
+#nameForum {
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #000000;
     -fx-font-family: "Courier New";
@@ -9,16 +9,19 @@
     -fx-border-radius: 5px;
     -fx-pref-width: 200px;
     -fx-pref-height: 30px;
-    -fx-margin-bottom: 10px;
 }
 #descriptionForum {
+    -fx-font-family: "Courier New";
+    -fx-font-size: 13px;
+    -fx-border-color: #007ACC;
     -fx-min-height: 150px;
     -fx-max-height: 200px;
+    -fx-border-radius: 5px;
 }
 #search {
     -fx-text-fill: white;
     -fx-background-color: #BDBFF0;
-    -fx-padding: 10px;
+    -fx-max-width: 60px;
     -fx-margin-top: 10px;
 }
 #msg {
@@ -34,5 +37,22 @@
     -fx-background-radius: 10 10 10 10;
     -fx-padding: 10px;
     -fx-alignment: center;
+}
+#name {
+    -fx-padding: 0 0 10 0;
+}
+#description {
+    -fx-padding: 10 0 10 0;
+}
+#general {
+    -fx-background-color: #edf7fc;
+    -fx-border-color: #737e85;
+    -fx-max-width: 300px;
+    -fx-max-height: 400px;
+    -fx-spacing: 6;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 5px;
 }
 
