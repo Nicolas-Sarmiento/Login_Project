@@ -185,6 +185,15 @@ public class ForumController {
         }
         return null;
     }
+    public List<Course> getCoursesByProfessorId(String id){
+        List<Course> aux = new ArrayList<>();
+        for(Course co: courses){
+            if(co.getIdProfessor().equals(id)){
+                aux.add(co);
+            }
+        }
+        return aux;
+    }
 
     public ArrayList<Course> getCourses() {
         return courses;

@@ -384,4 +384,7 @@ public class ForumView extends Header  implements EventHandler<ActionEvent> {
     public ForumController getForumController() {
         return forumController;
     }
+    public String getLoggedId(){
+        return this.parent.getController().getLoggedPerson().getId();
+    }
 }

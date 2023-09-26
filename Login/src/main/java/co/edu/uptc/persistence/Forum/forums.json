@@ -48,7 +48,23 @@
   {
     "titulo": "Foro prueba 2",
     "DescripcionDelForo": "En la sala de un hospital murio simon",
-    "answerForum": [],
+    "answerForum": [
+      {
+        "answer": "dsdkhsdkdads\n",
+        "person": {
+          "id": "12345",
+          "name": "Nino ",
+          "lastname": "Nakano",
+          "account": {
+            "id": "12345",
+            "userName": "nino.nakano",
+            "password": "M1nitaCH1na",
+            "role": "STUDENT",
+            "email": "nino.nakano@uptc.edu.co"
+          }
+        }
+      }
+    ],
     "course": {
       "name": "Bases de datos I U84",
       "id": "U84",
@@ -83,6 +99,19 @@
         "2022159",
         "123455",
         "789321"
+      ],
+      "idProfessor": "47865421"
+    }
+  },
+  {
+    "titulo": "hfuidsbcbsdjf",
+    "DescripcionDelForo": "siu",
+    "answerForum": [],
+    "course": {
+      "name": "Teoría General de Sistemas G10",
+      "id": "G10",
+      "idStudents": [
+        "2020154"
       ],
       "idProfessor": "47865421"
     }
